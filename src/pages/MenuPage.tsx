@@ -67,7 +67,7 @@ export default function MenuPage() {
       <main className="flex flex-col flex-1 relative z-10">
 
         {/*Hero Section / Top Arch Background Area*/}
-        <section className="relative flex flex-col items-center justify-center text-center pt-2 pb-1 px-6">
+        <section className="relative flex flex-col items-center justify-center text-center pt-8 pb-1 px-6">
 
 
 
