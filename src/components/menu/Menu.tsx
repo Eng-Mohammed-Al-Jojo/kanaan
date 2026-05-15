@@ -9,6 +9,7 @@ import { FiSearch, FiX } from "react-icons/fi";
 import FeedbackModal from "./FeedbackModal";
 import CategoryNavigation from "./CategoryNavigation";
 import { MenuService } from "../../services/menuService";
+import { FaCommentDots } from "react-icons/fa";
 
 const containerVariants = {
   hidden: {},
@@ -258,7 +259,7 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="max-w-7xl mx-auto px-4 pb-24 pt-6"
+        className="max-w-7xl mx-auto px-4 pb-24 pt-4"
       >
         <div className="flex flex-col">
           {/* Header Area */}
@@ -385,12 +386,12 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
         </div>
 
         {/* Floating Components */}
-        {/* <button
+        <button
           onClick={() => setShowFeedbackModal(true)}
           className="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-2xl shadow-2xl shadow-primary/30 flex items-center justify-center z-40 hover:scale-110 active:scale-95 transition-transform"
         >
           <FaCommentDots size={24} />
-        </button> */}
+        </button>
 
         <FeedbackModal show={showFeedbackModal} onClose={() => setShowFeedbackModal(false)} orderSystem={orderSystem} />
       </motion.div>

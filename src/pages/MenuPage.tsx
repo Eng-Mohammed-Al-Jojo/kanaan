@@ -44,7 +44,7 @@ export default function MenuPage() {
       <div className="fixed inset-0 pattern-heritage z-0 pointer-events-none" />
 
       {/* 🌟 Global Featured Button — Top Left */}
-      <div className="fixed top-6 left-6 z-[60]">
+      <div className="absolute top-6 left-6 z-[60]">
         {isDataReady && hasFeatured && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, x: -20 }}
@@ -69,6 +69,8 @@ export default function MenuPage() {
         {/*Hero Section / Top Arch Background Area*/}
         <section className="relative flex flex-col items-center justify-center text-center pt-2 pb-1 px-6">
 
+
+
           {/* New Brand Logo Integration */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -92,10 +94,28 @@ export default function MenuPage() {
           {/* Inner pattern overlay */}
           <div className="absolute inset-0 pattern-gear pointer-events-none rounded-t-[200px]" />
 
+          {/* 🏛️ Decorative Heritage Arch Frame */}
+          <div className="absolute top-0 left-0 w-full h-48 pointer-events-none z-20 overflow-hidden rounded-t-[200px]">
+            {/* Layer 1: Soft Ambient Glow (Orange) */}
+            <div className="absolute top-0 left-0 right-0 h-full border-t-3 border-orange blur-[6px]" />
+
+            {/* Layer 2: Deep Heritage Green Base */}
+            <div className="absolute top-0 left-0 right-0 h-full border-t-3 border-green-dark" />
+
+            {/* Layer 3: Main Copper/Orange Ornamental Line */}
+            <div className="absolute top-0 left-0 right-0 h-full border-t-3 border-orange rounded-t-[200px]" />
+
+            {/* Layer 4: Subtle Brown Inset Line */}
+            <div className="absolute top-4 left-6 right-6 h-full border-t-4 border-primary rounded-t-[180px]" />
+
+            {/* Layer 5: Fine Accent Line */}
+            <div className="absolute top-8 left-12 right-12 h-full border-t-4 border-orange rounded-t-[160px]" />
+          </div>
+
 
 
           {/* ✅ Menu Container */}
-          <div className="relative z-10 flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 pt-16 pb-24">
+          <div className="relative z-10 flex-1 w-full max-w-4xl mx-auto px-1 md:px-8 pt-32 pb-4">
             <Menu
               onLoadingChange={handleLoadingChange}
               onFeaturedCheck={setHasFeatured}

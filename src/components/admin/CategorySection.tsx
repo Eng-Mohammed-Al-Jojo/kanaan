@@ -156,7 +156,7 @@ const CategoryCard: React.FC<{
               <div className="flex items-center gap-2">
                 <input
                   autoFocus
-                  className="flex-1 p-3 bg-gray-50 border border-primary rounded-xl text-sm font-bold outline-none text-right focus:bg-white transition-all"
+                  className="flex-1 p-3 bg-primary/5 border border-primary rounded-xl text-sm font-bold outline-none text-right focus:bg-white transition-all text-primary"
                   value={editNameAr}
                   onChange={(e) => setEditNameAr(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && saveEdit(cat.id)}
@@ -170,12 +170,12 @@ const CategoryCard: React.FC<{
               </div>
             ) : (
               <div className="flex items-center justify-between gap-3">
-                <h3 className="text-lg font-bold text-gray-900 truncate" title={cat.nameAr}>
+                <h3 className="text-lg font-bold text-primary truncate" title={cat.nameAr}>
                   {cat.nameAr}
                 </h3>
                 <button
                   onClick={() => startEditing(cat.id, cat.nameAr)}
-                  className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-primary transition-colors"
+                  className="w-8 h-8 flex items-center justify-center text-primary/30 hover:text-primary transition-colors"
                 >
                   <FiEdit size={14} />
                 </button>
@@ -183,19 +183,19 @@ const CategoryCard: React.FC<{
             )}
             <div className="flex items-center gap-2 mt-2">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">
+              <p className="text-[11px] font-bold text-primary/40 uppercase tracking-widest">
                 {catSubcategories.length} {t('admin.subcategories')}
               </p>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-3 pt-6 border-t border-gray-50">
+          <div className="flex items-center gap-3 pt-6 border-t border-primary/5">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className={`flex-1 h-12 flex items-center justify-center gap-3 rounded-xl transition-all font-bold border ${isExpanded
                 ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                : "bg-gray-50 text-gray-500 border-gray-100 hover:bg-white hover:border-primary/30 hover:text-primary"
+                : "bg-primary/5 text-primary/60 border-primary/10 hover:bg-white hover:border-primary/30 hover:text-primary"
                 }`}
             >
               <span className="text-xs uppercase tracking-wider">{t('admin.subcategories')}</span>
@@ -204,7 +204,7 @@ const CategoryCard: React.FC<{
 
             <button
               onClick={() => setPopup({ type: "deleteCategory", id: cat.id })}
-              className="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary-50 text-secondary hover:bg-secondary hover:text-white transition-all border border-secondary-100 shadow-sm active:scale-95"
+              className="w-12 h-12 flex items-center justify-center rounded-xl bg-secondary/5 text-secondary hover:bg-secondary hover:text-white transition-all border border-secondary/10 shadow-sm active:scale-95"
             >
               <FiTrash2 size={18} />
             </button>
@@ -387,11 +387,11 @@ const CategorySection: React.FC<Props> = ({
           w-full mb-2
           flex items-center justify-between
           px-6 sm:px-8 py-5
-          bg-gray-50
+          bg-primary/5
           rounded-4xl
-          font-black text-base text-gray-800
-          hover:bg-primary/5 hover:text-primary
-          transition-all border border-gray-100 shadow-inner group
+          font-black text-base text-primary
+          hover:bg-primary/10 hover:text-primary
+          transition-all border border-primary/5 shadow-inner group
         "
       >
         <div className="flex items-center gap-4">
@@ -402,7 +402,7 @@ const CategorySection: React.FC<Props> = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em] hidden sm:inline">{t('admin.total')}</span>
+          <span className="text-[11px] font-bold text-primary/30 uppercase tracking-[0.2em] hidden sm:inline">{t('admin.total')}</span>
           <span className="bg-primary text-white text-[12px] font-black px-4 py-1.5 rounded-xl shadow-lg shadow-primary/20">
             {categoriesArray.length}
           </span>

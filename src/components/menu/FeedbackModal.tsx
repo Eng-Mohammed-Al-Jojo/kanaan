@@ -92,9 +92,9 @@ export default function FeedbackModal({ show, onClose }: Props) {
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="relative bg-(--bg-card)/80 backdrop-blur-2xl w-full max-w-md p-8 rounded-[2.5rem] border border-(--border-color) shadow-2xl overflow-y-auto max-h-[90vh] z-10"
+                        className="relative bg-cream/95 backdrop-blur-2xl w-full max-w-md p-8 rounded-[2.5rem] border border-primary/10 shadow-2xl overflow-y-auto max-h-[90vh] z-10"
                     >
-                        <button onClick={onClose} className="absolute top-6 left-6 w-10 h-10 flex items-center justify-center rounded-2xl bg-(--bg-main) text-(--text-muted) hover:text-red-500 transition-all border border-(--border-color)">
+                        <button onClick={onClose} className="absolute top-6 left-6 w-10 h-10 flex items-center justify-center rounded-2xl bg-white/50 text-primary hover:text-red-500 transition-all border border-primary/10">
                             <FiX />
                         </button>
 
@@ -102,8 +102,8 @@ export default function FeedbackModal({ show, onClose }: Props) {
                             <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-3xl mb-4 shadow-inner">
                                 <FiMessageSquare />
                             </div>
-                            <h2 className="text-2xl font-black text-(--text-main) text-center">{t('common.feedback_title')}</h2>
-                            <p className="text-sm font-bold text-(--text-muted) text-center mt-1 uppercase tracking-widest opacity-60">{t('common.feedback_desc')}</p>
+                            <h2 className="text-2xl font-black text-primary text-center">{t('common.feedback_title')}</h2>
+                            <p className="text-sm font-bold text-primary text-center mt-1 uppercase tracking-widest opacity-60">{t('common.feedback_desc')}</p>
                         </div>
 
                         <div className="space-y-4">
@@ -113,7 +113,7 @@ export default function FeedbackModal({ show, onClose }: Props) {
                                     placeholder={t('common.name')}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    className="w-full px-5 py-3.5 rounded-2xl bg-(--bg-main)/50 text-(--text-main) border border-(--border-color) focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all font-bold placeholder:opacity-50"
+                                    className="w-full px-5 py-3.5 rounded-2xl bg-white/50 text-primary border border-primary/10 focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all font-bold placeholder:text-primary/40"
                                 />
                             </div>
                             <div className="relative" dir="ltr">
@@ -124,11 +124,11 @@ export default function FeedbackModal({ show, onClose }: Props) {
                                     onChange={(e) => setPhone(e.target.value)}
                                     dir="ltr"
                                     className="w-full px-5 py-3.5 rounded-2xl 
-                                                bg-(--bg-main)/50 text-(--text-main) 
-                                                border border-(--border-color) 
+                                                bg-white/50 text-primary 
+                                                border border-primary/10 
                                                 focus:border-primary focus:ring-4 focus:ring-primary/5 
                                                 outline-none transition-all font-bold 
-                                                placeholder:opacity-50 text-right"
+                                                placeholder:text-primary/40 text-right"
                                 />
                             </div>
 
@@ -145,7 +145,7 @@ export default function FeedbackModal({ show, onClose }: Props) {
                                     >
                                         <FiStar
                                             size={32}
-                                            className={`transition-colors duration-300 ${star <= (hoverRating || rating) ? 'text-amber-400 fill-amber-400 drop-shadow-lg' : 'text-(--text-muted) opacity-20'}`}
+                                            className={`transition-colors duration-300 ${star <= (hoverRating || rating) ? 'text-primary fill-primary drop-shadow-lg' : 'text-primary opacity-10'}`}
                                         />
                                     </button>
                                 ))}
@@ -155,7 +155,7 @@ export default function FeedbackModal({ show, onClose }: Props) {
                                 placeholder={t('common.feedback_placeholder')}
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className="w-full px-5 py-4 rounded-2xl bg-(--bg-main)/50 text-(--text-main) border border-(--border-color) focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all font-bold resize-none h-32 placeholder:opacity-50"
+                                className="w-full px-5 py-4 rounded-2xl bg-white/50 text-primary border border-primary/10 focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all font-bold resize-none h-32 placeholder:text-primary/40"
                             />
 
                             <button

@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+; import { motion, AnimatePresence } from "framer-motion";
 import {
     FiX, FiUser, FiPhone, FiMapPin, FiClock,
     FiDollarSign, FiMessageSquare,
@@ -92,7 +92,7 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm z-0"
+                        className="absolute inset-0 bg-primary/20 backdrop-blur-sm z-0"
                     />
 
                     <motion.div
@@ -100,19 +100,19 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                         animate={{ x: 0 }}
                         exit={{ x: isRtl ? "-100%" : "100%" }}
                         transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                        className={`relative w-full max-w-lg bg-white h-full shadow-premium z-10 flex flex-col ${isRtl ? 'border-r' : 'border-l'} border-gray-100`}
+                        className={`relative w-full max-w-lg bg-white/95 backdrop-blur-md h-full shadow-premium z-10 flex flex-col ${isRtl ? 'border-r' : 'border-l'} border-primary/5`}
                     >
                         {/* Header */}
-                        <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                        <div className="p-8 border-b border-primary/5 flex items-center justify-between bg-primary/5">
                             <div>
-                                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em] bg-primary/5 px-3 py-1 rounded-lg border border-primary/10">
+                                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em] bg-primary/10 px-3 py-1 rounded-lg border border-primary/10">
                                     {order.orderId}
                                 </span>
-                                <h2 className="text-2xl font-black text-gray-900 mt-2">{t('admin.order_details') || "تفاصيل الطلب"}</h2>
+                                <h2 className="text-2xl font-black text-primary mt-2">{t('admin.order_details') || "تفاصيل الطلب"}</h2>
                             </div>
                             <button
                                 onClick={onClose}
-                                className="w-12 h-12 rounded-2xl bg-white text-gray-400 flex items-center justify-center hover:bg-secondary/10 hover:text-secondary transition-all border border-gray-100 shadow-soft"
+                                className="w-12 h-12 rounded-2xl bg-white text-primary/30 flex items-center justify-center hover:bg-secondary/10 hover:text-secondary transition-all border border-primary/5 shadow-soft"
                             >
                                 <FiX size={24} />
                             </button>
@@ -124,29 +124,29 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             {/* Order Progress Control Center */}
                             <section className="space-y-6">
                                 <div className="flex justify-between items-center">
-                                    <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">{t('admin.status_progress') || "تتبع وتحديث الحالة"}</h3>
+                                    <h3 className="text-xs font-black uppercase tracking-widest text-primary/40">{t('admin.status_progress') || "تتبع وتحديث الحالة"}</h3>
                                     {order.archived && (
-                                        <span className="bg-gray-100 text-gray-500 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest">{t('admin.archived')}</span>
+                                        <span className="bg-primary/5 text-primary/60 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest">{t('admin.archived')}</span>
                                     )}
                                 </div>
 
                                 {/* Simplified Status Visualization */}
                                 <div className="space-y-4">
-                                    <div className="flex items-center justify-between p-6 bg-gray-50 rounded-3xl border border-gray-100">
+                                    <div className="flex items-center justify-between p-6 bg-primary/5 rounded-3xl border border-primary/5 shadow-inner">
                                         <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
                                                 <FiClock size={22} />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] mb-1">{t('admin.order_status')}</p>
-                                                <p className="text-base font-black text-gray-900 leading-none">{t(`admin.${order.status}`)}</p>
+                                                <p className="text-[10px] text-primary/30 font-black uppercase tracking-[0.2em] mb-1">{t('admin.order_status')}</p>
+                                                <p className="text-base font-black text-primary leading-none">{t(`admin.${order.status}`)}</p>
                                             </div>
                                         </div>
                                         <div className="flex gap-1.5">
                                             {steps.map((st, idx) => (
                                                 <div
                                                     key={st}
-                                                    className={`w-6 h-1.5 rounded-full transition-all duration-500 ${idx <= currentStepIndex ? "bg-primary shadow-sm" : "bg-gray-200"}`}
+                                                    className={`w-6 h-1.5 rounded-full transition-all duration-500 ${idx <= currentStepIndex ? "bg-primary shadow-sm" : "bg-primary/10"}`}
                                                 />
                                             ))}
                                         </div>
@@ -206,19 +206,19 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                 </div>
                             </section>
 
-                            <div className="h-px bg-gray-100" />
+                            <div className="h-px bg-primary/5" />
 
                             {/* Customer Info */}
                             <section className="space-y-6">
-                                <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">{t('admin.customer_details')}</h3>
-                                <div className="grid gap-6 bg-gray-50 p-6 rounded-4xl border border-gray-100">
+                                <h3 className="text-xs font-black uppercase tracking-widest text-primary/40">{t('admin.customer_details')}</h3>
+                                <div className="grid gap-6 bg-primary/5 p-6 rounded-4xl border border-primary/5 shadow-inner">
                                     <div className="flex items-center gap-5">
-                                        <div className="w-12 h-12 rounded-2xl bg-white shadow-soft flex items-center justify-center text-primary border border-gray-100">
+                                        <div className="w-12 h-12 rounded-2xl bg-white shadow-soft flex items-center justify-center text-primary border border-primary/5">
                                             <FiUser size={22} />
                                         </div>
                                         <div>
-                                            <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{t('admin.customer')}</p>
-                                            <p className="text-base font-black text-gray-900 leading-none">{order.customer?.name}</p>
+                                            <p className="text-[10px] text-primary/30 font-black uppercase tracking-widest mb-1">{t('admin.customer')}</p>
+                                            <p className="text-base font-black text-primary leading-none">{order.customer?.name}</p>
                                         </div>
                                     </div>
                                     {order.customer?.phone && (
@@ -227,8 +227,8 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                                 <FiPhone size={22} />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{t('admin.phone')}</p>
-                                                <p className="text-base font-black text-gray-900 leading-none flex items-center gap-3">
+                                                <p className="text-[10px] text-primary/30 font-black uppercase tracking-widest mb-1">{t('admin.phone')}</p>
+                                                <p className="text-base font-black text-primary leading-none flex items-center gap-3">
                                                     {order.customer.phone}
                                                     <FaWhatsapp size={16} className="text-emerald-500" />
                                                 </p>
@@ -237,12 +237,12 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                     )}
                                     {order.customer?.address && (
                                         <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 rounded-2xl bg-white shadow-soft flex items-center justify-center text-orange-500 border border-gray-100">
+                                            <div className="w-12 h-12 rounded-2xl bg-white shadow-soft flex items-center justify-center text-orange-500 border border-primary/5">
                                                 <FiMapPin size={22} />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{t('whatsapp.address')}</p>
-                                                <p className="text-base font-black text-gray-900 leading-none">{order.customer.address}</p>
+                                                <p className="text-[10px] text-primary/30 font-black uppercase tracking-widest mb-1">{t('whatsapp.address')}</p>
+                                                <p className="text-base font-black text-primary leading-none">{order.customer.address}</p>
                                             </div>
                                         </div>
                                     )}
@@ -252,19 +252,19 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             {/* Items List */}
                             <section className="space-y-6">
                                 <div className="flex justify-between items-center">
-                                    <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">{t('admin.ordered_items')}</h3>
-                                    <span className="px-4 py-1.5 rounded-xl bg-gray-100 text-gray-500 text-[10px] font-black uppercase tracking-widest">
+                                    <h3 className="text-xs font-black uppercase tracking-widest text-primary/40">{t('admin.ordered_items')}</h3>
+                                    <span className="px-4 py-1.5 rounded-xl bg-primary/5 text-primary/60 text-[10px] font-black uppercase tracking-widest">
                                         {order.items?.length} {t('common.items')}
                                     </span>
                                 </div>
-                                <div className="bg-gray-50 rounded-4xl border border-gray-100 overflow-hidden divide-y divide-gray-100 shadow-inner">
+                                <div className="bg-primary/5 rounded-4xl border border-primary/5 overflow-hidden divide-y divide-primary/5 shadow-inner">
                                     {order.items?.map((item, idx) => (
                                         <div key={idx} className="p-5 flex justify-between items-center group hover:bg-white transition-all">
                                             <div className="flex items-center gap-5">
                                                 <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-black text-sm shadow-sm border border-primary/10">
                                                     {item.qty}×
                                                 </div>
-                                                <span className="text-base font-bold text-gray-900 leading-tight">
+                                                <span className="text-base font-bold text-primary leading-tight">
                                                     {isRtl ? item.nameAr : item.nameEn || item.nameAr}
                                                 </span>
                                             </div>
@@ -301,7 +301,7 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             </section>
 
                             {order.customer?.notes && (
-                                <section className="p-6 rounded-4xl bg-amber-50 border border-amber-100 space-y-4">
+                                <section className="p-6 rounded-4xl bg-amber-50/50 border border-amber-100/50 space-y-4">
                                     <div className="flex items-center gap-3 text-xs font-black text-amber-600 uppercase tracking-widest">
                                         <FiMessageSquare size={18} />
                                         <span>{t('whatsapp.notes')}</span>
@@ -315,20 +315,20 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                         </div>
 
                         {/* Sticky Bottom Actions */}
-                        <div className="p-8 border-t border-gray-100 bg-white flex flex-col gap-3 shrink-0">
+                        <div className="p-8 border-t border-primary/5 bg-white/80 backdrop-blur-md flex flex-col gap-3 shrink-0">
                             {/* Hard Delete for Cancelled/Archived orders */}
                             {(order.status === "cancelled" || order.status === "archived") && (
                                 !showHardDeleteConfirm ? (
                                     <button
                                         onClick={() => setShowHardDeleteConfirm(true)}
-                                        className="w-full py-4 bg-red-50 text-red-500 border border-red-100 rounded-2xl font-black text-sm hover:bg-red-500 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-3"
+                                        className="w-full py-4 bg-secondary/5 text-secondary border border-secondary/10 rounded-2xl font-black text-sm hover:bg-secondary hover:text-white transition-all active:scale-95 flex items-center justify-center gap-3"
                                     >
                                         <FiTrash2 size={18} />
                                         {t('admin.hard_delete') || "حذف نهائي من قاعدة البيانات"}
                                     </button>
                                 ) : (
-                                    <div className="bg-red-50 border border-red-200 rounded-2xl p-5 space-y-3">
-                                        <div className="flex items-center gap-3 text-red-600">
+                                    <div className="bg-secondary/5 border border-secondary/20 rounded-2xl p-5 space-y-3">
+                                        <div className="flex items-center gap-3 text-secondary">
                                             <FiAlertTriangle size={18} />
                                             <p className="text-xs font-black">{t('admin.hard_delete_confirm') || "هذا الإجراء لا يمكن التراجع عنه!"}</p>
                                         </div>
@@ -336,14 +336,14 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                             <button
                                                 onClick={handleHardDelete}
                                                 disabled={deleting}
-                                                className="flex-1 py-3 bg-red-600 text-white rounded-xl font-black text-xs hover:bg-red-700 transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2"
+                                                className="flex-1 py-3 bg-secondary text-white rounded-xl font-black text-xs hover:bg-secondary/80 transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2"
                                             >
                                                 {deleting ? <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" /> : <FiTrash2 size={14} />}
                                                 {t('common.delete') || "تأكيد الحذف"}
                                             </button>
                                             <button
                                                 onClick={() => setShowHardDeleteConfirm(false)}
-                                                className="flex-1 py-3 bg-gray-100 text-gray-500 rounded-xl font-black text-xs hover:bg-gray-200 transition-all"
+                                                className="flex-1 py-3 bg-primary/5 text-primary/40 rounded-xl font-black text-xs hover:bg-primary/10 transition-all"
                                             >
                                                 {t('common.cancel') || "إلغاء"}
                                             </button>
@@ -353,7 +353,7 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             )}
                             <button
                                 onClick={onClose}
-                                className="flex-1 py-5 bg-gray-50 text-gray-900 border border-gray-100 rounded-2xl font-black text-sm hover:bg-gray-100 transition-all active:scale-95 flex items-center justify-center gap-3 shadow-soft"
+                                className="flex-1 py-5 bg-primary/5 text-primary border border-primary/10 rounded-2xl font-black text-sm hover:bg-primary/10 transition-all active:scale-95 flex items-center justify-center gap-3 shadow-soft"
                             >
                                 <FiChevronRight className={isRtl ? "rotate-180" : ""} size={20} />
                                 {t('common.close')}

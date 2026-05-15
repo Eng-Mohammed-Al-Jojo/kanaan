@@ -165,11 +165,11 @@ export default function AdminOrdersPage() {
 
     if (!authOk && !loading) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white p-12 rounded-[3rem] border border-gray-100 shadow-premium text-center max-w-md">
+            <div className="min-h-screen bg-cream flex items-center justify-center p-6">
+                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/80 backdrop-blur-md p-12 rounded-[3rem] border border-primary/5 shadow-premium text-center max-w-md">
                     <div className="text-7xl mb-8">🔒</div>
-                    <h2 className="text-3xl font-black text-gray-900 mb-4">{t('admin.login_title')}</h2>
-                    <p className="text-gray-500 font-medium mb-8">{t('admin.login_required')}</p>
+                    <h2 className="text-3xl font-black text-primary mb-4">{t('admin.login_title')}</h2>
+                    <p className="text-primary/40 font-medium mb-8">{t('admin.login_required')}</p>
                     <button onClick={() => navigate("/admin")} className="w-full py-5 bg-primary text-white rounded-2xl font-black shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95">
                         {t('admin.login_btn')}
                     </button>
@@ -179,7 +179,7 @@ export default function AdminOrdersPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6 md:p-10 font-['Cairo']">
+        <div className="min-h-screen bg-cream/30 p-6 md:p-10 font-['Cairo']">
             <div className="max-w-7xl mx-auto space-y-12">
 
                 {/* Header & Main Toggle */}
@@ -189,13 +189,13 @@ export default function AdminOrdersPage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => navigate(-1)}
-                            className="w-14 h-14 flex items-center justify-center bg-white text-gray-900 rounded-2xl border border-gray-100 shadow-soft hover:shadow-premium transition-all"
+                            className="w-14 h-14 flex items-center justify-center bg-white text-primary rounded-2xl border border-primary/5 shadow-soft hover:shadow-premium transition-all"
                         >
                             {isRtl ? <FiArrowRight size={24} /> : <FiArrowRight className="rotate-180" size={24} />}
                         </motion.button>
                         <div className="text-right">
-                            <h1 className="text-4xl font-black text-gray-900 tracking-tight">{t('admin.orders_board')}</h1>
-                            <p className="text-gray-400 text-xs font-bold uppercase tracking-[0.2em] mt-2 flex items-center gap-2">
+                            <h1 className="text-4xl font-black text-primary tracking-tight">{t('admin.orders_board')}</h1>
+                            <p className="text-primary/40 text-xs font-bold uppercase tracking-[0.2em] mt-2 flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                                 {viewMode === "history" ? t('admin.archived_orders') : viewMode === "whatsapp" ? t('admin.source_whatsapp') : t('admin.active_orders')}
                             </p>
@@ -206,7 +206,7 @@ export default function AdminOrdersPage() {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setIsApprovalsModalOpen(true)}
-                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-white border border-gray-100 shadow-soft transition-all relative ${payments.some(p => p.status === 'pending') ? 'text-amber-500' : 'text-gray-400'}`}
+                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-white border border-primary/5 shadow-soft transition-all relative ${payments.some(p => p.status === 'pending') ? 'text-amber-500' : 'text-primary/30'}`}
                                 title={t('admin.payment_requests')}
                             >
                                 <FiBell />
@@ -219,7 +219,7 @@ export default function AdminOrdersPage() {
 
                             <button
                                 onClick={() => setIsPaymentModalOpen(true)}
-                                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-white text-gray-400 border border-gray-100 hover:text-primary hover:border-primary/30 shadow-soft transition-all"
+                                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-white text-primary/30 border border-primary/5 hover:text-primary hover:border-primary/30 shadow-soft transition-all"
                                 title={t('admin.payment_methods')}
                             >
                                 <FiDollarSign />
@@ -227,23 +227,23 @@ export default function AdminOrdersPage() {
 
                             <button
                                 onClick={() => setShowAnalytics(!showAnalytics)}
-                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl transition-all border ${showAnalytics ? 'bg-primary text-white border-primary shadow-lg' : 'bg-white text-gray-400 border-gray-100 hover:text-primary hover:border-primary/30 shadow-soft'}`}
+                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl transition-all border ${showAnalytics ? 'bg-primary text-white border-primary shadow-lg' : 'bg-white text-primary/30 border-primary/5 hover:text-primary hover:border-primary/30 shadow-soft'}`}
                                 title="الاحصائيات"
                             >
                                 <FiBarChart2 />
                             </button>
 
 
-                            <div className="flex bg-white p-1.5 gap-1.5 rounded-2xl border border-gray-100 shadow-inner">
+                            <div className="flex bg-white/50 p-1.5 gap-1.5 rounded-2xl border border-primary/5 shadow-inner">
                                 <button
                                     onClick={() => updateSettings('system', !settings.system)}
-                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${settings.system ? 'text-primary bg-primary/10' : 'text-gray-400 hover:bg-gray-50'}`}
+                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${settings.system ? 'text-primary bg-primary/10' : 'text-primary/30 hover:bg-white/50'}`}
                                 >
                                     {settings.system ? <FiBell /> : <FiBellOff />}
                                 </button>
                                 <button
                                     onClick={() => updateSettings('sound', !settings.sound)}
-                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${settings.sound ? 'text-blue-500 bg-blue-500/10' : 'text-gray-400 hover:bg-gray-50'}`}
+                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${settings.sound ? 'text-blue-500 bg-blue-500/10' : 'text-primary/30 hover:bg-white/50'}`}
                                 >
                                     {settings.sound ? <FiVolume2 /> : <FiVolumeX />}
                                 </button>
@@ -293,7 +293,7 @@ export default function AdminOrdersPage() {
                 <AnimatePresence>
                     {showAnalytics && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                            <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-soft">
+                            <div className="bg-white/80 backdrop-blur-md p-8 rounded-[2.5rem] border border-primary/5 shadow-soft">
                                 <AnalyticsSection orders={orders} />
                             </div>
                         </motion.div>
@@ -301,12 +301,12 @@ export default function AdminOrdersPage() {
                 </AnimatePresence>
 
                 {/* Advanced Filter Management */}
-                <div className="bg-white p-8 rounded-[3rem] border border-gray-100 shadow-soft space-y-8">
+                <div className="bg-white/80 backdrop-blur-md p-8 rounded-[3rem] border border-primary/5 shadow-soft space-y-8">
                     <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-xl bg-primary/5 text-primary flex items-center justify-center">
                             <FiFilter size={20} />
                         </div>
-                        <h3 className="text-lg font-black text-gray-900 uppercase tracking-widest">{t('admin.advanced_filters')}</h3>
+                        <h3 className="text-lg font-black text-primary uppercase tracking-widest">{t('admin.advanced_filters')}</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
@@ -352,22 +352,22 @@ export default function AdminOrdersPage() {
 
                 {/* Professional Orders Table */}
                 <>
-                    <div className="bg-white rounded-[3rem] border border-gray-100 shadow-premium overflow-hidden flex flex-col">
+                    <div className="bg-white/80 backdrop-blur-md rounded-[3rem] border border-primary/5 shadow-premium overflow-hidden flex flex-col">
                         <div className="overflow-x-auto custom-scrollbar">
                             <table className="w-full text-right border-collapse min-w-[1000px]">
                                 <thead>
-                                    <tr className="bg-gray-50/50 border-b border-gray-100">
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em]">{t('admin.order_id')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em]">{t('admin.customer')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em]">{t('admin.order_time')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em]">{t('admin.type')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em]">{t('admin.status_lifecycle')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em]">{t('admin.payment')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em] text-center">{t('common.total')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-gray-400 tracking-[0.2em] text-left">{t('admin.actions')}</th>
+                                    <tr className="bg-primary/5 border-b border-primary/5">
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.order_id')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.customer')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.order_time')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.type')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.status_lifecycle')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.payment')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em] text-center">{t('common.total')}</th>
+                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em] text-left">{t('admin.actions')}</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-50">
+                                <tbody className="divide-y divide-primary/5">
                                     {loading ? (
                                         <tr>
                                             <td colSpan={8} className="px-8 py-32 text-center">

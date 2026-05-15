@@ -105,7 +105,7 @@ const SortableItem: React.FC<{
         <div className="flex-1 min-w-0 flex flex-col">
 
           <div className="flex items-center gap-2">
-            <h4 className="font-bold text-base sm:text-xl text-gray-900 truncate">
+            <h4 className="font-bold text-base sm:text-xl text-primary truncate">
               {item.nameAr}
             </h4>
 
@@ -126,7 +126,7 @@ const SortableItem: React.FC<{
             {item.ingredientsAr && (
               <div className="flex flex-wrap gap-1 mt-1.5">
                 {item.ingredientsAr.split(',').map((ing, i) => (
-                  <span key={i} className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md border border-gray-200">
+                  <span key={i} className="bg-primary/5 text-primary/60 text-[10px] font-bold px-2 py-0.5 rounded-md border border-primary/10">
                     {ing.trim()}
                   </span>
                 ))}
@@ -136,14 +136,14 @@ const SortableItem: React.FC<{
 
           <div className="flex items-center gap-1.5 mt-2">
             <span className="text-lg font-black text-primary">{item.price}</span>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">₪</span>
+            <span className="text-[10px] font-bold text-primary/30 uppercase tracking-widest">₪</span>
           </div>
 
         </div>
       </div>
 
       {/* ===== Actions ===== */}
-      <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto bg-gray-50 p-2 rounded-2xl border border-gray-100 shadow-inner">
+      <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto bg-primary/5 p-2 rounded-2xl border border-primary/5 shadow-inner">
 
         {/* Animated Toggle */}
         <button
@@ -181,14 +181,14 @@ const SortableItem: React.FC<{
 
           <button
             onClick={() => setPopup({ type: "editItem", id: item.id })}
-            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-gray-400 transition-all"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-primary/30 transition-all"
           >
             <FiEdit size={18} />
           </button>
 
           <button
             onClick={() => setPopup({ type: "deleteItem", id: item.id })}
-            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-secondary hover:shadow-sm text-gray-400 transition-all"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-secondary hover:shadow-sm text-primary/30 transition-all"
           >
             <FiTrash2 size={18} />
           </button>
@@ -199,14 +199,14 @@ const SortableItem: React.FC<{
           <button
             onClick={() => moveItem(item.categoryId, item.id, 'up')}
             disabled={idx === 0}
-            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-gray-400 transition-all disabled:opacity-30 disabled:pointer-events-none"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-primary/30 transition-all disabled:opacity-30 disabled:pointer-events-none"
           >
             <FiArrowUp size={18} />
           </button>
           <button
             onClick={() => moveItem(item.categoryId, item.id, 'down')}
             disabled={idx === totalItems - 1}
-            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-gray-400 transition-all disabled:opacity-30 disabled:pointer-events-none"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-primary/30 transition-all disabled:opacity-30 disabled:pointer-events-none"
           >
             <FiArrowDown size={18} />
           </button>
@@ -379,7 +379,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
               <FiPlus />
             </div>
             <div>
-              <h2 className="text-2xl sm:text-xl font-black text-gray-900">{t('admin.add_new_item')}</h2>
+              <h2 className="text-2xl sm:text-xl font-black text-primary">{t('admin.add_new_item')}</h2>
             </div>
           </div>
         </div>
@@ -406,14 +406,13 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
               disabled={currentCatSubcategories.length === 0}
             />
           </div>
-
           <div className="flex flex-col gap-3 md:col-span-2">
-            <label className="text-sm md:text-lg font-bold uppercase tracking-[0.2em] text-gray-400 px-1">
+            <label className="text-sm md:text-lg font-bold uppercase tracking-[0.2em] text-primary/30 px-1">
               {t('common.name')}
             </label>
             <input
-              className={`w-full h-14 bg-gray-50 border px-6 rounded-2xl text-sm md:text-base lg:text-md outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all
-                ${itemNameError ? "border-secondary" : "border-gray-100"} text-right`}
+              className={`w-full h-14 bg-primary/5 border px-6 rounded-2xl text-sm md:text-base lg:text-md outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all
+                ${itemNameError ? "border-secondary" : "border-primary/10"} text-right text-primary placeholder:text-primary/20`}
               placeholder={t('admin.item_name_ar_placeholder')}
               value={itemNameAr}
               onChange={(e) => {
@@ -424,11 +423,11 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-3 md:col-span-2">
-            <label className="text-sm md:text-lg font-bold uppercase tracking-[0.2em] text-gray-400 px-1">
+            <label className="text-sm md:text-lg font-bold uppercase tracking-[0.2em] text-primary/30 px-1">
               {t('admin.ingredients_label')}
             </label>
             <input
-              className="w-full h-14 bg-gray-50 border border-gray-100 px-6 rounded-2xl text-sm md:text-base lg:text-md outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all text-right"
+              className="w-full h-14 bg-primary/5 border border-primary/10 px-6 rounded-2xl text-sm md:text-base lg:text-md outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all text-right text-primary placeholder:text-primary/20"
               placeholder={t('admin.ingredients_placeholder')}
               value={itemIngredientsAr}
               onChange={(e) => setItemIngredientsAr(e.target.value)}
@@ -436,10 +435,10 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-3">
-            <label className="text-sm md:text-lg font-bold uppercase tracking-[0.2em] text-gray-400 px-1">{t('common.total')}</label>
+            <label className="text-sm md:text-lg font-bold uppercase tracking-[0.2em] text-primary/30 px-1">{t('common.total')}</label>
             <input
-              className={`w-full h-14 bg-gray-50 border px-6 rounded-2xl text-sm md:text-base lg:text-md outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all
-                ${itemPriceError ? "border-secondary" : "border-gray-100"}`}
+              className={`w-full h-14 bg-primary/5 border px-6 rounded-2xl text-sm md:text-base lg:text-md outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all
+                ${itemPriceError ? "border-secondary" : "border-primary/10"} text-primary placeholder:text-primary/20`}
               placeholder={t('admin.item_price_placeholder')}
               value={itemPrice}
               onChange={(e) => { setItemPrice(e.target.value); setItemPriceError(false); }}

@@ -90,15 +90,15 @@ export default function Footer() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 pt-24 pb-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 pt-8 pb-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
 
           {/* Left: Contact Info */}
-          <div className="flex flex-col gap-6 order-2 md:order-1">
+          <div className="flex flex-col items-center md:items-start text-center md:text-right gap-6 order-2 md:order-1">
 
             <div className="space-y-4">
               {footer.address && (
-                <div className="flex items-center gap-4 group">
+                <div className="flex flex-col md:flex-row items-center md:items-center gap-4 group">
                   <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-all duration-500">
                     <FaMapMarkerAlt size={16} />
                   </div>
@@ -109,14 +109,15 @@ export default function Footer() {
                 </div>
               )}
               {footer.phone && (
-                <a href={`tel:${footer.phone}`} className="flex items-start gap-4 group">
+                <a
+                  href={`tel:${footer.phone}`}
+                  className="flex items-center gap-4 group"
+                >
                   <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-all duration-500">
                     <FaPhoneAlt size={16} />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-accent/50 font-bold uppercase tracking-wider">الهاتف</span>
-                    <span className="text-sm font-medium">{footer.phone}</span>
-                  </div>
+
+                  <span className="text-sm font-medium">{footer.phone}</span>
                 </a>
               )}
             </div>
@@ -134,7 +135,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Kanaan Logo"
-                className="w-32 md:w-40 relative z-10 drop-shadow-2xl"
+                className="w-36 md:w-44 relative z-10 drop-shadow-2xl"
               />
             </motion.div>
 
@@ -170,7 +171,7 @@ export default function Footer() {
 
             <button
               onClick={() => setIsPaymentModalOpen(true)}
-              className="mt-4 flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group overflow-hidden relative"
+              className="mt-2 flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group overflow-hidden relative"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <FiCreditCard className="text-accent group-hover:scale-110 transition-transform" />
@@ -182,7 +183,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-4 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-accent/30">
             <span>© {new Date().getFullYear()}</span>
             <span className="w-1 h-1 rounded-full bg-accent/20" />

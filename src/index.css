@@ -14,12 +14,16 @@
   /* Heritage Dark Brown */
   --color-secondary: #58755A;
   /* Heritage Dark Green */
+  --color-green-dark: #2A4D35;
+  /* Heritage Very Dark Green */
   --color-accent: #D8D1C2;
   /* Heritage Beige/Accent */
   --color-cream: #FDFBD4;
   /* Light Cream */
   --color-green-light: #E3ECE2;
   /* Light Green Tint */
+  --color-orange: #C68B59;
+  /* Heritage Orange/Copper */
 
   /* Row Colors */
   --color-row-odd: #EFE1B5;

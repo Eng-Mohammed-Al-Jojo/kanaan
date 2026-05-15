@@ -34,26 +34,26 @@ export default function FeaturedModal({ isOpen, onClose, items, orderSystem, onI
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-sm max-h-[85vh] bg-(--bg-card) rounded-[3rem] shadow-2xl overflow-hidden border border-white/10 flex flex-col"
+            className="relative w-full max-w-sm max-h-[85vh] bg-cream rounded-[3rem] shadow-2xl overflow-hidden border border-primary/10 flex flex-col"
           >
             {/* Header */}
-            <div className="p-6 sm:p-8 flex items-center justify-between border-b border-(--border-color)/30 bg-linear-to-b from-orange-500/10 to-transparent">
+            <div className="p-6 sm:p-8 flex items-center justify-between border-b border-primary/10 bg-linear-to-b from-primary/5 to-transparent">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <div className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20">
                   <FiStar size={24} className="fill-current" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-black text-(--text-main) tracking-tight">
+                  <h2 className="text-2xl font-black text-primary tracking-tight">
                     {t("menu.featured_items") || "الأصناف المميزة"}
                   </h2>
-                  <p className="text-xs font-bold text-orange-500 uppercase tracking-widest opacity-80">
+                  <p className="text-xs font-bold text-primary uppercase tracking-widest opacity-60">
                     {items.length} {t("common.items") || "صنف"}
                   </p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-xl bg-(--bg-main) text-(--text-muted) flex items-center justify-center hover:bg-red-500 hover:text-white transition-all border border-(--border-color)"
+                className="w-10 h-10 rounded-xl bg-white/50 text-primary flex items-center justify-center hover:bg-red-500 hover:text-white transition-all border border-primary/10"
               >
                 <FiX size={20} />
               </button>
@@ -81,14 +81,14 @@ export default function FeaturedModal({ isOpen, onClose, items, orderSystem, onI
 
               {items.length === 0 && (
                 <div className="py-20 text-center space-y-4">
-                  <div className="text-6xl opacity-20">⭐</div>
-                  <p className="text-(--text-muted) font-bold">{t("menu.no_featured") || "لا توجد أصناف مميزة حالياً"}</p>
+                  <div className="text-6xl opacity-20 text-primary">⭐</div>
+                  <p className="text-primary font-bold opacity-60">{t("menu.no_featured") || "لا توجد أصناف مميزة حالياً"}</p>
                 </div>
               )}
             </div>
 
             {/* Footer shadow fade */}
-            <div className="h-8 bg-linear-to-t from-(--bg-card) to-transparent shrink-0 pointer-events-none" />
+            <div className="h-8 bg-linear-to-t from-cream to-transparent shrink-0 pointer-events-none" />
           </motion.div>
         </div>
       )}

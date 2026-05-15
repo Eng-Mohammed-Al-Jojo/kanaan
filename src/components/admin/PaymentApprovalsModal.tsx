@@ -27,27 +27,27 @@ export default function PaymentApprovalsModal({ isOpen, onClose, payments, onApp
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm"
+                        className="absolute inset-0 bg-primary/20 backdrop-blur-sm"
                     />
 
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="relative w-full max-w-4xl bg-white rounded-[3rem] border border-gray-100 shadow-premium overflow-hidden z-10 flex flex-col max-h-[85vh]"
+                        className="relative w-full max-w-4xl max-h-full bg-cream rounded-[3rem] shadow-premium overflow-hidden border border-primary/5 flex flex-col"
                     >
                         {/* Header */}
-                        <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                        <div className="p-8 border-b border-primary/5 flex items-center justify-between bg-white/50">
                             <div className="flex items-center gap-5">
-                                <div className="p-4 bg-amber-500 text-white rounded-2xl shadow-lg shadow-amber-500/20">
+                                <div className="p-4 bg-primary text-white rounded-2xl shadow-lg shadow-primary/20">
                                     <FiDollarSign size={24} />
                                 </div>
                                 <div>
-                                    <h2 className="text-2xl font-black text-gray-900 tracking-tight">{t('admin.payment_approvals')}</h2>
-                                    <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">{t('admin.payment_editor_desc')}</p>
+                                    <h2 className="text-2xl font-black text-primary tracking-tight">{t('admin.payment_approvals')}</h2>
+                                    <p className="text-primary/40 text-xs font-bold uppercase tracking-widest mt-1">{t('admin.payment_editor_desc')}</p>
                                 </div>
                             </div>
-                            <button onClick={onClose} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white text-gray-400 hover:text-secondary hover:bg-secondary/10 transition-all border border-gray-100 shadow-soft">
+                            <button onClick={onClose} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white text-primary/30 hover:text-secondary hover:bg-secondary/10 transition-all border border-primary/5 shadow-soft">
                                 <FiX size={24} />
                             </button>
                         </div>
@@ -62,27 +62,30 @@ export default function PaymentApprovalsModal({ isOpen, onClose, payments, onApp
                                 </h3>
 
                                 {pendingPayments.length === 0 ? (
-                                    <div className="py-16 text-center bg-gray-50 rounded-[2.5rem] border-2 border-dashed border-gray-100">
-                                        <p className="text-gray-400 font-bold text-sm">{t('admin.no_pending_payments')}</p>
+                                    <div className="bg-primary/5 rounded-[2.5rem] p-20 flex flex-col items-center justify-center text-center border-2 border-dashed border-primary/10">
+                                        <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-primary/10 mb-6 shadow-soft">
+                                            <FiCheck size={40} />
+                                        </div>
+                                        <p className="text-lg font-black text-primary/20 uppercase tracking-widest">{t('admin.no_pending_payments')}</p>
                                     </div>
                                 ) : (
-                                    <div className="grid gap-6">
+                                    <div className="grid gap-4">
                                         {pendingPayments.map((payment) => (
-                                            <div key={payment.id} className="p-8 bg-white border border-gray-100 rounded-[2.5rem] shadow-soft hover:shadow-premium transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-                                                <div className="flex items-start gap-6">
-                                                    <div className="w-16 h-16 rounded-3xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl shrink-0">
+                                            <div key={payment.id} className="bg-white p-6 rounded-[2rem] border border-primary/5 shadow-soft hover:shadow-premium transition-all flex flex-col md:flex-row items-center justify-between gap-8 group">
+                                                <div className="flex items-center gap-6 w-full md:w-auto">
+                                                    <div className="w-16 h-16 rounded-3xl bg-primary/5 text-primary flex items-center justify-center text-2xl shrink-0">
                                                         <FiDollarSign />
                                                     </div>
                                                     <div className="space-y-1">
                                                         <div className="flex items-center gap-3">
-                                                            <span className="text-sm font-black text-gray-900">طلب {payment.orderId}</span>
-                                                            <span className="text-[10px] font-black bg-gray-100 text-gray-500 px-2 py-1 rounded-lg uppercase">{payment.methodName}</span>
+                                                            <span className="text-sm font-black text-primary">{t('admin.order')} {payment.orderId}</span>
+                                                            <span className="text-[10px] font-black bg-primary/10 text-primary/60 px-2 py-1 rounded-lg uppercase">{payment.methodName}</span>
                                                         </div>
-                                                        <div className="flex items-center gap-2 text-gray-500">
+                                                        <div className="flex items-center gap-2 text-primary/40">
                                                             <FiUser size={14} />
                                                             <p className="text-sm font-bold">{payment.senderAccountName || payment.customerName}</p>
                                                         </div>
-                                                        <p className="text-xs text-gray-400 font-medium">{payment.senderAccountNumber || "-"}</p>
+                                                        <p className="text-xs text-primary/20 font-medium">{payment.senderAccountNumber || "-"}</p>
                                                         {payment.senderBankOrWallet && (
                                                             <p className="text-[10px] text-primary font-bold">{payment.senderBankOrWallet}</p>
                                                         )}
@@ -122,26 +125,26 @@ export default function PaymentApprovalsModal({ isOpen, onClose, payments, onApp
                             {/* History Section */}
                             {historyPayments.length > 0 && (
                                 <section className="space-y-6">
-                                    <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] flex items-center gap-3">
+                                    <h3 className="text-xs font-black text-primary/40 uppercase tracking-[0.2em] flex items-center gap-3">
                                         <FiInfo size={18} /> {t('admin.payment_history')}
                                     </h3>
-                                    <div className="bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100">
+                                    <div className="bg-primary/5 rounded-[2.5rem] overflow-hidden border border-primary/5">
                                         <table className="w-full text-right border-collapse">
                                             <thead>
-                                                <tr className="bg-gray-100/50">
-                                                    <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">{t('admin.order_id')}</th>
-                                                    <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">{t('admin.customer')}</th>
-                                                    <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">{t('admin.method')}</th>
-                                                    <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">{t('common.total')}</th>
-                                                    <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">{t('admin.status')}</th>
+                                                <tr className="bg-primary/10">
+                                                    <th className="px-6 py-4 text-[10px] font-black text-primary/40 uppercase tracking-widest">{t('admin.order_id')}</th>
+                                                    <th className="px-6 py-4 text-[10px] font-black text-primary/40 uppercase tracking-widest">{t('admin.customer')}</th>
+                                                    <th className="px-6 py-4 text-[10px] font-black text-primary/40 uppercase tracking-widest">{t('admin.method')}</th>
+                                                    <th className="px-6 py-4 text-[10px] font-black text-primary/40 uppercase tracking-widest">{t('common.total')}</th>
+                                                    <th className="px-6 py-4 text-[10px] font-black text-primary/40 uppercase tracking-widest">{t('admin.status')}</th>
                                                 </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-gray-100">
+                                            <tbody className="divide-y divide-primary/5">
                                                 {historyPayments.map((p) => (
-                                                    <tr key={p.id} className="hover:bg-white transition-colors">
-                                                        <td className="px-6 py-4 text-xs font-black text-gray-900">{p.orderId}</td>
-                                                        <td className="px-6 py-4 text-xs font-bold text-gray-600">{p.senderAccountName || p.customerName}</td>
-                                                        <td className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase">{p.methodName}</td>
+                                                    <tr key={p.id} className="hover:bg-white/50 transition-colors">
+                                                        <td className="px-6 py-4 text-xs font-black text-primary">{p.orderId}</td>
+                                                        <td className="px-6 py-4 text-xs font-bold text-primary/60">{p.senderAccountName || p.customerName}</td>
+                                                        <td className="px-6 py-4 text-[10px] font-black text-primary/30 uppercase">{p.methodName}</td>
                                                         <td className="px-6 py-4 text-xs font-black text-primary">{p.amount}₪</td>
                                                         <td className="px-6 py-4">
                                                             <span className={`text-[9px] font-black uppercase px-2 py-1 rounded-lg border ${p.status === 'approved' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-secondary/5 text-secondary border-secondary/10'}`}>
