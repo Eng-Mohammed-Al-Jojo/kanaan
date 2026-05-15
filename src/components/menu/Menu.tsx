@@ -266,7 +266,7 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
             {/* Logo or Title Placeholder if needed */}
 
             {/* Premium Heritage Search Bar */}
-            <div className="w-full max-w-2xl mx-auto relative group">
+            <div className="w-3/4 max-w-xl mx-auto relative group mb-8 ">
               <div className="absolute right-5 top-1/2 -translate-y-1/2 text-primary/40 group-focus-within:text-primary transition-colors">
                 <FiSearch size={22} />
               </div>

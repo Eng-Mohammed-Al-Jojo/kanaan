@@ -95,12 +95,10 @@ export default function Footer() {
 
           {/* Left: Contact Info */}
           <div className="flex flex-col gap-6 order-2 md:order-1">
-            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent/60 font-['Tajawal']">
-              {t('footer.contact_us') || "تواصل معنا"}
-            </h3>
+
             <div className="space-y-4">
               {footer.address && (
-                <div className="flex items-start gap-4 group">
+                <div className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-all duration-500">
                     <FaMapMarkerAlt size={16} />
                   </div>
@@ -141,12 +139,8 @@ export default function Footer() {
             </motion.div>
 
             <div className="flex flex-col items-center text-center gap-3">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-px bg-accent/30" />
-                <div className="w-1.5 h-1.5 rounded-full bg-accent/50" />
-                <div className="w-8 h-px bg-accent/30" />
-              </div>
-              <p className="text-xs text-accent/60 font-['Tajawal'] tracking-[0.15em] max-w-xs leading-relaxed">
+
+              <p className="text-sm md:text-md text-accent/60  tracking-[0.15em] max-w-xs leading-relaxed">
                 أصالة المذاق الفلسطيني في قلب كل لقمة. تراثنا، هويتنا، ومستقبلنا.
               </p>
             </div>
@@ -154,8 +148,7 @@ export default function Footer() {
 
           {/* Right: Quick Links & Payments */}
           <div className="flex flex-col gap-6 items-center md:items-end order-3">
-            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent/60 font-['Tajawal']">
-              {t('footer.follow_us') || "تابعنا"}
+            <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-accent/60 ">
             </h3>
 
             <div className="flex flex-wrap justify-center md:justify-end gap-3">

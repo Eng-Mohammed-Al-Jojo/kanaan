@@ -25,7 +25,7 @@ export default function CategoryNavigation({
       if (container) {
         const activeEl = activeRef.current;
         const scrollLeft = activeEl.offsetLeft - (container.clientWidth / 2) + (activeEl.clientWidth / 2);
-        
+
         container.scrollTo({
           left: scrollLeft,
           behavior: "smooth",
@@ -85,10 +85,10 @@ function TabButton({
       onClick={onClick}
       className={`
         relative h-12 px-8 rounded-full text-sm font-black whitespace-nowrap
-        transition-all duration-300 flex items-center gap-2.5 font-['Tajawal']
-        ${isActive 
-          ? "text-white shadow-lg shadow-primary/20" 
-          : "text-primary/60 bg-cream/40 hover:bg-cream/60 border border-primary/5"
+        transition-all duration-300 flex items-center gap-2.5 mt-2
+        ${isActive
+          ? "text-white shadow-lg shadow-primary/20"
+          : "text-primary bg-cream/40 hover:bg-cream/60 border-2 border-primary/30"
         }
       `}
     >
@@ -108,4 +108,4 @@ function TabButton({
   );
 }
 
-
+

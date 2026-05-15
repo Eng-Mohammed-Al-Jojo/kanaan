@@ -45,11 +45,11 @@ export default function CategorySection({ category, subcategories, items, orderS
   const catName = category.nameAr || category.name || "";
 
   return (
-    <div className="w-full space-y-12">
+    <div className="w-full space-y-4">
       {/* Premium Heritage Category Header */}
-      <div className="flex flex-col items-center gap-6 py-10 relative">
+      <div className="flex flex-col items-center gap-4 py-8 relative">
         {/* Decorative Arch Motif */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 border-t-2 border-x-2 border-primary/20 rounded-t-[100px] -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 border-t-4 border-x-4 border-primary/20 rounded-t-[100px] -z-10" />
 
         <div className="flex flex-col items-center">
           <h2 className="text-3xl md:text-5xl font-black text-primary tracking-tight text-center">
@@ -57,14 +57,14 @@ export default function CategorySection({ category, subcategories, items, orderS
           </h2>
           {/* Decorative Divider */}
           <div className="mt-4 flex items-center gap-4">
-            <div className="w-12 h-px bg-primary/20" />
+            <div className="w-12 h-1.5 bg-primary/20" />
             <div className="w-2 h-2 rounded-full bg-primary/40" />
-            <div className="w-12 h-px bg-primary/20" />
+            <div className="w-12 h-1.5 bg-primary/20" />
           </div>
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Main Items Block */}
         {groupedItems.noSubItems.length > 0 && (
           <motion.div
@@ -90,7 +90,7 @@ export default function CategorySection({ category, subcategories, items, orderS
 
         {/* Subcategories Section */}
         {activeSubcategories.map((sub) => (
-          <div key={sub.id} className="space-y-6 pt-10">
+          <div key={sub.id} className="space-y-8 ">
             {/* Elegant Subcategory Heading */}
             <div className="flex items-center gap-4 w-full">
               <div className="h-px flex-1 bg-secondary/20" />
