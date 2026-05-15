@@ -98,14 +98,14 @@ export default function Footer() {
 
             <div className="space-y-4">
               {footer.address && (
-                <div className="flex flex-col md:flex-row items-center md:items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-all duration-500">
+                <div className="flex items-center gap-4 group">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-primary transition-all duration-500 shrink-0">
                     <FaMapMarkerAlt size={16} />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-accent/50 font-bold uppercase tracking-wider">العنوان</span>
-                    <span className="text-sm font-medium leading-relaxed max-w-[250px] md:max-w-[300px]">{footer.address}</span>
-                  </div>
+
+                  <span className="text-sm font-medium leading-relaxed max-w-[250px] md:max-w-[300px]">
+                    {footer.address}
+                  </span>
                 </div>
               )}
               {footer.phone && (
