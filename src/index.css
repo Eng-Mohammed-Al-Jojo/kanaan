@@ -103,14 +103,14 @@
 body {
   background-color: var(--bg-main);
   color: var(--text-primary);
-  font-family: 'IBM Plex Sans Arabic', 'Almarai', sans-serif;
+  font-family: 'IBM Plex Sans Arabic';
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 
 .menu-wrapper {
-  font-family: 'IBM Plex Sans Arabic', 'Almarai', sans-serif;
+  font-family: 'IBM Plex Sans Arabic';
 }
 
 /* Custom Arch Background */

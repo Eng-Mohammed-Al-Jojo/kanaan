@@ -179,7 +179,7 @@ export default function AdminOrdersPage() {
     }
 
     return (
-        <div className="min-h-screen bg-cream/30 p-6 md:p-10 font-['Cairo']">
+        <div className="min-h-screen bg-white/95 p-4 md:p-6">
             <div className="max-w-7xl mx-auto space-y-12">
 
                 {/* Header & Main Toggle */}

@@ -11,20 +11,20 @@ function Toast({ type, message }: { type: "success" | "error"; message: string }
     return (
         <motion.div
             initial={{ opacity: 0, y: -20, x: "-50%" }}
-            animate={{ opacity: 1, y: 30, x: "-50%" }}
+            animate={{ opacity: 1, y: 20, x: "-50%" }}
             exit={{ opacity: 0, y: -20, x: "-50%" }}
-            className={`fixed top-0 left-1/2 z-200 px-10 py-5 rounded-full shadow-premium text-white font-black flex items-center gap-4 backdrop-blur-xl border border-white/20 transition-all ${type === "success" ? "bg-emerald-500/95" : "bg-secondary/95"}`}
+            className={`fixed top-0 left-1/2 z-200 px-8 py-4 rounded-3xl shadow-premium text-white font-black flex items-center gap-4 backdrop-blur-2xl border border-white/20 transition-all ${type === "success" ? "bg-emerald-600/95" : "bg-(--color-secondary)/95"}`}
         >
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm">
+            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-base">
                 {type === "success" ? <FiCheck /> : "×"}
             </div>
-            <span className="text-sm tracking-wide">{message}</span>
+            <span className="text-[11px] tracking-widest uppercase">{message}</span>
         </motion.div>
     );
 }
 
 /* ================= Simple Components ================= */
-const inputClass = "w-full bg-gray-50 border border-gray-100 rounded-2xl px-6 py-4 text-sm font-bold outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all placeholder:text-gray-300";
+const inputClass = "w-full bg-(--color-primary)/5 border border-transparent rounded-2xl px-6 py-4 text-sm font-black text-(--color-primary) outline-none focus:bg-white focus:border-(--color-primary)/10 focus:ring-4 focus:ring-(--color-primary)/5 transition-all placeholder:text-(--color-primary)/10 uppercase tracking-widest shadow-inner";
 
 function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, icon: Icon, required, isWaMode }: any) {
     const { t, i18n } = useTranslation();
@@ -34,33 +34,33 @@ function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, 
 
     return (
         <motion.div
-            whileHover={!disabled ? { y: -4, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" } : {}}
-            className={`relative p-8 rounded-4xl border transition-all duration-500 group overflow-hidden ${enabled
-                ? "bg-white border-primary/20 shadow-premium"
-                : "bg-gray-50 border-gray-100 opacity-70 hover:opacity-100"
-                } ${disabled ? "opacity-40 grayscale pointer-events-none" : ""}`}
+            whileHover={!disabled ? { y: -2, boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.1)" } : {}}
+            className={`relative p-6 rounded-[2rem] border transition-all duration-700 group overflow-hidden ${enabled
+                ? "bg-white border-(--color-primary)/10 shadow-premium"
+                : "bg-(--color-primary)/5 border-transparent opacity-60 hover:opacity-100"
+                } ${disabled ? "opacity-30 grayscale pointer-events-none" : ""}`}
         >
             <div className="flex items-center justify-between mb-4 relative z-10">
-                <div className="flex items-center gap-5">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all duration-500 ${enabled
-                        ? "bg-primary text-white shadow-xl shadow-primary/20"
-                        : "bg-white text-gray-400 border border-gray-100"
+                <div className="flex items-center gap-4">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-all duration-700 shadow-soft ${enabled
+                        ? "bg-(--color-primary) text-white shadow-xl shadow-(--color-primary)/30"
+                        : "bg-white text-(--color-primary)/20 border border-(--color-primary)/5"
                         }`}>
-                        <Icon />
+                        <Icon size={24} />
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-black text-base text-gray-900 tracking-tight">{title}</span>
+                        <span className="font-black text-lg text-(--color-primary) tracking-tight">{title}</span>
                         {required && enabled && !value.trim() && (
                             <motion.span
                                 animate={{ opacity: [0.5, 1, 0.5] }}
                                 transition={{ repeat: Infinity, duration: 1.5 }}
-                                className="text-[9px] font-black text-secondary uppercase tracking-widest mt-1 bg-secondary/5 px-2 py-0.5 rounded-md w-fit border border-secondary/10"
+                                className="text-[10px] font-black text-(--color-secondary) uppercase tracking-[0.2em] mt-2 bg-(--color-secondary)/5 px-3 py-1 rounded-lg w-fit border border-(--color-secondary)/10"
                             >
                                 {t('admin.required') || "مطلوب"}
                             </motion.span>
                         )}
                         {!isWaMode && enabled && (
-                            <span className="text-[10px] text-primary/60 font-black uppercase tracking-widest mt-1">
+                            <span className="text-[10px] text-(--color-primary)/30 font-black uppercase tracking-[0.2em] mt-2">
                                 {t('admin.dashboard_managed') || "تدار عبر اللوحة"}
                             </span>
                         )}
@@ -70,12 +70,12 @@ function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, 
                 <button
                     onClick={onToggle}
                     disabled={disabled}
-                    className={`relative w-14 h-7 rounded-full transition-all duration-500 border ${enabled ? "bg-emerald-500 border-emerald-600" : "bg-gray-200 border-gray-300"
+                    className={`relative w-16 h-8 rounded-full transition-all duration-700 border border-transparent shadow-inner ${enabled ? "bg-emerald-500" : "bg-(--color-primary)/10"
                         }`}
                 >
                     <motion.span
-                        animate={{ x: enabled ? (isRtl ? 4 : 32) : (isRtl ? 32 : 4) }}
-                        className="absolute top-1 left-0 w-5 h-5 rounded-full bg-white shadow-md z-10"
+                        animate={{ x: enabled ? (isRtl ? 6 : 38) : (isRtl ? 38 : 6) }}
+                        className="absolute top-1 left-0 w-6 h-6 rounded-full bg-white shadow-lg z-10"
                     />
                 </button>
             </div>
@@ -88,16 +88,16 @@ function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, 
                         exit={{ height: 0, opacity: 0, marginTop: 0 }}
                         className="overflow-hidden relative z-10"
                     >
-                        <div className="relative">
-                            <div className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-emerald-50 text-emerald-500 flex items-center justify-center border border-emerald-100`}>
-                                <FaWhatsapp size={16} />
+                        <div className="relative group/input">
+                            <div className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 w-10 h-10 rounded-xl bg-white text-emerald-500 flex items-center justify-center border border-emerald-100 shadow-sm group-hover/input:scale-110 transition-transform duration-500`}>
+                                <FaWhatsapp size={20} />
                             </div>
                             <input
                                 type="tel"
                                 value={value}
                                 onChange={(e) => setValue(e.target.value.replace(/\D/g, ""))}
                                 placeholder={t('admin.whatsapp_placeholder')}
-                                className={`${inputClass} ${isRtl ? 'pr-16 pl-6' : 'pl-16 pr-6'} ${required && !value.trim() ? 'border-secondary/30 bg-secondary/5' : ''}`}
+                                className={`${inputClass} ${isRtl ? 'pr-20 pl-8' : 'pl-20 pr-8'} ${required && !value.trim() ? 'bg-(--color-secondary)/5' : ''}`}
                             />
                         </div>
                     </motion.div>
@@ -183,78 +183,79 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
 
     return (
         <div className="fixed inset-0 z-100 flex items-center justify-center p-6">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => onClose()} className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm" />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => onClose()} className="absolute inset-0 bg-(--color-primary)/30 backdrop-blur-md" />
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                initial={{ opacity: 0, scale: 0.98, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative bg-white w-full max-w-2xl rounded-[3rem] border border-gray-100 shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10"
+                exit={{ opacity: 0, scale: 0.98, y: 20 }}
+                className="relative bg-white/95 backdrop-blur-2xl w-full max-w-xl rounded-[2.5rem] border border-white shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10"
             >
                 {/* Header */}
-                <div className="p-10 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-                    <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-3xl bg-primary text-white flex items-center justify-center text-3xl shadow-xl shadow-primary/20">
+                <div className="px-6 py-4 border-b border-(--color-primary)/5 flex items-center justify-between bg-white/50 backdrop-blur-md relative z-10">
+                    <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-(--color-primary) text-white flex items-center justify-center text-xl shadow-xl shadow-(--color-primary)/30">
                             <FiSettings />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-black text-gray-900 tracking-tight">{t('admin.system_settings')}</h2>
-                            <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">{t('admin.system_config_desc')}</p>
+                            <h2 className="text-lg font-black text-(--color-primary) tracking-tight">{t('admin.system_settings')}</h2>
+                            <p className="text-(--color-primary)/30 text-[8px] font-black uppercase tracking-[0.15em] mt-0.5">{t('admin.system_config_desc')}</p>
                         </div>
                     </div>
                     <button
                         onClick={() => onClose()}
-                        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white text-gray-400 hover:text-secondary hover:bg-secondary/10 transition-all border border-gray-100 shadow-soft"
+                        className="w-9 h-9 flex items-center justify-center rounded-xl bg-white text-(--color-primary)/20 hover:text-(--color-secondary) hover:bg-(--color-secondary)/10 transition-all border border-(--color-primary)/5 shadow-soft active:scale-90"
                     >
-                        <FiX size={24} />
+                        <FiX size={18} />
                     </button>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-10 space-y-10 custom-scrollbar">
+                <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
                     {/* Order Module Toggle */}
-                    <div className="p-8 rounded-4xl bg-primary/5 border border-primary/10 flex items-center justify-between shadow-sm">
-                        <div className="flex items-center gap-5">
-                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-inner ${orderSystem ? "bg-primary text-white" : "bg-white text-gray-300"}`}>
+                    <div className="p-5 rounded-[1.5rem] bg-(--color-primary)/5 border border-transparent flex items-center justify-between shadow-inner relative group overflow-hidden">
+                        <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2 blur-xl" />
+                        <div className="flex items-center gap-4 relative z-10">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-inner transition-all duration-700 ${orderSystem ? "bg-(--color-primary) text-white" : "bg-white text-(--color-primary)/20 border border-(--color-primary)/5"}`}>
                                 <FiSmartphone />
                             </div>
                             <div className="flex flex-col">
-                                <span className="font-black text-base text-gray-900 leading-none">{t('admin.enable_web_ordering')}</span>
-                                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">{orderSystem ? "النظام مفعل حالياً" : "النظام معطل"}</span>
+                                <span className="font-black text-base text-(--color-primary) leading-none tracking-tight">{t('admin.enable_web_ordering')}</span>
+                                <span className="text-[8px] text-(--color-primary)/30 font-black uppercase tracking-[0.15em] mt-1.5">{orderSystem ? "النظام مفعل حالياً" : "النظام معطل"}</span>
                             </div>
                         </div>
                         <button
                             onClick={() => setOrderSystem((p) => !p)}
-                            className={`relative w-16 h-8 rounded-full transition-all duration-300 border ${orderSystem ? "bg-emerald-500 border-emerald-600" : "bg-gray-200 border-gray-300"}`}
+                            className={`relative w-12 h-6 rounded-full transition-all duration-700 border border-transparent shadow-inner relative z-10 ${orderSystem ? "bg-emerald-500 shadow-emerald-500/30" : "bg-(--color-primary)/10"}`}
                         >
-                            <motion.span animate={{ x: orderSystem ? (isRtl ? 4 : 36) : (isRtl ? 36 : 4) }} className="absolute top-1 left-0 w-6 h-6 rounded-full bg-white shadow-md" />
+                            <motion.span animate={{ x: orderSystem ? (isRtl ? 3 : 26) : (isRtl ? 26 : 3) }} className="absolute top-0.5 left-0 w-5 h-5 rounded-full bg-white shadow-lg" />
                         </button>
                     </div>
 
                     {/* Order Mode Switch */}
-                    <div className="space-y-4">
-                        <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 px-2">{t('admin.order_source_mode') || "وضع استقبال الطلبات"}</h3>
-                        <div className="relative grid grid-cols-2 p-2 bg-gray-100 rounded-3xl overflow-hidden border border-gray-100">
+                    <div className="space-y-3">
+                        <h3 className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.order_source_mode') || "وضع استقبال الطلبات"}</h3>
+                        <div className="relative grid grid-cols-2 p-1.5 bg-(--color-primary)/5 rounded-[1.2rem] overflow-hidden border border-transparent shadow-inner">
                             <motion.div
-                                className="absolute top-2 bottom-2 w-[calc(50%-8px)] bg-white rounded-2xl shadow-premium"
+                                className="absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-lg shadow-premium"
                                 animate={{
                                     left: orderMode === "dashboard"
-                                        ? (isRtl ? "calc(50% + 4px)" : "8px")
-                                        : (isRtl ? "8px" : "calc(50% + 4px)")
+                                        ? (isRtl ? "calc(50% + 3px)" : "3px")
+                                        : (isRtl ? "3px" : "calc(50% + 3px)")
                                 }}
-                                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 35 }}
                             />
                             <button
                                 onClick={() => setOrderMode("dashboard")}
-                                className={`relative z-10 py-4 text-xs font-black tracking-widest transition-all duration-300
-                                ${orderMode === "dashboard" ? "text-primary" : "text-gray-400 hover:text-gray-600"}`}
+                                className={`relative z-10 py-2.5 text-[9px] font-black uppercase tracking-[0.15em] transition-all duration-700
+                                ${orderMode === "dashboard" ? "text-(--color-primary)" : "text-(--color-primary)/30 hover:text-(--color-primary)/60"}`}
                             >
                                 {t('admin.mode_dashboard')}
                             </button>
                             <button
                                 onClick={() => setOrderMode("whatsapp")}
-                                className={`relative z-10 py-4 text-xs font-black tracking-widest transition-all duration-300
-                                ${orderMode === "whatsapp" ? "text-primary" : "text-gray-400 hover:text-gray-600"}`}
+                                className={`relative z-10 py-2.5 text-[9px] font-black uppercase tracking-[0.15em] transition-all duration-700
+                                ${orderMode === "whatsapp" ? "text-(--color-primary)" : "text-(--color-primary)/30 hover:text-(--color-primary)/60"}`}
                             >
                                 {t('admin.mode_whatsapp')}
                             </button>
@@ -264,10 +265,10 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={orderMode}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.98 }}
+                            className="flex flex-col gap-4"
                         >
                             <ServiceCheckbox
                                 title={t('admin.local_ordering')}
@@ -295,64 +296,87 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                     </AnimatePresence>
 
                     {/* Complaints */}
-                    <div className="p-8 rounded-4xl bg-secondary/5 border border-secondary/10 space-y-6 relative group overflow-hidden">
-                        <div className="flex items-center gap-5">
-                            <div className="w-14 h-14 rounded-2xl bg-secondary text-white flex items-center justify-center shadow-xl shadow-secondary/20">
-                                <FiInfo size={24} />
+                    <div className="p-5 rounded-[1.5rem] bg-(--color-secondary)/5 border border-transparent space-y-4 relative group overflow-hidden shadow-inner">
+                        <div className="absolute bottom-0 right-0 w-20 h-20 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2 blur-xl" />
+                        <div className="flex items-center gap-4 relative z-10">
+                            <div className="w-10 h-10 rounded-xl bg-(--color-secondary) text-white flex items-center justify-center shadow-xl shadow-(--color-secondary)/30 group-hover:scale-110 transition-transform duration-700">
+                                <FiInfo size={20} />
                             </div>
                             <div>
-                                <h3 className="font-black text-base text-gray-900 tracking-tight">{t('admin.complaints_whatsapp')}</h3>
-                                <p className="text-[10px] text-gray-400 font-bold mt-1 uppercase tracking-widest">{t('admin.feedback_channel') || "قناة التواصل للشكاوى والملاحظات"}</p>
+                                <h3 className="font-black text-base text-(--color-primary) tracking-tight">{t('admin.complaints_whatsapp')}</h3>
+                                <p className="text-[8px] text-(--color-primary)/30 font-black mt-1 uppercase tracking-[0.15em]">{t('admin.feedback_channel') || "قناة التواصل للشكاوى والملاحظات"}</p>
                             </div>
                         </div>
-                        <div className="relative">
-                            <FaWhatsapp className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 text-secondary z-10`} />
-                            <input
-                                value={complaintsWhatsapp}
-                                onChange={(e) => setComplaintsWhatsapp(e.target.value.replace(/\D/g, ""))}
-                                placeholder={t('admin.whatsapp_placeholder')}
-                                className={`${inputClass} ${isRtl ? 'pr-16 pl-6' : 'pl-16 pr-6'}`}
-                            />
+                        <div className="space-y-2 relative z-10">
+                            <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.whatsapp_number') || "رقم الواتساب"}</label>
+                            <div className="relative group/input">
+                                <div className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-white text-(--color-secondary) flex items-center justify-center border border-(--color-secondary)/10 shadow-sm group-hover/input:scale-110 transition-transform duration-500`}>
+                                    <FaWhatsapp size={16} />
+                                </div>
+                                <input
+                                    value={complaintsWhatsapp}
+                                    onChange={(e) => setComplaintsWhatsapp(e.target.value.replace(/\D/g, ""))}
+                                    placeholder={t('admin.whatsapp_placeholder')}
+                                    className={`${inputClass} ${isRtl ? 'pr-14 pl-5' : 'pl-14 pr-5'} bg-white! shadow-soft h-12 py-0`}
+                                />
+                            </div>
                         </div>
                     </div>
 
                     {/* Footer Info */}
-                    <div className="p-10 rounded-[2.5rem] bg-gray-50 border border-gray-100 space-y-8 shadow-inner">
-                        <div className="flex items-center gap-5">
-                            <div className="w-14 h-14 rounded-2xl bg-white text-primary flex items-center justify-center border border-gray-100 shadow-soft">
-                                <FiLayout size={24} />
+                    <div className="p-6 rounded-[2rem] bg-(--color-primary)/5 border border-transparent space-y-6 shadow-inner relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-20 h-20 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-xl" />
+                        <div className="flex items-center gap-4 relative z-10">
+                            <div className="w-10 h-10 rounded-xl bg-white text-(--color-primary) flex items-center justify-center border border-(--color-primary)/5 shadow-soft group-hover:scale-110 transition-transform duration-700">
+                                <FiLayout size={20} />
                             </div>
-                            <h3 className="font-black text-base text-gray-900 tracking-tight">{t('admin.footer_info')}</h3>
+                            <h3 className="font-black text-base text-(--color-primary) tracking-tight">{t('admin.footer_info')}</h3>
                         </div>
 
-                        <div className="space-y-6">
-                            <div className="relative group">
-                                <FiLayout className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary`} />
-                                <input placeholder={t('admin.address_detail')} value={footer.address} onChange={(e) => setFooter({ ...footer, address: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-16' : 'pl-16'} bg-white! shadow-soft`} />
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div className="relative group">
-                                    <FiSmartphone className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary`} />
-                                    <input placeholder={t('admin.primary_phone')} value={footer.phone} onChange={(e) => setFooter({ ...footer, phone: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-16' : 'pl-16'} bg-white! shadow-soft`} />
-                                </div>
-                                <div className="relative group">
-                                    <FaWhatsapp className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-emerald-500`} />
-                                    <input placeholder={t('admin.contact_whatsapp')} value={footer.whatsapp} onChange={(e) => setFooter({ ...footer, whatsapp: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-16' : 'pl-16'} bg-white! shadow-soft`} />
+                        <div className="space-y-4 relative z-10">
+                            {/* Address */}
+                            <div className="space-y-2">
+                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.address') || "العنوان"}</label>
+                                <div className="relative group/input">
+                                    <FiLayout className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-(--color-primary) group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
+                                    <input placeholder={t('admin.address_detail')} value={footer.address} onChange={(e) => setFooter({ ...footer, address: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-3 gap-6">
-                                <div className="relative group">
-                                    <FaFacebook className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-blue-600`} />
-                                    <input placeholder="FB" value={footer.facebook} onChange={(e) => setFooter({ ...footer, facebook: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-14 pl-2' : 'pl-14 pr-2'} bg-white! shadow-soft text-xs`} />
+                            {/* Phone */}
+                            <div className="space-y-2">
+                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.phone') || "رقم الهاتف"}</label>
+                                <div className="relative group/input">
+                                    <FiSmartphone className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-(--color-primary) group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
+                                    <input placeholder={t('admin.primary_phone')} value={footer.phone} onChange={(e) => setFooter({ ...footer, phone: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
                                 </div>
-                                <div className="relative group">
-                                    <FaInstagram className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-pink-500`} />
-                                    <input placeholder="IG" value={footer.instagram} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-14 pl-2' : 'pl-14 pr-2'} bg-white! shadow-soft text-xs`} />
+                            </div>
+
+                            {/* Whatsapp */}
+                            <div className="space-y-2">
+                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.whatsapp_contact') || "واتساب التواصل"}</label>
+                                <div className="relative group/input">
+                                    <FaWhatsapp className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-emerald-500 group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
+                                    <input placeholder={t('admin.contact_whatsapp')} value={footer.whatsapp} onChange={(e) => setFooter({ ...footer, whatsapp: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
                                 </div>
-                                <div className="relative group">
-                                    <FaTiktok className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-black`} />
-                                    <input placeholder="TT" value={footer.tiktok} onChange={(e) => setFooter({ ...footer, tiktok: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-14 pl-2' : 'pl-14 pr-2'} bg-white! shadow-soft text-xs`} />
+                            </div>
+
+                            {/* Social Media Stack */}
+                            <div className="space-y-3 pt-1">
+                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.social_links') || "روابط التواصل الاجتماعي"}</label>
+                                <div className="space-y-3">
+                                    <div className="relative group/input">
+                                        <FaFacebook className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-blue-600 group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
+                                        <input placeholder="Facebook Username" value={footer.facebook} onChange={(e) => setFooter({ ...footer, facebook: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                    </div>
+                                    <div className="relative group/input">
+                                        <FaInstagram className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-pink-500 group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
+                                        <input placeholder="Instagram Username" value={footer.instagram} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                    </div>
+                                    <div className="relative group/input">
+                                        <FaTiktok className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-black group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
+                                        <input placeholder="Tiktok Username" value={footer.tiktok} onChange={(e) => setFooter({ ...footer, tiktok: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -360,27 +384,27 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                 </div>
 
                 {/* Footer Save */}
-                <div className="p-10 border-t border-gray-100 bg-gray-50/50">
+                <div className="px-6 py-4 border-t border-(--color-primary)/5 bg-white/50 backdrop-blur-md relative z-10">
                     <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
                         onClick={handleSave}
                         disabled={saving}
-                        className={`w-full py-6 rounded-4xl font-black text-white shadow-xl flex items-center justify-center gap-4 transition-all relative overflow-hidden group ${saving
+                        className={`w-full h-14 rounded-xl font-black text-white shadow-2xl flex items-center justify-center gap-3 transition-all relative overflow-hidden group uppercase tracking-[0.15em] ${saving
                             ? "bg-emerald-500/50 cursor-not-allowed"
-                            : "bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/30"
+                            : "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/40"
                             }`}
                     >
                         {saving ? (
                             <motion.div
                                 animate={{ rotate: 360 }}
                                 transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-                                className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full"
+                                className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                             />
                         ) : (
-                            <FiCheck size={24} />
+                            <FiCheck size={20} />
                         )}
-                        <span className="text-base uppercase tracking-widest">{t('admin.save_changes')}</span>
+                        <span className="text-sm">{t('admin.save_changes')}</span>
                     </motion.button>
                 </div>
 

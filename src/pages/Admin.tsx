@@ -334,42 +334,49 @@ export default function Admin() {
 
   if (!authOk) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream p-6 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-(--color-cream) p-6 relative overflow-hidden">
+        {/* Heritage Pattern Background */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
         {/* Abstract Background Shapes */}
-        <div className="absolute top-0 left-0 w-full h-full -z-10 opacity-30 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-accent/20 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-0 w-full h-full -z-10 opacity-40 pointer-events-none">
+          <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-(--color-primary)/20 rounded-full blur-[140px]" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-(--color-secondary)/20 rounded-full blur-[140px]" />
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full max-w-md bg-white/80 backdrop-blur-md p-10 rounded-[2.5rem] shadow-premium border border-primary/5 relative z-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="w-full max-w-md bg-white/90 backdrop-blur-xl p-10 sm:p-12 rounded-[3.5rem] shadow-premium border border-white/50 relative z-10"
         >
-          <div className="flex flex-col items-center mb-10">
-            <div className="w-24 h-24 bg-white p-3 rounded-3xl shadow-soft mb-8 border border-primary/5 flex items-center justify-center">
+          <div className="flex flex-col items-center mb-12">
+            <div className="w-28 h-28 bg-white p-4 rounded-[2.5rem] shadow-soft border border-(--color-primary)/5 flex items-center justify-center mb-8">
               <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" onError={(e) => e.currentTarget.src = '/hamada.png'} />
             </div>
-            <h1 className="text-3xl font-black text-primary text-center leading-tight">{t('admin.login_title')}</h1>
-            <p className="text-primary/40 font-bold uppercase tracking-[0.2em] text-[11px] mt-3 text-center">{t('admin.login_subtitle')}</p>
+            <h1 className="text-4xl font-black text-(--color-primary) text-center leading-tight tracking-tight">{t('admin.login_title')}</h1>
+            <div className="flex items-center gap-3 mt-4">
+              <div className="h-px w-8 bg-(--color-primary)/10" />
+              <p className="text-(--color-primary)/40 font-black uppercase tracking-[0.3em] text-[10px] text-center">{t('admin.login_subtitle')}</p>
+              <div className="h-px w-8 bg-(--color-primary)/10" />
+            </div>
           </div>
 
           <div className="space-y-6">
             <div className="relative group">
-              <FiMail className={`${i18n.language === 'ar' ? 'right-5' : 'left-5'} absolute top-1/2 -translate-y-1/2 text-primary/30 group-focus-within:text-primary transition-colors`} />
+              <FiMail className={`${i18n.language === 'ar' ? 'right-6' : 'left-6'} absolute top-1/2 -translate-y-1/2 text-(--color-primary)/30 group-focus-within:text-(--color-primary) transition-colors text-lg`} />
               <input
                 type="email"
-                className={`w-full bg-white/50 border border-primary/5 rounded-2xl py-4 ${i18n.language === 'ar' ? 'pr-14 pl-6 text-right' : 'pl-14 pr-6'} text-sm font-bold outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all text-primary placeholder:text-primary/20`}
+                className={`w-full h-16 bg-(--color-primary)/5 border border-transparent rounded-2xl py-4 ${i18n.language === 'ar' ? 'pr-16 pl-6 text-right' : 'pl-16 pr-6'} text-sm font-bold outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all text-(--color-primary) placeholder:text-(--color-primary)/20`}
                 placeholder={t('admin.email_placeholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="relative group">
-              <FiLock className={`${i18n.language === 'ar' ? 'right-5' : 'left-5'} absolute top-1/2 -translate-y-1/2 text-primary/30 group-focus-within:text-primary transition-colors`} />
+              <FiLock className={`${i18n.language === 'ar' ? 'right-6' : 'left-6'} absolute top-1/2 -translate-y-1/2 text-(--color-primary)/30 group-focus-within:text-(--color-primary) transition-colors text-lg`} />
               <input
                 type="password"
-                className={`w-full bg-white/50 border border-primary/5 rounded-2xl py-4 ${i18n.language === 'ar' ? 'pr-14 pl-6 text-right' : 'pl-14 pr-6'} text-sm font-bold outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all text-primary placeholder:text-primary/20`}
+                className={`w-full h-16 bg-(--color-primary)/5 border border-transparent rounded-2xl py-4 ${i18n.language === 'ar' ? 'pr-16 pl-6 text-right' : 'pl-16 pr-6'} text-sm font-bold outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all text-(--color-primary) placeholder:text-(--color-primary)/20`}
                 placeholder={t('admin.password_placeholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -380,16 +387,16 @@ export default function Admin() {
             <button
               onClick={login}
               disabled={loading}
-              className="w-full h-14 bg-primary text-white rounded-2xl font-black text-lg shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+              className="w-full h-16 bg-(--color-primary) text-white rounded-2xl font-black text-lg shadow-xl shadow-(--color-primary)/30 hover:shadow-(--color-primary)/40 hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-4 disabled:opacity-50"
             >
-              {loading ? <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>⚙️</motion.div> : <FiUser />}
+              {loading ? <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>⚙️</motion.div> : <FiUser className="text-xl" />}
               {t('admin.login_btn')}
             </button>
 
-            <div className="text-center pt-2">
+            <div className="text-center pt-4">
               <button
                 onClick={() => setResetPasswordPopup(true)}
-                className="text-xs font-bold text-primary/40 hover:text-primary transition-colors uppercase tracking-widest"
+                className="text-xs font-black text-(--color-primary)/30 hover:text-(--color-primary) transition-colors uppercase tracking-[0.2em]"
               >
                 {t('admin.forgot_password')}
               </button>
@@ -404,9 +411,12 @@ export default function Admin() {
               initial={{ opacity: 0, y: 30, x: '-50%' }}
               animate={{ opacity: 1, y: 0, x: '-50%' }}
               exit={{ opacity: 0, y: 30, x: '-50%' }}
-              className={`fixed bottom-10 left-1/2 z-100 px-10 py-5 rounded-4xl shadow-premium text-white font-black text-sm border border-white/20 ${toast.type === 'success' ? 'bg-primary' : 'bg-secondary'}`}
+              className={`fixed bottom-10 left-1/2 z-[100] px-10 py-5 rounded-[2rem] shadow-premium text-white font-black text-sm border border-white/20 ${toast.type === 'success' ? 'bg-(--color-primary)' : 'bg-(--color-secondary)'}`}
             >
-              {toast.message}
+              <div className="flex items-center gap-3">
+                <span>{toast.type === 'success' ? '✨' : '⚠️'}</span>
+                {toast.message}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -428,58 +438,60 @@ export default function Admin() {
 
   // ================= ADMIN PANEL UI =================
   return (
-    <div className="min-h-screen flex justify-center py-6 sm:py-10 px-4 md:px-10 bg-cream/30">
-      <div className="w-full max-w-6xl space-y-8 sm:space-y-10">
+    <div className="min-h-screen bg-white/95 selection:bg-(--color-primary)/10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 space-y-10">
         {/* Modern Header */}
-        <header className="bg-white/80 backdrop-blur-md border border-primary/5 p-8 rounded-[2.5rem] flex flex-col md:flex-row justify-between items-center gap-8 shadow-premium">
-          <div className="flex items-center gap-6">
-            <div className="w-16 h-16 bg-white p-2 rounded-2xl shadow-soft border border-primary/5 flex items-center justify-center">
+        <header className="bg-white/90 backdrop-blur-xl border border-white p-8 sm:p-10 rounded-[3.5rem] flex flex-col xl:flex-row justify-between items-center gap-10 shadow-premium relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+
+          <div className="flex flex-col sm:flex-row items-center gap-8 relative z-10">
+            <div className="w-20 h-20 bg-white p-3 rounded-[2rem] shadow-soft border border-(--color-primary)/5 flex items-center justify-center transition-transform group-hover:scale-105 duration-500">
               <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" onError={(e) => e.currentTarget.src = '/hamada.png'} />
             </div>
-            <div>
-              <h1 className="text-2xl font-black text-primary">{t('admin.menu_management')}</h1>
-              <div className="flex flex-wrap items-center gap-4 mt-2">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.4)]" />
-                  <p className="text-primary/40 text-[10px] uppercase font-bold tracking-[0.2em]">{t('admin.dashboard_active')}</p>
+            <div className="text-center sm:text-right">
+              <h1 className="text-3xl sm:text-4xl font-black text-(--color-primary) tracking-tight">{t('admin.menu_management')}</h1>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 mt-3">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-(--color-primary)/5 rounded-full border border-(--color-primary)/10">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.5)]" />
+                  <p className="text-(--color-primary)/50 text-[10px] uppercase font-black tracking-[0.2em]">{t('admin.dashboard_active')}</p>
                 </div>
                 <button
                   onClick={() => navigate("/admin/orders")}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-white text-[11px] font-bold hover:shadow-lg hover:shadow-primary/30 transition-all active:scale-95 uppercase tracking-wider"
+                  className="flex items-center gap-2.5 px-6 py-2.5 rounded-2xl bg-(--color-primary) text-white text-xs font-black hover:shadow-2xl hover:shadow-(--color-primary)/30 transition-all active:scale-95 uppercase tracking-widest"
                 >
-                  <FiPackage /> {t('admin.orders')}
+                  <FiPackage className="text-sm" /> {t('admin.orders')}
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 flex-wrap justify-center w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-6 w-full xl:w-auto relative z-10">
             {/* Action Group */}
-            <div className="flex items-center gap-1.5 bg-primary/5 p-2 rounded-2xl border border-primary/5 shadow-inner">
-              <button onClick={() => setShowOrderSettings(true)} className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-primary/30 transition-all" title={t('admin.settings')}>
-                <FiSettings size={20} />
+            <div className="flex items-center gap-2 bg-(--color-primary)/5 p-2 rounded-[2rem] border border-(--color-primary)/10 shadow-inner w-full sm:w-auto justify-center">
+              <button onClick={() => setShowOrderSettings(true)} className="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/30 transition-all" title={t('admin.settings')}>
+                <FiSettings size={22} />
               </button>
-              <div className="w-px h-6 bg-primary/10 mx-1" />
-              <button onClick={exportToExcel} className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-white hover:text-emerald-600 hover:shadow-sm text-primary/30 transition-all" title={t('admin.export_excel')}>
-                <FiUpload size={20} />
+              <div className="w-px h-8 bg-(--color-primary)/10 mx-1" />
+              <button onClick={exportToExcel} className="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-white hover:text-emerald-600 hover:shadow-soft text-(--color-primary)/30 transition-all" title={t('admin.export_excel')}>
+                <FiUpload size={22} />
               </button>
-              <button onClick={() => document.getElementById("excelUpload")?.click()} className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-white hover:text-blue-600 hover:shadow-sm text-primary/30 transition-all" title={t('admin.import_excel')}>
-                <FiDownload size={20} />
+              <button onClick={() => document.getElementById("excelUpload")?.click()} className="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-white hover:text-blue-600 hover:shadow-soft text-(--color-primary)/30 transition-all" title={t('admin.import_excel')}>
+                <FiDownload size={22} />
               </button>
-              <button onClick={exportToJSON} className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-white hover:text-secondary text-primary/30 transition-all" title={t('admin.backup')}>
-                <FiDatabase size={20} />
+              <button onClick={exportToJSON} className="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-orange) hover:shadow-soft text-(--color-primary)/30 transition-all" title={t('admin.backup')}>
+                <FiDatabase size={22} />
               </button>
-              <div className="w-px h-6 bg-primary/10 mx-1" />
-              <button onClick={() => setShowPaymentMethods(true)} className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-white hover:text-primary hover:shadow-sm text-primary/30 transition-all" title={t('admin.payment_methods')}>
-                <FiDollarSign size={20} />
+              <div className="w-px h-8 bg-(--color-primary)/10 mx-1" />
+              <button onClick={() => setShowPaymentMethods(true)} className="w-12 h-12 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-secondary) hover:shadow-soft text-(--color-primary)/30 transition-all" title={t('admin.payment_methods')}>
+                <FiDollarSign size={22} />
               </button>
             </div>
 
             <button
               onClick={() => setPopup({ type: "logout" })}
-              className="flex items-center gap-2 px-6 h-14 rounded-2xl bg-secondary/5 text-secondary font-bold text-sm hover:bg-secondary hover:text-white transition-all border border-secondary/10 shadow-sm w-full sm:w-auto justify-center active:scale-95"
+              className="flex items-center gap-3 px-8 h-16 rounded-[2rem] bg-(--color-secondary)/5 text-(--color-secondary) font-black text-sm hover:bg-(--color-secondary) hover:text-white transition-all border border-(--color-secondary)/10 shadow-soft w-full sm:w-auto justify-center active:scale-95 uppercase tracking-widest"
             >
-              <FiLogOut /> {t('admin.logout')}
+              <FiLogOut className="text-lg" /> {t('admin.logout')}
             </button>
           </div>
         </header>
@@ -491,13 +503,15 @@ export default function Admin() {
         }} />
 
         {/* Dashboard Sections */}
-        <main className="space-y-12 pb-20">
+        <main className="space-y-16 pb-24">
 
           {/* Section 2: Categories */}
-          <section className="space-y-6">
-            <div className="flex items-center gap-3 px-4">
-              <FiLayout className="text-primary text-xl" />
-              <h2 className="text-2xl font-black text-(--text-main)">{t('admin.categories')}</h2>
+          <section className="space-y-8">
+            <div className="flex items-center gap-4 px-6">
+              <div className="w-12 h-12 rounded-2xl bg-(--color-primary)/10 text-(--color-primary) flex items-center justify-center shadow-inner">
+                <FiLayout className="text-xl" />
+              </div>
+              <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.categories')}</h2>
             </div>
             <CategorySection
               categories={categories}
@@ -513,10 +527,12 @@ export default function Admin() {
           </section>
 
           {/* Section 3: Items */}
-          <section className="space-y-6">
-            <div className="flex items-center gap-3 px-4">
-              <FiPackage className="text-secondary text-xl" />
-              <h2 className="text-2xl font-black text-(--text-main)">{t('admin.products')}</h2>
+          <section className="space-y-8">
+            <div className="flex items-center gap-4 px-6">
+              <div className="w-12 h-12 rounded-2xl bg-(--color-secondary)/10 text-(--color-secondary) flex items-center justify-center shadow-inner">
+                <FiPackage className="text-xl" />
+              </div>
+              <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.products')}</h2>
             </div>
             <ItemSection
               categories={categories}

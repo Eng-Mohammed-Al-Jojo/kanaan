@@ -97,56 +97,58 @@ const Popup: React.FC<Props> = ({
     setResetPasswordPopup && setResetPasswordPopup(false);
   };
 
-  const inputClass = "w-full bg-gray-50 border border-gray-100 rounded-2xl py-4 pr-12 pl-6 text-right text-sm font-bold outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all shadow-inner";
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-100 flex items-center justify-center p-6">
+      <div className="fixed inset-0 z-[200] flex items-center justify-center p-6">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={closePopup}
-          className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm"
+          className="absolute inset-0 bg-(--color-primary)/30 backdrop-blur-md"
         />
 
         {/* Modal Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-md bg-white rounded-[3rem] border border-gray-100 shadow-premium overflow-hidden z-10"
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          className="relative w-full max-w-lg bg-white/90 backdrop-blur-2xl rounded-[3.5rem] border border-white/50 overflow-hidden z-10 shadow-premium"
         >
+          {/* Design accents */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-(--color-secondary)/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
           {/* Close Button */}
           <button
             onClick={closePopup}
-            className="absolute top-4 left-6 w-10 h-10 flex items-center justify-center rounded-2xl bg-white text-gray-400 hover:text-secondary hover:bg-secondary/10 transition-all border border-gray-100 shadow-soft z-20"
+            className="absolute top-8 left-10 w-12 h-12 flex items-center justify-center rounded-2xl bg-white text-(--color-primary)/20 hover:text-(--color-secondary) hover:bg-(--color-secondary)/10 transition-all border border-(--color-primary)/5 shadow-soft z-20 active:scale-90"
           >
-            <FiX size={20} />
+            <FiX size={28} />
           </button>
 
           <div className="p-10">
             {/* ===== Logout ===== */}
             {popup.type === "logout" && (
-              <div className="text-center space-y-8">
-                <div className="w-24 h-24 bg-secondary/5 text-secondary rounded-4xl flex items-center justify-center mx-auto text-4xl shadow-inner border border-secondary/10">
+              <div className="text-center space-y-10 py-4">
+                <div className="w-28 h-28 bg-(--color-secondary)/5 text-(--color-secondary) rounded-[2.5rem] flex items-center justify-center mx-auto text-5xl shadow-inner border border-(--color-secondary)/10">
                   <FiLogOut />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">{t('admin.logout_title')}؟</h2>
-                  <p className="text-gray-400 font-bold mt-2 uppercase tracking-widest text-[11px]">{t('admin.logout_confirm')}</p>
+                  <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.logout_confirm')}</h2>
+                  <p className="text-(--color-primary)/30 font-black mt-4 uppercase tracking-[0.3em] text-[10px] leading-loose">{t('admin.logout_desc')}</p>
                 </div>
                 <div className="flex flex-col gap-4">
                   <button
                     onClick={() => { logout && logout(); closePopup(); }}
-                    className="w-full py-5 rounded-2xl bg-secondary text-white font-black shadow-xl shadow-secondary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-secondary) text-white font-black shadow-xl shadow-(--color-secondary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
                   >
-                    {t('admin.logout_title')}
+                    {t('admin.logout')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>
@@ -156,22 +158,22 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Add/Edit/Delete Subcategory ===== */}
             {(popup.type === "addSubcategory" || popup.type === "editSubcategory" || popup.type === "deleteSubcategory") && (
-              <div className="text-center space-y-8">
-                <div className={`w-24 h-24 rounded-4xl flex items-center justify-center mx-auto text-4xl shadow-inner border ${popup.type === 'deleteSubcategory' ? 'bg-secondary/5 text-secondary border-secondary/10' : 'bg-primary/5 text-primary border-primary/10'}`}>
+              <div className="text-center space-y-10 py-4">
+                <div className={`w-28 h-28 rounded-[2.5rem] flex items-center justify-center mx-auto text-5xl shadow-inner border ${popup.type === 'deleteSubcategory' ? 'bg-(--color-secondary)/5 text-(--color-secondary) border-(--color-secondary)/10' : 'bg-(--color-primary)/5 text-(--color-primary) border-(--color-primary)/10'}`}>
                   {popup.type === 'deleteSubcategory' ? <FiTrash2 /> : (popup.type === 'editSubcategory' ? <FiEdit /> : <FiLayers />)}
                 </div>
                 <div>
-                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">
+                  <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">
                     {popup.type === "addSubcategory" ? t('admin.add_subcategory') : (popup.type === "editSubcategory" ? t('admin.edit_subcategory') : t('admin.delete_subcategory'))}
                   </h2>
                 </div>
 
                 {(popup.type === "addSubcategory" || popup.type === "editSubcategory") && (
-                  <div className="space-y-5">
-                    <div className="relative group">
-                      <FiType className="right-5 absolute top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary" />
+                  <div className="space-y-6">
+                    <div className="relative group/field">
+                      <FiType className={`right-8 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-2xl`} />
                       <input
-                        className={inputClass}
+                        className="w-full h-18 bg-white border border-transparent rounded-[1.5rem] py-4 pr-20 pl-8 text-right text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
                         placeholder={t('admin.subcategory_name_ar')}
                         value={subNameAr}
                         onChange={(e) => setSubNameAr(e.target.value)}
@@ -180,15 +182,15 @@ const Popup: React.FC<Props> = ({
 
                     <button
                       onClick={() => setShowGallery(true)}
-                      className="w-full h-20 rounded-2xl bg-gray-50 border border-gray-100 text-gray-400 font-black flex items-center justify-center gap-3 hover:border-primary hover:bg-white hover:shadow-soft transition-all overflow-hidden"
+                      className="w-full h-28 rounded-[1.5rem] bg-white border border-transparent text-(--color-primary)/20 font-black flex items-center justify-center gap-6 hover:shadow-premium transition-all overflow-hidden px-8 shadow-soft active:scale-95 group/btn"
                     >
                       {selectedImg ? (
-                        <div className="flex items-center gap-3 px-4">
-                          <img src={selectedImg.startsWith('/') ? selectedImg : `/images/${selectedImg}`} className="w-12 h-12 rounded-xl object-cover shadow-sm" />
-                          <span className="truncate text-gray-900 text-sm">{selectedImg.split('/').pop()}</span>
+                        <div className="flex items-center gap-6 w-full">
+                          <img src={selectedImg.startsWith('/') ? selectedImg : `/images/${selectedImg}`} className="w-20 h-20 rounded-2xl object-cover shadow-premium border border-white" />
+                          <span className="truncate text-(--color-primary) text-sm font-black text-right flex-1 uppercase tracking-widest">{selectedImg.split('/').pop()}</span>
                         </div>
                       ) : (
-                        <><FiImage size={24} /> {t('admin.select_image')}</>
+                        <><FiImage size={32} className="group-hover/btn:scale-110 transition-transform" /> <span className="text-[11px] uppercase tracking-[0.3em]">{t('admin.select_image')}</span></>
                       )}
                     </button>
                   </div>
@@ -206,13 +208,13 @@ const Popup: React.FC<Props> = ({
                       }
                       closePopup();
                     }}
-                    className={`w-full py-5 rounded-2xl text-white font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-sm ${popup.type === 'deleteSubcategory' ? 'bg-secondary shadow-secondary/20' : 'bg-primary shadow-primary/20'}`}
+                    className={`w-full h-18 rounded-[1.5rem] text-white font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-sm ${popup.type === 'deleteSubcategory' ? 'bg-(--color-secondary) shadow-(--color-secondary)/30' : 'bg-(--color-primary) shadow-(--color-primary)/30'}`}
                   >
                     {popup.type === "deleteSubcategory" ? t('common.delete') : t('common.save')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>
@@ -222,14 +224,15 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Add/Delete Category ===== */}
             {(popup.type === "addCategory" || popup.type === "deleteCategory") && (
-              <div className="text-center space-y-8">
-                <div className={`w-24 h-24 rounded-4xl flex items-center justify-center mx-auto text-4xl shadow-inner border ${popup.type === 'deleteCategory' ? 'bg-secondary/5 text-secondary border-secondary/10' : 'bg-emerald-50 text-emerald-500 border-emerald-100'}`}>
+              <div className="text-center space-y-10 py-4">
+                <div className={`w-28 h-28 rounded-[2.5rem] flex items-center justify-center mx-auto text-5xl shadow-inner border ${popup.type === 'deleteCategory' ? 'bg-(--color-secondary)/5 text-(--color-secondary) border-(--color-secondary)/10' : 'bg-emerald-50 text-emerald-500 border-emerald-100'}`}>
                   {popup.type === 'deleteCategory' ? <FiTrash2 /> : <FiLayers />}
                 </div>
                 <div>
-                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">
+                  <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">
                     {popup.type === "addCategory" ? t('admin.add_category_title') : t('admin.delete_category_title')}
                   </h2>
+                  <p className="text-(--color-primary)/30 font-black mt-4 uppercase tracking-[0.3em] text-[10px] leading-loose">{t('admin.delete_confirm_desc')}</p>
                 </div>
                 <div className="flex flex-col gap-4">
                   <button
@@ -238,13 +241,13 @@ const Popup: React.FC<Props> = ({
                       else deleteCategory && deleteCategory(popup.id!);
                       closePopup();
                     }}
-                    className={`w-full py-5 rounded-2xl text-white font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-sm ${popup.type === 'deleteCategory' ? 'bg-secondary shadow-secondary/20' : 'bg-emerald-500 shadow-emerald-500/20'}`}
+                    className={`w-full h-18 rounded-[1.5rem] text-white font-black shadow-xl transition-all hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-sm ${popup.type === 'deleteCategory' ? 'bg-(--color-secondary) shadow-(--color-secondary)/30' : 'bg-emerald-500 shadow-emerald-500/30'}`}
                   >
                     {popup.type === "addCategory" ? t('common.save') : t('common.delete')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>
@@ -254,25 +257,26 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Category/Subcategory Image Selection ===== */}
             {(popup.type === "categoryImage" || popup.type === "subcategoryImage") && (
-              <div className="text-center space-y-8">
-                <div className="w-24 h-24 bg-primary/5 text-primary rounded-4xl border border-primary/10 flex items-center justify-center mx-auto text-4xl shadow-inner">
+              <div className="text-center space-y-10 py-4">
+                <div className="w-28 h-28 bg-(--color-primary)/5 text-(--color-primary) rounded-[2.5rem] border border-(--color-primary)/10 flex items-center justify-center mx-auto text-5xl shadow-inner">
                   <FiImage />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">{t('admin.select_image')}</h2>
+                  <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.select_image')}</h2>
+                  <p className="text-(--color-primary)/30 font-black mt-3 uppercase tracking-[0.3em] text-[10px]">{t('admin.image_gallery_desc')}</p>
                 </div>
-                <div className="space-y-5">
+                <div className="space-y-6">
                   <button
                     onClick={() => setShowGallery(true)}
-                    className="w-full h-24 rounded-2xl bg-gray-50 border border-gray-100 text-gray-400 font-black flex items-center justify-center gap-3 hover:border-primary hover:bg-white hover:shadow-soft transition-all overflow-hidden px-6"
+                    className="w-full h-32 rounded-[1.5rem] bg-white border border-transparent text-(--color-primary)/20 font-black flex items-center justify-center gap-6 hover:shadow-premium transition-all overflow-hidden px-10 shadow-soft active:scale-95 group/btn"
                   >
                     {selectedImg ? (
-                      <div className="flex items-center gap-4">
-                        <img src={selectedImg.startsWith('/') ? selectedImg : `/images/${selectedImg}`} className="w-14 h-14 rounded-xl object-cover shadow-sm border border-gray-100" />
-                        <span className="truncate text-gray-900 text-sm font-black">{selectedImg.split('/').pop()}</span>
+                      <div className="flex items-center gap-8 w-full">
+                        <img src={selectedImg.startsWith('/') ? selectedImg : `/images/${selectedImg}`} className="w-24 h-24 rounded-2xl object-cover shadow-premium border border-white" />
+                        <span className="truncate text-(--color-primary) text-sm font-black text-right flex-1 uppercase tracking-widest">{selectedImg.split('/').pop()}</span>
                       </div>
                     ) : (
-                      <><FiImage size={24} /> {t('admin.select_image')}</>
+                      <><FiImage size={40} className="group-hover/btn:scale-110 transition-transform" /> <span className="text-[11px] uppercase tracking-[0.3em]">{t('admin.select_image')}</span></>
                     )}
                   </button>
                 </div>
@@ -287,13 +291,13 @@ const Popup: React.FC<Props> = ({
                       closePopup();
                       setSelectedImg("");
                     }}
-                    className="w-full py-5 rounded-2xl bg-primary text-white font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary) text-white font-black shadow-xl shadow-(--color-primary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.save')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>
@@ -303,24 +307,24 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Delete Item ===== */}
             {popup.type === "deleteItem" && (
-              <div className="text-center space-y-8">
-                <div className="w-24 h-24 bg-secondary/5 text-secondary rounded-4xl border border-secondary/10 flex items-center justify-center mx-auto text-4xl shadow-inner">
+              <div className="text-center space-y-10 py-4">
+                <div className="w-28 h-28 bg-(--color-secondary)/5 text-(--color-secondary) rounded-[2.5rem] border border-(--color-secondary)/10 flex items-center justify-center mx-auto text-5xl shadow-inner">
                   <FiTrash2 />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">{t('admin.delete_item_title')}</h2>
-                  <p className="text-gray-400 font-bold mt-2 uppercase tracking-widest text-[11px]">{t('admin.delete_item_confirm')}</p>
+                  <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.delete_item_title')}</h2>
+                  <p className="text-(--color-primary)/30 font-black mt-4 uppercase tracking-[0.3em] text-[10px] leading-loose">{t('admin.delete_item_confirm')}</p>
                 </div>
                 <div className="flex flex-col gap-4">
                   <button
                     onClick={() => { deleteItem && deleteItem(); closePopup(); }}
-                    className="w-full py-5 rounded-2xl bg-secondary text-white font-black shadow-xl shadow-secondary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-secondary) text-white font-black shadow-xl shadow-(--color-secondary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.delete')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>
@@ -330,90 +334,102 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Edit Item ===== */}
             {popup.type === "editItem" && editItemValues && setEditItemValues && categories && (
-              <div className="space-y-8">
-                <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-3xl bg-amber-50 text-amber-500 flex items-center justify-center text-3xl shadow-inner border border-amber-100">
+              <div className="space-y-10 py-2">
+                <div className="flex items-center gap-10">
+                  <div className="w-24 h-24 rounded-[2rem] bg-(--color-secondary)/5 text-(--color-secondary) flex items-center justify-center text-5xl shadow-inner border border-(--color-secondary)/10 transition-transform hover:scale-110 duration-500">
                     <FiEdit />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-gray-900 tracking-tight">{t('admin.edit_product_title')}</h2>
-                    <p className="text-gray-400 font-black text-[10px] uppercase tracking-widest mt-1">{t('admin.edit_product_desc')}</p>
+                    <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.edit_product_title')}</h2>
+                    <p className="text-(--color-primary)/30 font-black text-[11px] uppercase tracking-[0.3em] mt-3">{t('admin.edit_product_desc')}</p>
                   </div>
                 </div>
 
-                <div className="space-y-5">
-                  <div className="relative group">
-                    <FiLayers className="right-5 absolute top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary" />
-                    <select
-                      className={`${inputClass} appearance-none cursor-pointer`}
-                      value={editItemValues.selectedCategory}
-                      onChange={(e) => setEditItemValues({ ...editItemValues, selectedCategory: e.target.value, selectedSubcategory: "" })}
-                    >
-                      {Object.keys(categories).map((id) => (
-                        <option key={id} value={id}>{categories[id].nameAr}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {editItemValues.selectedCategory && subcategories && (
-                    <div className="relative group">
-                      <FiLayers className="right-5 absolute top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary" />
-                      <select
-                        className={`${inputClass} appearance-none cursor-pointer`}
-                        value={editItemValues.selectedSubcategory}
-                        onChange={(e) => setEditItemValues({ ...editItemValues, selectedSubcategory: e.target.value })}
-                      >
-                        <option value="">{t('admin.no_subcategory')}</option>
-                        {Object.entries(subcategories)
-                          .filter(([, s]: any) => s.categoryId === editItemValues.selectedCategory)
-                          .map(([id, s]: any) => (
-                            <option key={id} value={id}>{s.nameAr}</option>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.categories')}</label>
+                      <div className="relative group/field">
+                        <FiLayers className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
+                        <select
+                          className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) appearance-none shadow-premium uppercase tracking-widest"
+                          value={editItemValues.selectedCategory}
+                          onChange={(e) => setEditItemValues({ ...editItemValues, selectedCategory: e.target.value, selectedSubcategory: "" })}
+                        >
+                          {Object.keys(categories).map((id) => (
+                            <option key={id} value={id}>{categories[id].nameAr}</option>
                           ))}
-                      </select>
+                        </select>
+                      </div>
                     </div>
-                  )}
 
-                  <div className="relative group">
-                    <FiType className="right-5 absolute top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary" />
-                    <input
-                      className={inputClass}
-                      placeholder={t('admin.product_name_ar')}
-                      value={editItemValues.itemNameAr}
-                      onChange={(e) => setEditItemValues({ ...editItemValues, itemNameAr: e.target.value })}
-                    />
+                    <div className="space-y-3">
+                      <label className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.subcategories')}</label>
+                      <div className="relative group/field">
+                        <FiLayers className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
+                        <select
+                          className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) appearance-none shadow-premium uppercase tracking-widest"
+                          value={editItemValues.selectedSubcategory}
+                          onChange={(e) => setEditItemValues({ ...editItemValues, selectedSubcategory: e.target.value })}
+                        >
+                          <option value="">{t('admin.no_subcategory')}</option>
+                          {Object.entries(subcategories)
+                            .filter(([, s]: any) => s.categoryId === editItemValues.selectedCategory)
+                            .map(([id, s]: any) => (
+                              <option key={id} value={id}>{s.nameAr}</option>
+                            ))}
+                        </select>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="relative group">
-                    <FiInfo className="right-5 absolute top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary" />
-                    <input
-                      className={inputClass}
-                      placeholder={t('admin.ingredients_placeholder')}
-                      value={editItemValues.itemIngredientsAr || ""}
-                      onChange={(e) => setEditItemValues({ ...editItemValues, itemIngredientsAr: e.target.value })}
-                    />
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('common.name')}</label>
+                    <div className="relative group/field">
+                      <FiType className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
+                      <input
+                        className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
+                        value={editItemValues.itemNameAr}
+                        onChange={(e) => setEditItemValues({ ...editItemValues, itemNameAr: e.target.value })}
+                      />
+                    </div>
                   </div>
 
-                  <div className="relative group">
-                    <FiDollarSign className="right-5 absolute top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary" />
-                    <input
-                      className={inputClass}
-                      placeholder={t('common.total')}
-                      value={editItemValues.itemPrice}
-                      onChange={(e) => setEditItemValues({ ...editItemValues, itemPrice: e.target.value })}
-                    />
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.ingredients_label')}</label>
+                    <div className="relative group/field">
+                      <FiInfo className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
+                      <input
+                        className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
+                        value={editItemValues.itemIngredientsAr || ""}
+                        onChange={(e) => setEditItemValues({ ...editItemValues, itemIngredientsAr: e.target.value })}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('common.total')}</label>
+                    <div className="relative group/field">
+                      <FiDollarSign className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
+                      <input
+                        className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
+                        value={editItemValues.itemPrice}
+                        onChange={(e) => setEditItemValues({ ...editItemValues, itemPrice: e.target.value })}
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 pt-6">
                   <button
                     onClick={() => { updateItem && updateItem(); closePopup(); }}
-                    className="w-full py-5 rounded-2xl bg-primary text-white font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-3"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary) text-white font-black shadow-xl shadow-(--color-primary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-4"
                   >
-                    <FiCheck size={20} /> {t('admin.save_edits')}
+                    <FiCheck size={24} /> {t('admin.save_edits')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>
@@ -423,23 +439,23 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Reset Password ===== */}
             {resetPasswordPopup && (
-              <div className="space-y-8">
-                <div className="text-center space-y-6 mb-2">
-                  <div className="w-24 h-24 bg-blue-50 text-blue-600 rounded-4xl border border-blue-100 flex items-center justify-center mx-auto text-4xl shadow-inner">
+              <div className="space-y-10 py-4">
+                <div className="text-center space-y-8">
+                  <div className="w-28 h-28 bg-blue-500/5 text-blue-500 rounded-[2.5rem] border border-blue-500/10 flex items-center justify-center mx-auto text-5xl shadow-inner transition-transform hover:scale-110 duration-500">
                     <FiKey />
                   </div>
                   <div>
-                    <h2 className="text-3xl font-black text-gray-900 tracking-tight">{t('admin.account_reset_title')}</h2>
-                    <p className="text-gray-400 font-bold mt-2 uppercase tracking-widest text-[11px]">{t('admin.account_reset_desc')}</p>
+                    <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.account_reset_title')}</h2>
+                    <p className="text-(--color-primary)/30 font-black mt-4 uppercase tracking-[0.3em] text-[10px] leading-loose">{t('admin.account_reset_desc')}</p>
                   </div>
                 </div>
 
-                <div className="relative group">
-                  <FiMail className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-1/2 -translate-y-1/2 text-gray-300 transition-colors group-focus-within:text-primary`} />
+                <div className="relative group/field">
+                  <FiMail className={`absolute ${isRtl ? 'right-8' : 'left-8'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-2xl`} />
                   <input
                     type="email"
                     placeholder={t('admin.email_placeholder')}
-                    className={`${inputClass} ${isRtl ? '' : 'pl-12 pr-6 text-left'}`}
+                    className="w-full h-18 bg-white border border-transparent rounded-[1.5rem] py-4 pr-20 pl-8 text-right text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
                     value={resetEmail}
                     onChange={(e) => setResetEmail && setResetEmail(e.target.value)}
                   />
@@ -447,7 +463,7 @@ const Popup: React.FC<Props> = ({
 
                 <AnimatePresence>
                   {resetMessage && (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-xs text-center text-emerald-600 font-black bg-emerald-50 p-4 rounded-2xl border border-emerald-100 shadow-sm">
+                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-xs text-center text-emerald-600 font-black bg-emerald-50 p-6 rounded-2xl border border-emerald-100 shadow-soft">
                       {resetMessage}
                     </motion.div>
                   )}
@@ -456,13 +472,13 @@ const Popup: React.FC<Props> = ({
                 <div className="flex flex-col gap-4">
                   <button
                     onClick={handleResetPassword}
-                    className="w-full py-5 rounded-2xl bg-primary text-white font-black shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary) text-white font-black shadow-xl shadow-(--color-primary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('admin.send_reset_link')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full py-5 rounded-2xl bg-gray-50 text-gray-400 font-black border border-gray-100 hover:bg-gray-100 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>

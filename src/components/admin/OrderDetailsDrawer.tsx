@@ -99,54 +99,57 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                         initial={{ x: isRtl ? "-100%" : "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: isRtl ? "-100%" : "100%" }}
-                        transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                        className={`relative w-full max-w-lg bg-white/95 backdrop-blur-md h-full shadow-premium z-10 flex flex-col ${isRtl ? 'border-r' : 'border-l'} border-primary/5`}
+                        transition={{ type: "spring", damping: 35, stiffness: 400 }}
+                        className={`relative w-full max-w-xl bg-white/90 backdrop-blur-2xl h-full shadow-premium z-10 flex flex-col ${isRtl ? 'border-r' : 'border-l'} border-white overflow-hidden`}
                     >
+                        {/* Heritage Design Accents */}
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-80 h-80 bg-(--color-secondary)/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
                         {/* Header */}
-                        <div className="p-8 border-b border-primary/5 flex items-center justify-between bg-primary/5">
+                        <div className="px-8 py-6 border-b border-(--color-primary)/5 flex items-center justify-between relative z-10 bg-white/50 backdrop-blur-md">
                             <div>
-                                <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em] bg-primary/10 px-3 py-1 rounded-lg border border-primary/10">
+                                <span className="text-[9px] font-black text-(--color-primary) uppercase tracking-[0.2em] bg-(--color-primary)/5 px-3 py-1 rounded-lg border border-(--color-primary)/10">
                                     {order.orderId}
                                 </span>
-                                <h2 className="text-2xl font-black text-primary mt-2">{t('admin.order_details') || "تفاصيل الطلب"}</h2>
+                                <h2 className="text-2xl font-black text-(--color-primary) mt-3 tracking-tight">{t('admin.order_details') || "تفاصيل الطلب"}</h2>
                             </div>
                             <button
                                 onClick={onClose}
-                                className="w-12 h-12 rounded-2xl bg-white text-primary/30 flex items-center justify-center hover:bg-secondary/10 hover:text-secondary transition-all border border-primary/5 shadow-soft"
+                                className="w-10 h-10 rounded-xl bg-white text-(--color-primary)/30 flex items-center justify-center hover:bg-(--color-secondary)/10 hover:text-(--color-secondary) transition-all border border-(--color-primary)/5 shadow-soft active:scale-90"
                             >
                                 <FiX size={24} />
                             </button>
                         </div>
 
                         {/* Content Scrollable */}
-                        <div className="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-10">
+                        <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8">
 
                             {/* Order Progress Control Center */}
                             <section className="space-y-6">
-                                <div className="flex justify-between items-center">
-                                    <h3 className="text-xs font-black uppercase tracking-widest text-primary/40">{t('admin.status_progress') || "تتبع وتحديث الحالة"}</h3>
+                                <div className="flex justify-between items-center px-2">
+                                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30">{t('admin.status_progress') || "تتبع وتحديث الحالة"}</h3>
                                     {order.archived && (
-                                        <span className="bg-primary/5 text-primary/60 text-[10px] px-3 py-1 rounded-full font-black uppercase tracking-widest">{t('admin.archived')}</span>
+                                        <span className="bg-(--color-primary)/5 text-(--color-primary)/40 text-[9px] px-3 py-1 rounded-full font-black uppercase tracking-[0.2em] border border-(--color-primary)/5">{t('admin.archived')}</span>
                                     )}
                                 </div>
 
                                 {/* Simplified Status Visualization */}
                                 <div className="space-y-4">
-                                    <div className="flex items-center justify-between p-6 bg-primary/5 rounded-3xl border border-primary/5 shadow-inner">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-inner">
-                                                <FiClock size={22} />
+                                    <div className="flex items-center justify-between p-6 bg-(--color-primary)/5 rounded-[2rem] border border-transparent shadow-inner group transition-all hover:bg-(--color-primary)/10">
+                                        <div className="flex items-center gap-5">
+                                            <div className="w-12 h-12 rounded-xl bg-white text-(--color-primary) flex items-center justify-center shadow-soft group-hover:scale-110 transition-transform duration-500">
+                                                <FiClock size={24} />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] text-primary/30 font-black uppercase tracking-[0.2em] mb-1">{t('admin.order_status')}</p>
-                                                <p className="text-base font-black text-primary leading-none">{t(`admin.${order.status}`)}</p>
+                                                <p className="text-[9px] text-(--color-primary)/30 font-black uppercase tracking-[0.2em] mb-1.5">{t('admin.order_status')}</p>
+                                                <p className="text-lg font-black text-(--color-primary) leading-none tracking-tight">{t(`admin.${order.status}`)}</p>
                                             </div>
                                         </div>
                                         <div className="flex gap-1.5">
                                             {steps.map((st, idx) => (
                                                 <div
                                                     key={st}
-                                                    className={`w-6 h-1.5 rounded-full transition-all duration-500 ${idx <= currentStepIndex ? "bg-primary shadow-sm" : "bg-primary/10"}`}
+                                                    className={`w-6 h-1.5 rounded-full transition-all duration-700 ${idx <= currentStepIndex ? "bg-(--color-primary) shadow-lg shadow-(--color-primary)/30" : "bg-(--color-primary)/10"}`}
                                                 />
                                             ))}
                                         </div>
@@ -154,21 +157,21 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                 </div>
 
                                 {/* Smart Actions Contextual */}
-                                <div className="grid grid-cols-1 gap-4 mt-4">
+                                <div className="grid grid-cols-1 gap-4 mt-6">
                                     {order.status === "pending" && (
                                         <button
                                             onClick={handleConfirmNotify}
-                                            className="w-full py-5 bg-primary text-white rounded-2xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"
+                                            className="w-full h-16 bg-(--color-primary) text-white rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-(--color-primary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                                         >
                                             <FiCheck size={20} />
                                             {t('admin.mark_confirmed') || "تأكيد الطلب وإبلاغ العميل"}
-                                            <FaWhatsapp size={18} className="opacity-70 ml-2" />
+                                            <FaWhatsapp size={18} className="opacity-70" />
                                         </button>
                                     )}
                                     {order.status === "confirmed" && (
                                         <button
                                             onClick={() => updateStatus("preparing")}
-                                            className="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/20 hover:scale-[1.02] active:scale-95 transition-all"
+                                            className="w-full h-16 bg-indigo-600 text-white rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-indigo-600/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                                         >
                                             <FiPackage size={20} />
                                             {t('admin.mark_preparing') || "بدء تحضير الطلب"}
@@ -177,17 +180,17 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                     {order.status === "preparing" && (
                                         <button
                                             onClick={handleReadyNotify}
-                                            className="w-full py-5 bg-purple-600 text-white rounded-2xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-purple-600/20 hover:scale-[1.02] active:scale-95 transition-all"
+                                            className="w-full h-16 bg-purple-600 text-white rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-purple-600/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                                         >
                                             <FiBell size={20} />
                                             {t('admin.mark_ready') || "إخطار العميل بجاهزية الطلب"}
-                                            <FaWhatsapp size={18} className="opacity-70 ml-2" />
+                                            <FaWhatsapp size={18} className="opacity-70" />
                                         </button>
                                     )}
                                     {(order.status === "ready" || order.status === "confirmed" || order.status === "preparing") && (
                                         <button
                                             onClick={() => updateStatus("delivered")}
-                                            className="w-full py-5 bg-emerald-600 text-white rounded-2xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-emerald-600/20 hover:scale-[1.02] active:scale-95 transition-all"
+                                            className="w-full h-16 bg-emerald-600 text-white rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-emerald-600/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                                         >
                                             <FiTruck size={20} />
                                             {t('admin.mark_delivered') || "تم التسليم بنجاح (إغلاق الطلب)"}
@@ -197,7 +200,7 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                                     {order.status === "archived" && (
                                         <button
                                             onClick={() => updateStatus("pending")}
-                                            className="w-full py-5 bg-blue-600 text-white rounded-2xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-blue-600/20 hover:scale-[1.02] active:scale-95 transition-all"
+                                            className="w-full h-16 bg-blue-600 text-white rounded-xl font-black text-sm flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest"
                                         >
                                             <FiRotateCw size={20} />
                                             {t('admin.restore') || "استعادة الطلب ونقله للنشطة"}
@@ -210,39 +213,39 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
 
                             {/* Customer Info */}
                             <section className="space-y-6">
-                                <h3 className="text-xs font-black uppercase tracking-widest text-primary/40">{t('admin.customer_details')}</h3>
-                                <div className="grid gap-6 bg-primary/5 p-6 rounded-4xl border border-primary/5 shadow-inner">
+                                <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.customer_details')}</h3>
+                                <div className="grid gap-4 bg-(--color-primary)/5 p-6 rounded-[2rem] border border-transparent shadow-inner">
                                     <div className="flex items-center gap-5">
-                                        <div className="w-12 h-12 rounded-2xl bg-white shadow-soft flex items-center justify-center text-primary border border-primary/5">
-                                            <FiUser size={22} />
+                                        <div className="w-12 h-12 rounded-xl bg-white shadow-soft flex items-center justify-center text-(--color-primary) border border-(--color-primary)/5">
+                                            <FiUser size={24} />
                                         </div>
                                         <div>
-                                            <p className="text-[10px] text-primary/30 font-black uppercase tracking-widest mb-1">{t('admin.customer')}</p>
-                                            <p className="text-base font-black text-primary leading-none">{order.customer?.name}</p>
+                                            <p className="text-[9px] text-(--color-primary)/30 font-black uppercase tracking-[0.2em] mb-1">{t('admin.customer')}</p>
+                                            <p className="text-lg font-black text-(--color-primary) leading-none tracking-tight">{order.customer?.name}</p>
                                         </div>
                                     </div>
                                     {order.customer?.phone && (
-                                        <div className="flex items-center gap-5 transition-transform hover:scale-[1.02] cursor-pointer group" onClick={() => OrderService.notifyCustomer(order, 'confirm')}>
-                                            <div className="w-12 h-12 rounded-2xl bg-emerald-50 shadow-soft flex items-center justify-center text-emerald-600 border border-emerald-100 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                                                <FiPhone size={22} />
+                                        <div className="flex items-center gap-5 transition-transform hover:scale-[1.01] cursor-pointer group" onClick={() => OrderService.notifyCustomer(order, 'confirm')}>
+                                            <div className="w-12 h-12 rounded-xl bg-emerald-50 shadow-soft flex items-center justify-center text-emerald-600 border border-emerald-100 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500">
+                                                <FiPhone size={24} />
                                             </div>
-                                            <div>
-                                                <p className="text-[10px] text-primary/30 font-black uppercase tracking-widest mb-1">{t('admin.phone')}</p>
-                                                <p className="text-base font-black text-primary leading-none flex items-center gap-3">
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-[9px] text-(--color-primary)/30 font-black uppercase tracking-[0.2em] mb-1">{t('admin.phone')}</p>
+                                                <p className="text-lg font-black text-(--color-primary) leading-none flex items-center gap-3 truncate tracking-tight">
                                                     {order.customer.phone}
-                                                    <FaWhatsapp size={16} className="text-emerald-500" />
+                                                    <FaWhatsapp size={16} className="text-emerald-500 group-hover:scale-125 transition-transform" />
                                                 </p>
                                             </div>
                                         </div>
                                     )}
                                     {order.customer?.address && (
                                         <div className="flex items-center gap-5">
-                                            <div className="w-12 h-12 rounded-2xl bg-white shadow-soft flex items-center justify-center text-orange-500 border border-primary/5">
-                                                <FiMapPin size={22} />
+                                            <div className="w-12 h-12 rounded-xl bg-white shadow-soft flex items-center justify-center text-orange-500 border border-(--color-primary)/5">
+                                                <FiMapPin size={24} />
                                             </div>
                                             <div>
-                                                <p className="text-[10px] text-primary/30 font-black uppercase tracking-widest mb-1">{t('whatsapp.address')}</p>
-                                                <p className="text-base font-black text-primary leading-none">{order.customer.address}</p>
+                                                <p className="text-[9px] text-(--color-primary)/30 font-black uppercase tracking-[0.2em] mb-1">{t('whatsapp.address')}</p>
+                                                <p className="text-lg font-black text-(--color-primary) leading-none tracking-tight">{order.customer.address}</p>
                                             </div>
                                         </div>
                                     )}
@@ -251,25 +254,25 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
 
                             {/* Items List */}
                             <section className="space-y-6">
-                                <div className="flex justify-between items-center">
-                                    <h3 className="text-xs font-black uppercase tracking-widest text-primary/40">{t('admin.ordered_items')}</h3>
-                                    <span className="px-4 py-1.5 rounded-xl bg-primary/5 text-primary/60 text-[10px] font-black uppercase tracking-widest">
+                                <div className="flex justify-between items-center px-2">
+                                    <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30">{t('admin.ordered_items')}</h3>
+                                    <span className="px-4 py-1 rounded-lg bg-(--color-primary)/5 text-(--color-primary)/40 text-[9px] font-black uppercase tracking-[0.2em] border border-(--color-primary)/5">
                                         {order.items?.length} {t('common.items')}
                                     </span>
                                 </div>
-                                <div className="bg-primary/5 rounded-4xl border border-primary/5 overflow-hidden divide-y divide-primary/5 shadow-inner">
+                                <div className="bg-(--color-primary)/5 rounded-[2rem] border border-transparent overflow-hidden divide-y divide-(--color-primary)/5 shadow-inner">
                                     {order.items?.map((item, idx) => (
-                                        <div key={idx} className="p-5 flex justify-between items-center group hover:bg-white transition-all">
+                                        <div key={idx} className="p-5 flex justify-between items-center group hover:bg-white transition-all duration-500">
                                             <div className="flex items-center gap-5">
-                                                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-black text-sm shadow-sm border border-primary/10">
+                                                <div className="w-10 h-10 rounded-xl bg-(--color-primary)/5 text-(--color-primary) flex items-center justify-center font-black text-xs shadow-sm border border-(--color-primary)/10 group-hover:bg-(--color-primary)/10">
                                                     {item.qty}×
                                                 </div>
-                                                <span className="text-base font-bold text-primary leading-tight">
+                                                <span className="text-base font-black text-(--color-primary) leading-tight tracking-tight">
                                                     {isRtl ? item.nameAr : item.nameEn || item.nameAr}
                                                 </span>
                                             </div>
-                                            <span className="text-base font-black text-primary tracking-tight">
-                                                {item.total}<span className="text-xs ml-0.5 opacity-60">₪</span>
+                                            <span className="text-lg font-black text-(--color-primary) tracking-tighter">
+                                                {item.total}<span className="text-xs ml-1 opacity-30 uppercase">₪</span>
                                             </span>
                                         </div>
                                     ))}
@@ -277,12 +280,13 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             </section>
 
                             {/* Financial Summary */}
-                            <section className="bg-primary/5 rounded-[2.5rem] p-8 border border-primary/10 space-y-6 shadow-inner">
-                                <div className="flex justify-between items-baseline">
-                                    <span className="text-xs font-black uppercase tracking-[0.2em] text-primary/60">{t('common.total')}</span>
+                            <section className="bg-(--color-primary)/5 rounded-[2rem] p-8 border border-(--color-primary)/10 space-y-6 shadow-inner relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-xl" />
+                                <div className="flex justify-between items-baseline relative z-10">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-(--color-primary)/40">{t('common.total')}</span>
                                     <div className="text-right">
-                                        <div className="text-5xl font-black text-primary tracking-tighter leading-none">{order.totalPrice}<span className="text-lg ml-1 opacity-50">₪</span></div>
-                                        <div className={`text-[11px] font-black uppercase mt-2 tracking-widest ${order.paymentStatus === 'paid' ? 'text-emerald-600' : 'text-secondary'}`}>
+                                        <div className="text-5xl font-black text-(--color-primary) tracking-tighter leading-none group-hover:scale-105 transition-transform duration-700">{order.totalPrice}<span className="text-lg ml-1.5 opacity-30 uppercase">₪</span></div>
+                                        <div className={`text-[9px] font-black uppercase mt-3 tracking-[0.2em] px-3 py-1 rounded-full border inline-block ${order.paymentStatus === 'paid' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-(--color-secondary)/10 text-(--color-secondary) border-(--color-secondary)/20'}`}>
                                             {order.paymentStatus === 'paid' ? t('admin.paid') : t('admin.unpaid')}
                                         </div>
                                     </div>
@@ -290,9 +294,9 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
 
                                 <button
                                     onClick={updatePayment}
-                                    className={`w-full flex items-center justify-center gap-4 py-5 rounded-2xl font-black text-sm transition-all border ${order.paymentStatus === "paid"
-                                        ? "bg-emerald-500 text-white border-emerald-400 shadow-xl shadow-emerald-500/20"
-                                        : "bg-white text-secondary border-secondary/20 hover:bg-secondary/5 shadow-soft"
+                                    className={`w-full h-16 flex items-center justify-center gap-3 rounded-xl font-black text-sm transition-all border uppercase tracking-widest relative z-10 ${order.paymentStatus === "paid"
+                                        ? "bg-emerald-600 text-white border-emerald-500 shadow-xl shadow-emerald-600/30"
+                                        : "bg-white text-(--color-secondary) border-(--color-secondary)/20 hover:bg-(--color-secondary)/5 shadow-soft"
                                         }`}
                                 >
                                     <FiDollarSign size={20} />
@@ -301,12 +305,12 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             </section>
 
                             {order.customer?.notes && (
-                                <section className="p-6 rounded-4xl bg-amber-50/50 border border-amber-100/50 space-y-4">
-                                    <div className="flex items-center gap-3 text-xs font-black text-amber-600 uppercase tracking-widest">
+                                <section className="p-6 rounded-[2rem] bg-amber-50/50 border border-amber-100/50 space-y-4 shadow-inner">
+                                    <div className="flex items-center gap-3 text-[9px] font-black text-amber-600 uppercase tracking-[0.2em]">
                                         <FiMessageSquare size={18} />
                                         <span>{t('whatsapp.notes')}</span>
                                     </div>
-                                    <p className="text-base font-bold text-amber-700 italic leading-relaxed">
+                                    <p className="text-base font-bold text-amber-900 italic leading-relaxed">
                                         {order.customer.notes}
                                     </p>
                                 </section>
@@ -315,35 +319,35 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                         </div>
 
                         {/* Sticky Bottom Actions */}
-                        <div className="p-8 border-t border-primary/5 bg-white/80 backdrop-blur-md flex flex-col gap-3 shrink-0">
+                        <div className="p-8 border-t border-(--color-primary)/5 bg-white/80 backdrop-blur-xl flex flex-col gap-3 shrink-0 relative z-20">
                             {/* Hard Delete for Cancelled/Archived orders */}
                             {(order.status === "cancelled" || order.status === "archived") && (
                                 !showHardDeleteConfirm ? (
                                     <button
                                         onClick={() => setShowHardDeleteConfirm(true)}
-                                        className="w-full py-4 bg-secondary/5 text-secondary border border-secondary/10 rounded-2xl font-black text-sm hover:bg-secondary hover:text-white transition-all active:scale-95 flex items-center justify-center gap-3"
+                                        className="w-full h-14 bg-(--color-secondary)/5 text-(--color-secondary) border border-(--color-secondary)/10 rounded-xl font-black text-sm hover:bg-(--color-secondary) hover:text-white transition-all active:scale-95 flex items-center justify-center gap-3 uppercase tracking-widest"
                                     >
-                                        <FiTrash2 size={18} />
-                                        {t('admin.hard_delete') || "حذف نهائي من قاعدة البيانات"}
+                                        <FiTrash2 size={20} />
+                                        {t('admin.hard_delete') || "حذف نهائي"}
                                     </button>
                                 ) : (
-                                    <div className="bg-secondary/5 border border-secondary/20 rounded-2xl p-5 space-y-3">
-                                        <div className="flex items-center gap-3 text-secondary">
-                                            <FiAlertTriangle size={18} />
-                                            <p className="text-xs font-black">{t('admin.hard_delete_confirm') || "هذا الإجراء لا يمكن التراجع عنه!"}</p>
+                                    <div className="bg-(--color-secondary)/5 border border-(--color-secondary)/20 rounded-xl p-5 space-y-3">
+                                        <div className="flex items-center gap-3 text-(--color-secondary)">
+                                            <FiAlertTriangle size={20} />
+                                            <p className="text-[10px] font-black uppercase tracking-widest">{t('admin.hard_delete_confirm') || "لا يمكن التراجع عنه!"}</p>
                                         </div>
                                         <div className="flex gap-3">
                                             <button
                                                 onClick={handleHardDelete}
                                                 disabled={deleting}
-                                                className="flex-1 py-3 bg-secondary text-white rounded-xl font-black text-xs hover:bg-secondary/80 transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2"
+                                                className="flex-2 h-12 bg-(--color-secondary) text-white rounded-lg font-black text-[10px] hover:bg-(--color-secondary)/80 transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-2 uppercase tracking-widest"
                                             >
-                                                {deleting ? <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" /> : <FiTrash2 size={14} />}
-                                                {t('common.delete') || "تأكيد الحذف"}
+                                                {deleting ? <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" /> : <FiTrash2 size={16} />}
+                                                {t('common.delete') || "تأكيد"}
                                             </button>
                                             <button
                                                 onClick={() => setShowHardDeleteConfirm(false)}
-                                                className="flex-1 py-3 bg-primary/5 text-primary/40 rounded-xl font-black text-xs hover:bg-primary/10 transition-all"
+                                                className="flex-1 h-12 bg-(--color-primary)/5 text-(--color-primary)/40 rounded-lg font-black text-[10px] hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest"
                                             >
                                                 {t('common.cancel') || "إلغاء"}
                                             </button>
@@ -353,7 +357,7 @@ export default function OrderDetailsDrawer({ order, isOpen, onClose }: Props) {
                             )}
                             <button
                                 onClick={onClose}
-                                className="flex-1 py-5 bg-primary/5 text-primary border border-primary/10 rounded-2xl font-black text-sm hover:bg-primary/10 transition-all active:scale-95 flex items-center justify-center gap-3 shadow-soft"
+                                className="w-full h-16 bg-(--color-primary)/5 text-(--color-primary) border border-(--color-primary)/10 rounded-xl font-black text-sm hover:bg-(--color-primary)/10 transition-all active:scale-95 flex items-center justify-center gap-3 shadow-soft uppercase tracking-widest"
                             >
                                 <FiChevronRight className={isRtl ? "rotate-180" : ""} size={20} />
                                 {t('common.close')}

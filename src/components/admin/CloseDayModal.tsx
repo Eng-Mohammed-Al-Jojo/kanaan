@@ -35,65 +35,66 @@ export default function CloseDayModal({ isOpen, onClose, onConfirm }: Props) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={!loading ? onClose : undefined}
-                        className="absolute inset-0 bg-gray-900/60 backdrop-blur-md"
+                        className="absolute inset-0 bg-(--color-primary)/30 backdrop-blur-md"
                     />
 
                     {/* Modal Content */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        initial={{ opacity: 0, scale: 0.98, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="relative w-full max-w-lg bg-white rounded-[3rem] border border-gray-100 shadow-premium overflow-hidden z-10 p-8 md:p-12 text-center"
+                        exit={{ opacity: 0, scale: 0.98, y: 20 }}
+                        className="relative w-full max-w-lg bg-white/95 backdrop-blur-2xl rounded-[2.5rem] border border-white shadow-premium overflow-hidden z-10 p-8 md:p-10 text-center"
                     >
                         {/* Header Icon */}
-                        <div className="w-24 h-24 bg-red-50 text-red-500 rounded-4xl flex items-center justify-center mx-auto mb-8 text-4xl shadow-inner border border-red-100">
+                        <div className="w-20 h-20 bg-(--color-secondary)/5 text-(--color-secondary) rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner border border-(--color-secondary)/10">
                             <FiAlertTriangle />
                         </div>
 
                         {/* Title & Message */}
-                        <h3 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">
+                        <h3 className="text-2xl font-black text-(--color-primary) mb-3 tracking-tight">
                             تأكيد الإغلاق اليومي
                         </h3>
-                        <p className="text-gray-500 font-medium mb-10 leading-relaxed text-sm">
+                        <p className="text-(--color-primary)/40 font-black text-[10px] uppercase tracking-[0.15em] mb-8 leading-loose px-4">
                             سيتم إغلاق اليوم الحالي، ترحيل جميع الطلبات إلى ملف Excel، وحذفها من لوحة التحكم. لا يمكن التراجع عن هذه العملية.
                         </p>
 
                         {/* Checklist Section */}
-                        <div className="bg-gray-50 rounded-4xl border border-gray-100 p-8 mb-10 text-right space-y-4 shadow-inner">
-                            <div className="flex items-center gap-4 text-emerald-600">
-                                <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                                    <FiCheck size={14} />
+                        <div className="bg-(--color-primary)/5 rounded-[2rem] p-8 mb-8 text-right space-y-4 shadow-inner relative group overflow-hidden">
+                            <div className="absolute top-0 left-0 w-24 h-24 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl" />
+                            <div className="flex items-center gap-4 text-emerald-600 relative z-10">
+                                <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center shrink-0 shadow-sm">
+                                    <FiCheck size={16} />
                                 </div>
-                                <span className="text-xs font-bold">سيتم إنشاء ملف Excel يحتوي على جميع طلبات اليوم</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest leading-tight">سيتم إنشاء ملف Excel يحتوي على جميع طلبات اليوم</span>
                             </div>
-                            <div className="flex items-center gap-4 text-emerald-600">
-                                <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
-                                    <FiCheck size={14} />
+                            <div className="flex items-center gap-4 text-emerald-600 relative z-10">
+                                <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center shrink-0 shadow-sm">
+                                    <FiCheck size={16} />
                                 </div>
-                                <span className="text-xs font-bold">سيتم حذف الطلبات من النظام بعد التصدير</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest leading-tight">سيتم حذف الطلبات من النظام بعد التصدير</span>
                             </div>
-                            <div className="flex items-center gap-4 text-amber-600">
-                                <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
-                                    <FiAlertTriangle size={14} />
+                            <div className="flex items-center gap-4 text-(--color-secondary) relative z-10">
+                                <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center shrink-0 shadow-sm">
+                                    <FiAlertTriangle size={16} />
                                 </div>
-                                <span className="text-xs font-bold">تأكد من مراجعة الطلبات قبل المتابعة</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest leading-tight">تأكد من مراجعة الطلبات قبل المتابعة</span>
                             </div>
                         </div>
 
                         {/* Actions */}
-                        <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4 relative z-10">
                             <button
                                 onClick={onClose}
                                 disabled={loading}
-                                className="flex-1 py-5 bg-gray-50 text-gray-400 border border-gray-100 rounded-2xl font-black text-sm hover:bg-gray-100 transition-all active:scale-95 flex items-center justify-center gap-3 uppercase tracking-widest disabled:opacity-50"
+                                className="flex-1 h-14 bg-white text-(--color-primary)/30 border border-transparent rounded-xl font-black text-[9px] hover:text-(--color-secondary) hover:bg-(--color-secondary)/5 transition-all active:scale-95 flex items-center justify-center gap-2 uppercase tracking-[0.2em] disabled:opacity-50 shadow-soft"
                             >
-                                <FiX size={20} />
+                                <FiX size={18} />
                                 {t('common.cancel') || "إلغاء"}
                             </button>
                             <button
                                 onClick={handleConfirm}
                                 disabled={loading}
-                                className="flex-[1.5] py-5 bg-red-600 text-white rounded-2xl font-black text-sm hover:bg-red-700 shadow-xl shadow-red-200 transition-all active:scale-95 flex items-center justify-center gap-3 uppercase tracking-widest disabled:opacity-50"
+                                className="flex-[1.5] h-14 bg-(--color-secondary) text-white rounded-xl font-black text-[9px] hover:brightness-110 shadow-xl shadow-(--color-secondary)/30 transition-all active:scale-95 flex items-center justify-center gap-2 uppercase tracking-[0.2em] disabled:opacity-50"
                             >
                                 {loading ? (
                                     <motion.div
@@ -108,6 +109,7 @@ export default function CloseDayModal({ isOpen, onClose, onConfirm }: Props) {
                                 {loading ? "جاري الإغلاق..." : "تأكيد الإغلاق"}
                             </button>
                         </div>
+
                     </motion.div>
                 </div>
             )}

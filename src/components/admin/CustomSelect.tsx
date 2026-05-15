@@ -36,43 +36,44 @@ const CustomSelect: React.FC<Props> = ({ options, value, onChange, error, placeh
                 onClick={() => !disabled && setOpen(!open)}
                 disabled={disabled}
                 className={`
-                    w-full flex items-center justify-between px-6 py-4 rounded-2xl border transition-all duration-500
-                    bg-gray-50 outline-none shadow-soft
-                    ${disabled ? "opacity-50 cursor-not-allowed border-gray-100" : "hover:border-primary/30 hover:bg-white"}
-                    ${error ? "border-secondary ring-4 ring-secondary/5" : (!disabled ? "border-gray-100 focus:border-primary focus:ring-4 focus:ring-primary/5 focus:bg-white" : "")} 
+                    w-full h-16 flex items-center justify-between px-8 rounded-[1.2rem] border transition-all duration-700
+                    bg-white outline-none shadow-soft
+                    ${disabled ? "opacity-50 cursor-not-allowed border-transparent" : "hover:shadow-premium border-transparent"}
+                    ${error ? "border-(--color-secondary) ring-8 ring-(--color-secondary)/5" : (!disabled ? "focus:ring-10 focus:ring-(--color-primary)/5" : "")} 
                 `}
             >
-                <span className={`text-sm font-bold ${selectedOption ? "text-gray-900" : "text-gray-400"}`}>
+                <span className={`text-[11px] font-black uppercase tracking-[0.2em] ${selectedOption ? "text-(--color-primary)" : "text-(--color-primary)/20"}`}>
                     {selectedOption ? selectedOption.name : placeholder || t('common.select')}
                 </span>
-                <FiChevronDown className={`transition-transform duration-500 text-gray-400 ${open ? "rotate-180 text-primary" : ""}`} size={20} />
+                <FiChevronDown className={`transition-all duration-500 text-(--color-primary)/20 ${open ? "rotate-180 text-(--color-primary) scale-125" : ""}`} size={24} />
             </button>
 
             <AnimatePresence>
                 {open && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                        initial={{ opacity: 0, scale: 0.95, y: 15 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                        className="absolute z-60 w-full right-0 mt-3 max-h-64 overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-premium"
+                        exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                        className="absolute z-60 w-full right-0 mt-4 max-h-72 overflow-hidden rounded-[2rem] bg-white/95 backdrop-blur-2xl border border-white shadow-premium"
                     >
-                        <div className="overflow-y-auto max-h-64 custom-scrollbar p-2">
+                        <div className="overflow-y-auto max-h-72 custom-scrollbar p-3">
                             {options.length === 0 ? (
-                                <div className="p-6 text-center text-xs text-gray-400 font-bold uppercase tracking-widest">{t('common.no_options')}</div>
+                                <div className="p-10 text-center text-[10px] text-(--color-primary)/20 font-black uppercase tracking-[0.3em]">{t('common.no_options')}</div>
                             ) : (
-                                <div className="space-y-1">
+                                <div className="space-y-2">
                                     {options.map(o => (
                                         <button
                                             key={o.id}
                                             type="button"
                                             onClick={() => { onChange(o.id); setOpen(false); }}
                                             className={`
-                                                w-full text-right px-5 py-3.5 rounded-xl transition-all flex items-center justify-between group
-                                                ${value === o.id ? "bg-primary text-white shadow-lg shadow-primary/20" : "hover:bg-primary/5 text-gray-700"}
+                                                w-full text-right px-6 py-4 rounded-[1.2rem] transition-all flex items-center justify-between group/opt relative overflow-hidden
+                                                ${value === o.id ? "bg-(--color-primary) text-white shadow-xl shadow-(--color-primary)/20" : "hover:bg-(--color-primary)/5 text-(--color-primary)/40 hover:text-(--color-primary)"}
                                             `}
                                         >
-                                            <span className="text-sm font-black tracking-tight">{o.name}</span>
-                                            {value === o.id && <FiCheck className="text-white" size={18} strokeWidth={3} />}
+                                            <span className="text-[11px] font-black uppercase tracking-widest relative z-10">{o.name}</span>
+                                            {value === o.id && <FiCheck className="text-white relative z-10" size={20} strokeWidth={4} />}
+                                            {value !== o.id && <div className="absolute inset-0 bg-white/40 opacity-0 group-hover/opt:opacity-100 transition-opacity" />}
                                         </button>
                                     ))}
                                 </div>

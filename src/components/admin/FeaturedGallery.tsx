@@ -95,51 +95,51 @@ const FeaturedGallery: React.FC<Props> = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={onClose}
-                className="absolute inset-0 bg-gray-900/60 backdrop-blur-md z-10000"
+                className="absolute inset-0 bg-(--color-primary)/30 backdrop-blur-md z-10000"
             />
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative bg-white w-full max-w-4xl rounded-[2.5rem] border border-gray-100 shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10001 pointer-events-auto"
+                exit={{ opacity: 0, scale: 0.95, y: 30 }}
+                className="relative bg-white/95 backdrop-blur-2xl w-full max-w-5xl rounded-[3.5rem] border border-white shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10001 pointer-events-auto"
             >
-                <div className="p-6 md:p-8 border-b border-gray-100 bg-gray-50/50 space-y-6">
+                <div className="p-10 md:p-12 border-b border-(--color-primary)/5 bg-white/50 backdrop-blur-md space-y-8 relative z-10">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-5">
-                            <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-primary text-white flex items-center justify-center text-2xl shadow-xl shadow-primary/20">
+                        <div className="flex items-center gap-8">
+                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-(--color-primary) text-white flex items-center justify-center text-4xl shadow-2xl shadow-(--color-primary)/30">
                                 <FiImage />
                             </div>
                             <div>
-                                <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight">{title || t('admin.gallery_title')}</h2>
-                                <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-1">{t('admin.select_image_desc')}</p>
+                                <h2 className="text-2xl md:text-3xl font-black text-(--color-primary) tracking-tight">{title || t('admin.gallery_title')}</h2>
+                                <p className="text-(--color-primary)/30 text-[10px] font-black uppercase tracking-[0.3em] mt-2">{t('admin.select_image_desc')}</p>
                             </div>
                         </div>
-                        <button onClick={onClose} className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-white text-gray-400 hover:text-secondary hover:bg-secondary/10 transition-all border border-gray-100 shadow-soft">
-                            <FiX size={24} />
+                        <button onClick={onClose} className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-2xl bg-white text-(--color-primary)/20 hover:text-(--color-secondary) hover:bg-(--color-secondary)/10 transition-all border border-(--color-primary)/5 shadow-soft active:scale-90">
+                            <FiX size={28} />
                         </button>
                     </div>
 
-                    <div className="relative group">
-                        <FiSearch className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-primary transition-colors" size={20} />
+                    <div className="relative group/search">
+                        <FiSearch className="absolute left-8 top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/search:text-(--color-primary) group-focus-within/search:scale-125 transition-all duration-500" size={24} />
                         <input
                             type="text"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             placeholder={t('common.search') || "Search images..."}
-                            className="w-full bg-white border border-gray-100 rounded-2xl py-4 pl-14 pr-6 text-sm font-bold outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all shadow-soft"
+                            className="w-full bg-white border border-transparent rounded-[1.5rem] py-5 pl-18 pr-8 text-sm font-black text-(--color-primary) outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all shadow-premium placeholder:text-(--color-primary)/10 uppercase tracking-[0.2em]"
                         />
                     </div>
                 </div>
 
                 {/* Grid */}
-                <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar bg-gray-50/30">
-                    <motion.div layout className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 md:gap-6">
+                <div className="flex-1 overflow-y-auto p-10 md:p-12 custom-scrollbar bg-white/30 backdrop-blur-md">
+                    <motion.div layout className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 md:gap-8">
                         <AnimatePresence mode="popLayout">
                             {isLoading ? (
                                 // Loading Skeleton
-                                [...Array(10)].map((_, i) => (
-                                    <div key={`skeleton-${i}`} className="aspect-square bg-gray-100 rounded-3xl animate-pulse" />
+                                [...Array(15)].map((_, i) => (
+                                    <div key={`skeleton-${i}`} className="aspect-square bg-(--color-primary)/5 rounded-[2rem] animate-pulse" />
                                 ))
                             ) : filteredImages.map((img) => {
                                 const fullUrl = getFullSrc(img);
@@ -153,13 +153,13 @@ const FeaturedGallery: React.FC<Props> = ({
                                         key={img}
                                         type="button"
                                         onClick={() => handleSelect(img)}
-                                        className={`group relative rounded-3xl overflow-hidden border-2 transition-all duration-300 aspect-square shadow-soft
-                                            ${isSelected ? "border-primary ring-4 ring-primary/10" : "border-white hover:border-primary/50 hover:shadow-premium"}`}
+                                        className={`group relative rounded-[2.2rem] overflow-hidden border-2 transition-all duration-700 aspect-square shadow-soft
+                                            ${isSelected ? "border-(--color-primary) ring-10 ring-(--color-primary)/5" : "border-transparent hover:border-(--color-primary)/20 hover:shadow-premium"}`}
                                     >
                                         <img
                                             src={fullUrl}
                                             alt={img}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                             onError={(e) => e.currentTarget.src = '/logo.png'}
                                         />
 
@@ -168,17 +168,21 @@ const FeaturedGallery: React.FC<Props> = ({
                                                 <motion.div
                                                     initial={{ opacity: 0 }}
                                                     animate={{ opacity: 1 }}
-                                                    className="absolute inset-0 bg-primary/10 backdrop-blur-[2px] flex items-center justify-center"
+                                                    className="absolute inset-0 bg-(--color-primary)/10 backdrop-blur-[3px] flex items-center justify-center"
                                                 >
-                                                    <div className="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center shadow-premium">
-                                                        <FiCheck strokeWidth={4} size={20} />
-                                                    </div>
+                                                    <motion.div 
+                                                        initial={{ scale: 0.5, rotate: -45 }}
+                                                        animate={{ scale: 1, rotate: 0 }}
+                                                        className="w-14 h-14 rounded-full bg-white text-(--color-primary) flex items-center justify-center shadow-premium"
+                                                    >
+                                                        <FiCheck strokeWidth={4} size={28} />
+                                                    </motion.div>
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
 
-                                        <div className="absolute inset-0 bg-linear-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 pointer-events-none">
-                                            <span className="text-[9px] text-white font-black truncate w-full uppercase tracking-widest">{img.split('/').pop()}</span>
+                                        <div className="absolute inset-0 bg-linear-to-t from-(--color-primary)/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none">
+                                            <span className="text-[10px] text-white font-black truncate w-full uppercase tracking-[0.2em]">{img.split('/').pop()}</span>
                                         </div>
                                     </motion.button>
                                 );
@@ -187,20 +191,23 @@ const FeaturedGallery: React.FC<Props> = ({
                     </motion.div>
 
                     {filteredImages.length === 0 && (
-                        <div className="py-20 text-center space-y-6">
-                            <div className="w-20 h-20 bg-white text-gray-200 rounded-3xl flex items-center justify-center mx-auto text-3xl shadow-soft border border-gray-100">
-                                <FiSearch size={32} />
+                        <div className="py-32 text-center space-y-10 relative z-10">
+                            <div className="w-24 h-24 bg-white text-(--color-primary)/10 rounded-[2.5rem] flex items-center justify-center mx-auto text-4xl shadow-premium border border-(--color-primary)/5">
+                                <FiSearch size={40} />
                             </div>
-                            <p className="text-gray-900 font-black text-lg">{t('common.no_results') || "No images found"}</p>
+                            <div className="space-y-4">
+                                <p className="text-(--color-primary) font-black text-2xl tracking-tight">{t('common.no_results') || "No images found"}</p>
+                                <p className="text-[10px] text-(--color-primary)/30 font-black uppercase tracking-[0.3em]">{t('admin.no_search_results_desc') || "حاول البحث بكلمات مختلفة"}</p>
+                            </div>
                         </div>
                     )}
                 </div>
 
-                <div className="p-6 md:p-8 border-t border-gray-100 bg-gray-50/50">
+                <div className="p-10 md:p-12 border-t border-(--color-primary)/5 bg-white/50 backdrop-blur-md relative z-10">
                     <button
                         type="button"
                         onClick={onClose}
-                        className="w-full py-4 rounded-xl bg-white text-gray-400 font-black border border-gray-100 hover:text-secondary hover:bg-secondary/5 transition-all shadow-soft uppercase tracking-widest text-xs"
+                        className="w-full h-18 rounded-[1.5rem] bg-white text-(--color-primary)/30 font-black border border-transparent hover:text-(--color-secondary) hover:bg-(--color-secondary)/5 transition-all shadow-soft active:scale-95 uppercase tracking-[0.3em] text-[10px]"
                     >
                         {t('admin.close_gallery')}
                     </button>

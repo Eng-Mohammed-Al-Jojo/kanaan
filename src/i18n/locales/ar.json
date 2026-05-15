@@ -202,7 +202,7 @@
         "subcategories": "الأقسام الفرعية",
         "settings": "الإعدادات",
         "add_item_btn": "إضافة",
-        "total": "إجمالي",
+        "price": "السعر",
         "items_count": "أصناف",
         "all": "الكل",
         "orders_board": "لوحة الطلبات",
@@ -462,7 +462,13 @@
         "electronic": "إلكتروني",
         "cash": "كاش",
         "final_check": "تشييك نهائي ✓",
-        "confirm_payment": "تأكيد الدفع"
+        "confirm_payment": "تأكيد الدفع",
+        "whatsapp_number": "رقم الواتساب",
+        "address": "العنوان",
+        "company_name": "اسم الشركة",
+        "whatsapp_contact": "تواصل واتساب",
+        "social_links": "روابط التواصل الاجتماعي",
+        "item_form_desc": "صفحة الصنف"
     },
     "footer": {
         "developed_by": "تصميم وتطوير",
