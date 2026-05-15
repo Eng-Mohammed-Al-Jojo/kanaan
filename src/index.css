@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+
+/* ==========================================================
+   COLOR SYSTEM — Extracted from Orca RestoCafe Logo
+   Primary:   #2D8B4E (Orca green — logo icon)
+   Secondary: #FAB008 (Golden yellow — logo background circle)
+   Accent:    #1A1A1A (Dark — logo text)
+   ========================================================== */
+
+@theme {
+  /* Kanaan Heritage Colors */
+  --color-primary: #5A3E2B;
+  /* Heritage Dark Brown */
+  --color-secondary: #58755A;
+  /* Heritage Dark Green */
+  --color-accent: #D8D1C2;
+  /* Heritage Beige/Accent */
+  --color-cream: #FDFBD4;
+  /* Light Cream */
+  --color-green-light: #E3ECE2;
+  /* Light Green Tint */
+
+  /* Row Colors */
+  --color-row-odd: #EFE1B5;
+  --color-row-even: #FDFBD4;
+
+  --shadow-premium: 0 10px 30px -5px rgba(90, 62, 43, 0.15), 0 5px 15px -3px rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 4px 12px -2px rgba(88, 117, 90, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+}
+
+
+
+
+
+
+
+
+/* ===== Glassmorphism ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Custom Scrollbar ===== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #E5E7EB;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #D1D5DB;
+}
+
+/* ===== Global Utils ===== */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --bg-main: var(--color-secondary);
+  --bg-surface: var(--color-olive);
+  --bg-card: var(--color-green-light);
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --text-muted: #9CA3AF;
+  --border-light: #F3F4F6;
+  --border-base: #E5E7EB;
+
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'IBM Plex Sans Arabic', 'Almarai', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+
+.menu-wrapper {
+  font-family: 'IBM Plex Sans Arabic', 'Almarai', sans-serif;
+}
+
+/* Custom Arch Background */
+.arch-bg {
+  background-color: var(--color-olive);
+  position: relative;
+  overflow: hidden;
+}
+
+.arch-content {
+  background-color: var(--color-cream);
+  border-top-left-radius: 200px;
+  border-top-right-radius: 200px;
+  min-height: 500px;
+  margin-top: 50px;
+  position: relative;
+}
+
+/* Pattern Overlays (Approximate) */
+.pattern-gear {
+  background-image: radial-gradient(circle, var(--color-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+@keyframes pulseScale {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulseScale {
+  animation: pulseScale 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom Swiper Styles */
+.swiper-pagination-bullet-active {
+  background-color: var(--color-primary) !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-primary) !important;
+  background: white;
+  box-shadow: var(--shadow-soft);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 18px !important;
+}

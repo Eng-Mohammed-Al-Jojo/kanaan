@@ -1,0 +1,137 @@
+import { useEffect, useMemo } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import { FiX, FiCreditCard } from "react-icons/fi";
+import type { PaymentMethod } from "../../types/payment";
+import PaymentFieldsRenderer from "../common/PaymentFieldsRenderer";
+
+interface Props {
+    isOpen: boolean;
+    onClose: () => void;
+    methods: PaymentMethod[];
+    isLoading?: boolean;
+}
+
+export default function PaymentModal({
+    isOpen, onClose, methods, isLoading = false
+}: Props) {
+    useTranslation();
+
+    useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose();
+        };
+        window.addEventListener("keydown", handleEsc);
+        return () => window.removeEventListener("keydown", handleEsc);
+    }, [onClose]);
+
+    const enabledMethods = useMemo(() => methods.filter(m => m.isEnabled), [methods]);
+
+    if (!isOpen) return null;
+
+    const modalContent = (
+        <div className="fixed inset-0 z-9999 flex items-center justify-center p-4 overflow-hidden">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+                className="absolute inset-0 bg-gray-950/60 backdrop-blur-md"
+            />
+
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="relative w-full max-w-lg bg-white rounded-[3rem] shadow-premium flex flex-col max-h-[85vh] overflow-hidden border border-gray-100 z-10"
+            >
+                {/* Header */}
+                <div className="p-8 border-b border-gray-50 flex items-center justify-between bg-white shrink-0">
+                    <div className="flex items-center gap-5">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-inner shrink-0">
+                            <FiCreditCard size={28} />
+                        </div>
+                        <div>
+                            <h3 className="text-2xl font-black text-gray-900 leading-tight tracking-tight">طرق الدفع</h3>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">بيانات التحويل المعتمدة</p>
+                        </div>
+                    </div>
+                    <button
+                        onClick={onClose}
+                        className="w-12 h-12 rounded-2xl bg-gray-50 text-gray-400 hover:text-secondary hover:bg-secondary/10 transition-all flex items-center justify-center border border-gray-100"
+                    >
+                        <FiX size={24} />
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-10">
+                    {isLoading ? (
+                        <div className="space-y-6">
+                            {[1, 2, 3].map(i => (
+                                <div key={i} className="space-y-4">
+                                    <div className="h-14 bg-gray-50 rounded-2xl animate-pulse w-1/2" />
+                                    <div className="h-24 bg-gray-50 rounded-3xl animate-pulse" />
+                                </div>
+                            ))}
+                        </div>
+                    ) : enabledMethods.length > 0 ? (
+                        enabledMethods.map((method) => (
+                            <div key={method.id} className="space-y-5">
+                                <div className="flex items-center gap-5 px-1">
+                                    <div className="w-14 h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center p-2.5 shadow-sm overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
+                                        {method.image ? (
+                                            <img
+                                                src={method.image.startsWith('/') ? method.image : `/images/payment/${method.image}`}
+                                                alt={method.name}
+                                                className="w-full h-full object-contain"
+                                            />
+                                        ) : <FiCreditCard size={28} className="text-gray-300" />}
+                                    </div>
+                                    <div>
+                                        <h4 className="font-black text-gray-900 text-xl leading-none">{method.name}</h4>
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <span className="text-[9px] font-black text-primary uppercase tracking-widest bg-primary/5 px-3 py-1 rounded-full">
+                                                {method.type === 'cash' ? "نقدي" : method.type === 'wallet' ? "محفظة" : "بنكي"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <PaymentFieldsRenderer
+                                    fields={method.paymentFields || []}
+                                    isCash={method.type === 'cash'}
+                                />
+
+                                <div className="h-px bg-gray-50 w-full" />
+                            </div>
+                        ))
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-16 text-center space-y-6">
+                            <div className="w-24 h-24 rounded-4xl bg-gray-50 flex items-center justify-center text-5xl">📵</div>
+                            <div>
+                                <h4 className="text-xl font-black text-gray-900">لا توجد وسائل دفع متاحة</h4>
+                                <p className="text-xs font-bold text-gray-400 mt-2 uppercase tracking-widest leading-relaxed">يرجى التواصل مع الإدارة مباشرة لإتمام طلبك</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Bottom Tip */}
+                <div className="p-8 bg-gray-50/50 border-t border-gray-50 shrink-0">
+                    <p className="text-[10px] font-bold text-gray-400 text-center uppercase tracking-widest leading-relaxed opacity-70">
+                        تأكد من إرسال إشعار التحويل بعد إتمام العملية لضمان معالجة طلبك بأسرع وقت
+                    </p>
+                </div>
+            </motion.div>
+        </div>
+    );
+
+    return createPortal(
+        <AnimatePresence>
+            {isOpen && modalContent}
+        </AnimatePresence>,
+        document.body
+    );
+}
