@@ -124,7 +124,7 @@ export default function Footer() {
           </div>
 
           {/* Center: Brand Identity */}
-          <div className="flex flex-col items-center justify-center gap-6 order-1 md:order-2">
+          <div className="flex flex-col items-center justify-center gap-3 order-1 md:order-2">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -139,12 +139,6 @@ export default function Footer() {
               />
             </motion.div>
 
-            <div className="flex flex-col items-center text-center gap-3">
-
-              <p className="text-sm md:text-md text-accent/60  tracking-[0.15em] max-w-xs leading-relaxed">
-                أصالة المذاق الفلسطيني في قلب كل لقمة. تراثنا، هويتنا، ومستقبلنا.
-              </p>
-            </div>
           </div>
 
           {/* Right: Quick Links & Payments */}

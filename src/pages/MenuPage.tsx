@@ -44,7 +44,7 @@ export default function MenuPage() {
       <div className="fixed inset-0 pattern-heritage z-0 pointer-events-none" />
 
       {/* 🌟 Global Featured Button — Top Left */}
-      <div className="absolute top-6 left-6 z-[60]">
+      <div className="absolute top-6 left-6 z-[100]">
         {isDataReady && hasFeatured && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, x: -20 }}
