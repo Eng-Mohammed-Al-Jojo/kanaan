@@ -9,8 +9,8 @@ export default function CartItemRow({ item }: { item: CartItem }) {
     const { i18n } = useTranslation();
     const isRtl = i18n.language === 'ar';
 
-    const itemName = isRtl 
-        ? (item.nameAr || item.nameEn || item.name) 
+    const itemName = isRtl
+        ? (item.nameAr || item.nameEn || item.name)
         : (item.nameEn || item.nameAr || item.name);
 
     return (
@@ -18,7 +18,7 @@ export default function CartItemRow({ item }: { item: CartItem }) {
             layout
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between gap-4 bg-(--bg-main) p-4 rounded-3xl border border-(--border-color) group hover:border-primary/20 transition-all shadow-sm"
+            className="flex items-center justify-between gap-4 bg-cream/80 p-4 rounded-3xl border border-(--border-color) group hover:border-primary/20 transition-all shadow-sm"
         >
             <div className="flex-1 min-w-0">
                 <p className="font-black text-(--text-main) truncate text-sm sm:text-base">{itemName}</p>

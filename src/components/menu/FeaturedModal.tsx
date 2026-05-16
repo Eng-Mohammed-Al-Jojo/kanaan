@@ -1,4 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
+
 import { FiX, FiStar } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import ItemRow from "./ItemRow";
@@ -16,10 +18,10 @@ interface Props {
 export default function FeaturedModal({ isOpen, onClose, items, orderSystem, onItemClick, onDetailsClick }: Props) {
   const { t } = useTranslation();
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6">
+        <div className="fixed inset-0 z-200 flex items-center justify-center p-4 sm:p-6">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -92,6 +94,8 @@ export default function FeaturedModal({ isOpen, onClose, items, orderSystem, onI
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
+
 }

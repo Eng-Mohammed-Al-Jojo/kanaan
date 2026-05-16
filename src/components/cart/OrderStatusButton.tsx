@@ -49,28 +49,28 @@ export default function OrderStatusButton() {
                 return {
                     label: t('admin.pending'),
                     icon: <FaClock />,
-                    color: "bg-amber-500",
+                    color: "bg-orange",
                     progress: 20
                 };
             case "confirmed":
                 return {
                     label: t('admin.confirmed'),
                     icon: <FaCheckCircle />,
-                    color: "bg-blue-500",
+                    color: "bg-primary",
                     progress: 40
                 };
             case "preparing":
                 return {
                     label: t('admin.preparing'),
                     icon: <FaUtensils />,
-                    color: "bg-indigo-500",
+                    color: "bg-primary",
                     progress: 60
                 };
             case "ready":
                 return {
                     label: t('admin.ready'),
                     icon: <FaBell />,
-                    color: "bg-purple-500",
+                    color: "bg-orange",
                     progress: 80
                 };
             case "delivered":
@@ -78,21 +78,21 @@ export default function OrderStatusButton() {
                 return {
                     label: t('admin.delivered'),
                     icon: <FaMotorcycle />,
-                    color: "bg-green-600",
+                    color: "bg-secondary",
                     progress: 100
                 };
             case "cancelled":
                 return {
                     label: t('admin.cancelled'),
                     icon: <FaTimes />,
-                    color: "bg-red-500",
+                    color: "bg-secondary",
                     progress: 100
                 };
             default:
                 return {
                     label: status,
                     icon: <FaClock />,
-                    color: "bg-gray-400",
+                    color: "bg-primary/20",
                     progress: 0
                 };
         }
@@ -123,44 +123,44 @@ export default function OrderStatusButton() {
                 onClick={handleOpenFull}
                 className={`fixed bottom-24 ${isRtl ? 'left-6 sm:left-10' : 'right-6 sm:right-10'} z-50 w-[280px] sm:w-[320px] cursor-pointer`}
             >
-                <div className="bg-(--bg-card)/80 backdrop-blur-2xl border border-(--border-color) rounded-[2.5rem] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden relative group">
+                <div className="bg-cream/80 backdrop-blur-3xl border border-white/50 rounded-[2.5rem] p-5 shadow-premium overflow-hidden relative group">
                     {/* Progress Bar Background */}
-                    <div className="absolute top-0 left-0 w-full h-1 bg-(--border-color) opacity-20" />
+                    <div className="absolute top-0 left-0 w-full h-1 bg-primary/5" />
                     <motion.div
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: statusInfo.progress / 100 }}
                         style={{ originX: isRtl ? 1 : 0, willChange: 'transform' }}
-                        className={`absolute top-0 left-0 right-0 h-1 ${statusInfo.color} transition-all duration-1000`}
+                        className={`absolute top-0 left-0 right-0 h-1 ${statusInfo.color} transition-all duration-1000 shadow-[0_0_10px_rgba(198,139,89,0.3)]`}
                     />
 
                     <div className="flex items-center gap-4">
-                        <div className={`w-12 h-12 rounded-2xl ${statusInfo.color} text-white flex items-center justify-center text-xl shadow-lg shadow-${statusInfo.color.split('-')[1]}-500/20`}>
+                        <div className={`w-14 h-14 rounded-2xl ${statusInfo.color} text-white flex items-center justify-center text-2xl shadow-lg border border-white/20`}>
                             {statusInfo.icon}
                         </div>
 
                         <div className="flex-1 min-w-0">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-(--text-muted) mb-0.5">
+                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/30 mb-1">
                                 {t('common.order_type')}: {order.orderType === 'in' ? t('common.dine_in') : t('common.takeaway')}
                             </p>
-                            <h4 className="font-black text-(--text-main) truncate text-sm">
+                            <h4 className="font-black text-primary truncate text-base tracking-tight">
                                 {statusInfo.label}
                             </h4>
                         </div>
 
                         <button
                             onClick={dismiss}
-                            className="w-8 h-8 rounded-xl bg-(--bg-main) border border-(--border-color) flex items-center justify-center text-(--text-muted) hover:text-red-500 transition-colors shadow-sm"
+                            className="w-10 h-10 rounded-xl bg-white/60 border border-primary/10 flex items-center justify-center text-primary/30 hover:text-secondary transition-all shadow-sm"
                         >
                             <FaTimes size={12} />
                         </button>
                     </div>
 
                     {/* Step Indicators */}
-                    <div className="mt-4 flex justify-between px-1">
+                    <div className="mt-5 flex justify-between gap-1.5 px-1">
                         {[1, 2, 3, 4, 5].map((step) => (
                             <div
                                 key={step}
-                                className={`h-1 flex-1 mx-0.5 rounded-full transition-all duration-500 ${statusInfo.progress >= step * 20 ? statusInfo.color : 'bg-(--border-color)/50'
+                                className={`h-1.5 flex-1 rounded-full transition-all duration-700 ${statusInfo.progress >= step * 20 ? statusInfo.color : 'bg-primary/5'
                                     }`}
                             />
                         ))}

@@ -387,7 +387,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div className="flex flex-col gap-4">
-            <label className="text-[11px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.categories')}</label>
+            <label className="text-md  md:text-xl font-bold  text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.categories')}</label>
             <CustomSelect
               options={Object.keys(categories).map(id => ({ id, name: categories[id].nameAr || "" }))}
               value={selectedCategory}
@@ -398,7 +398,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className={`flex flex-col gap-4 transition-all duration-700 ${currentCatSubcategories.length > 0 ? "opacity-100 translate-y-0" : "opacity-20 pointer-events-none translate-y-4"}`}>
-            <label className="text-[11px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.subcategories')}</label>
+            <label className="text-md  md:text-xl font-bold  text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.subcategories')}</label>
             <CustomSelect
               options={currentCatSubcategories.map(([id, sub]) => ({ id, name: sub.nameAr || "" }))}
               value={selectedSubcategory}
@@ -409,11 +409,11 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-4">
-            <label className="text-[11px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
+            <label className="text-md  md:text-xl font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
               {t('common.name')}
             </label>
             <input
-              className={`w-full h-16 bg-(--color-primary)/5 border px-8 rounded-2xl text-sm font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
+              className={`w-full h-12 bg-(--color-primary)/5 border px-8 rounded-2xl text-md md:text-lg font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
                 ${itemNameError ? "border-(--color-secondary)" : "border-transparent"} text-right text-(--color-primary) placeholder:text-(--color-primary)/20`}
               placeholder={t('admin.item_name_ar_placeholder')}
               value={itemNameAr}
@@ -425,11 +425,11 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-4 md:col-span-2 lg:col-span-1">
-            <label className="text-[11px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
+            <label className="text-md  md:text-xl font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
               {t('admin.ingredients_label')}
             </label>
             <input
-              className="w-full h-16 bg-(--color-primary)/5 border border-transparent px-8 rounded-2xl text-sm font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/20"
+              className="w-full h-12 bg-(--color-primary)/5 border border-transparent px-8 rounded-2xl text-md md:text-lg font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/20"
               placeholder={t('admin.ingredients_placeholder')}
               value={itemIngredientsAr}
               onChange={(e) => setItemIngredientsAr(e.target.value)}
@@ -437,9 +437,9 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-4">
-            <label className="text-[11px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.price')}</label>
+            <label className="text-md  md:text-xl font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.price')}</label>
             <input
-              className={`w-full h-16 bg-(--color-primary)/5 border px-8 rounded-2xl text-sm font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
+              className={`w-full h-12 bg-(--color-primary)/5 border px-8 rounded-2xl text-md md:text-lg font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
                 ${itemPriceError ? "border-(--color-secondary)" : "border-transparent"} text-(--color-primary) placeholder:text-(--color-primary)/20`}
               placeholder={t('admin.item_price_placeholder')}
               value={itemPrice}
@@ -489,7 +489,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
       </div>
 
       {/* Items by Category */}
-      <div className="space-y-8">
+      <div className="space-y-2">
         {Object.entries(categories)
           .sort(([, a], [, b]) => (a.order ?? 0) - (b.order ?? 0))
           .map(([catId, cat]) => {
@@ -516,7 +516,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
               <div key={catId} className="bg-white/80 backdrop-blur-xl border border-white rounded-[3rem] overflow-hidden shadow-soft hover:shadow-premium transition-all duration-500">
                 <button
                   onClick={() => toggleSection(catId)}
-                  className="w-full p-8 flex items-center justify-between group bg-(--color-cream)/10 hover:bg-(--color-cream)/30 transition-colors"
+                  className="w-full p-6 flex items-center justify-between group bg-(--color-cream)/10 hover:bg-(--color-cream)/30 transition-colors"
                 >
 
                   <div className="flex items-center gap-8">
@@ -538,7 +538,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <div className="p-8 pt-4">
+                      <div className="p-2 pt-4">
                         <DndContext
                           sensors={sensors}
                           collisionDetection={closestCenter}

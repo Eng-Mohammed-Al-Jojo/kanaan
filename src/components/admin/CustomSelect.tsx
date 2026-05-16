@@ -42,7 +42,7 @@ const CustomSelect: React.FC<Props> = ({ options, value, onChange, error, placeh
                     ${error ? "border-(--color-secondary) ring-8 ring-(--color-secondary)/5" : (!disabled ? "focus:ring-10 focus:ring-(--color-primary)/5" : "")} 
                 `}
             >
-                <span className={`text-[11px] font-black uppercase tracking-[0.2em] ${selectedOption ? "text-(--color-primary)" : "text-(--color-primary)/20"}`}>
+                <span className={`text-sm md:text-md font-black uppercase tracking-[0.2em] ${selectedOption ? "text-(--color-primary)" : "text-(--color-primary)/20"}`}>
                     {selectedOption ? selectedOption.name : placeholder || t('common.select')}
                 </span>
                 <FiChevronDown className={`transition-all duration-500 text-(--color-primary)/20 ${open ? "rotate-180 text-(--color-primary) scale-125" : ""}`} size={24} />

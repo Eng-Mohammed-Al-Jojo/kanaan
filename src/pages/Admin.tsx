@@ -334,7 +334,8 @@ export default function Admin() {
 
   if (!authOk) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-(--color-cream) p-6 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-cream/50 p-6 relative overflow-hidden">
+
         {/* Heritage Pattern Background */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
 
@@ -438,7 +439,9 @@ export default function Admin() {
 
   // ================= ADMIN PANEL UI =================
   return (
-    <div className="min-h-screen bg-white/95 selection:bg-(--color-primary)/10">
+    <div className="min-h-screen bg_admin">
+
+
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-8 sm:py-12 space-y-10">
         {/* Modern Header */}
         <header className="bg-white/90 backdrop-blur-xl border border-white p-8 sm:p-10 rounded-[3.5rem] flex flex-col xl:flex-row justify-between items-center gap-10 shadow-premium relative overflow-hidden group">

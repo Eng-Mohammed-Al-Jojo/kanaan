@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { RefObject } from "react";
 import { FaUtensils, FaMotorcycle } from "react-icons/fa";
-import { FiUser, FiGrid, FiMapPin, FiPhone, FiMessageSquare } from "react-icons/fi";
+import { FiUser, FiGrid, FiMapPin, FiPhone, FiMessageSquare, FiArrowRight } from "react-icons/fi";
 import { useCart } from "../../context/CartContext";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
@@ -78,13 +78,13 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
     };
 
     // Shared input style — matches admin dashboard inputs
-    const inputCls = `w-full bg-white border border-gray-200 rounded-2xl py-3.5 px-5 text-sm font-bold text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary focus:ring-4 focus:ring-primary/8 transition-all shadow-sm`;
-    const iconCls = `absolute top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none`;
+    const inputCls = `w-full bg-white/60 backdrop-blur-md border border-primary/10 rounded-2xl py-4 px-6 text-sm font-bold text-primary placeholder:text-primary/20 outline-none focus:border-primary/40 focus:ring-8 focus:ring-primary/5 transition-all shadow-sm`;
+    const iconCls = `absolute top-1/2 -translate-y-1/2 text-primary/30 pointer-events-none`;
 
     return (
-        <div className="space-y-5">
+        <div className="space-y-6">
             {/* Type Tabs */}
-            <div className="flex gap-3 p-1.5 bg-white rounded-2xl border border-gray-200 shadow-sm">
+            <div className="flex gap-2 p-2 bg-white/40 rounded-[1.5rem] border border-primary/5 shadow-inner">
                 {[
                     { id: "in" as const, icon: <FaUtensils size={14} />, label: t('common.dine_in'), enabled: orderSettings?.inRestaurant },
                     { id: "out" as const, icon: <FaMotorcycle size={14} />, label: t('common.takeaway'), enabled: orderSettings?.takeaway },
@@ -94,8 +94,8 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
                         onClick={() => enabled && setTab(id)}
                         disabled={!enabled}
                         className={`
-                            flex-1 flex items-center justify-center gap-2.5 py-3 rounded-xl font-black text-sm transition-all duration-300
-                            ${tab === id ? "bg-primary text-white shadow-lg shadow-primary/25" : enabled ? "text-gray-400 hover:text-gray-600 hover:bg-gray-50" : "text-gray-200 cursor-not-allowed"}
+                            flex-1 flex items-center justify-center gap-3 py-3.5 rounded-2xl font-black text-sm transition-all duration-500
+                            ${tab === id ? "bg-primary text-white shadow-premium scale-[1.02]" : enabled ? "text-primary/40 hover:text-primary hover:bg-white/60" : "text-primary/10 cursor-not-allowed"}
                         `}
                     >
                         {icon}
@@ -108,10 +108,10 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
             <AnimatePresence>
                 {error && (
                     <motion.div
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
-                        className="text-xs font-bold text-secondary bg-secondary-50 px-4 py-3 rounded-2xl text-center border border-secondary-100"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="text-xs font-black text-secondary bg-secondary/10 px-5 py-4 rounded-2xl text-center border border-secondary/20 shadow-soft"
                     >
                         {error}
                     </motion.div>
@@ -119,25 +119,25 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
             </AnimatePresence>
 
             {/* Fields */}
-            <div className="space-y-3">
+            <div className="space-y-4">
                 {/* Name */}
                 <div className="relative">
-                    <FiUser className={`${iconCls} ${isRtl ? 'right-4' : 'left-4'}`} size={16} />
+                    <FiUser className={`${iconCls} ${isRtl ? 'right-5' : 'left-5'}`} size={18} />
                     <input
                         ref={firstInputRef}
                         placeholder={t('common.customer_name')}
-                        className={inputCls + (isRtl ? ' pr-11 pl-5' : ' pl-11 pr-5')}
+                        className={inputCls + (isRtl ? ' pr-12 pl-6' : ' pl-12 pr-6')}
                         value={form.name}
                         onChange={e => { setError(null); setForm({ ...form, name: e.target.value }); }}
                     />
                 </div>
 
                 {tab === "in" && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="relative">
-                        <FiGrid className={`${iconCls} ${isRtl ? 'right-4' : 'left-4'}`} size={16} />
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="relative">
+                        <FiGrid className={`${iconCls} ${isRtl ? 'right-5' : 'left-5'}`} size={18} />
                         <input
                             placeholder={t('common.table_number')}
-                            className={inputCls + (isRtl ? ' pr-11 pl-5' : ' pl-11 pr-5')}
+                            className={inputCls + (isRtl ? ' pr-12 pl-6' : ' pl-12 pr-6')}
                             value={form.table}
                             onChange={e => { setError(null); setForm({ ...form, table: e.target.value }); }}
                         />
@@ -145,21 +145,21 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
                 )}
 
                 {tab === "out" && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="space-y-3">
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
                         <div className="relative">
-                            <FiPhone className={`${iconCls} ${isRtl ? 'right-4' : 'left-4'}`} size={16} />
+                            <FiPhone className={`${iconCls} ${isRtl ? 'right-5' : 'left-5'}`} size={18} />
                             <input
                                 placeholder={t('common.phone_number')}
-                                className={inputCls + (isRtl ? ' pr-11 pl-5' : ' pl-11 pr-5')}
+                                className={inputCls + (isRtl ? ' pr-12 pl-6' : ' pl-12 pr-6')}
                                 value={form.phone}
                                 onChange={e => { setError(null); setForm({ ...form, phone: e.target.value }); }}
                             />
                         </div>
                         <div className="relative">
-                            <FiMapPin className={`${iconCls} ${isRtl ? 'right-4' : 'left-4'}`} size={16} />
+                            <FiMapPin className={`${iconCls} ${isRtl ? 'right-5' : 'left-5'}`} size={18} />
                             <input
                                 placeholder={t('common.address')}
-                                className={inputCls + (isRtl ? ' pr-11 pl-5' : ' pl-11 pr-5')}
+                                className={inputCls + (isRtl ? ' pr-12 pl-6' : ' pl-12 pr-6')}
                                 value={form.address}
                                 onChange={e => { setError(null); setForm({ ...form, address: e.target.value }); }}
                             />
@@ -168,11 +168,11 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
                 )}
 
                 <div className="relative">
-                    <FiMessageSquare className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-4 text-gray-400 pointer-events-none`} size={16} />
+                    <FiMessageSquare className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-5 text-primary/30 pointer-events-none`} size={18} />
                     <textarea
                         placeholder={t('common.notes_optional')}
-                        rows={2}
-                        className={inputCls + " resize-none " + (isRtl ? 'pr-11 pl-5' : 'pl-11 pr-5')}
+                        rows={3}
+                        className={inputCls + " resize-none pt-4 " + (isRtl ? 'pr-12 pl-6' : 'pl-12 pr-6')}
                         value={form.notes}
                         onChange={e => setForm({ ...form, notes: e.target.value })}
                     />
@@ -183,11 +183,18 @@ export default function OrderTabs({ onConfirm, firstInputRef, disableSend, order
             <button
                 onClick={submit}
                 disabled={disableSend || submitting || !isCurrentTabActive()}
-                className="w-full py-5 rounded-3xl bg-primary text-white font-black text-base shadow-xl shadow-primary/25 hover:bg-primary-600 hover:shadow-primary/40 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
+                className="w-full py-6 rounded-[2rem] bg-primary text-white font-black text-lg shadow-premium hover:bg-primary/90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-4 group"
             >
                 {submitting ? (
-                    <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                ) : t('common.confirm_order')}
+                    <div className="w-6 h-6 rounded-full border-3 border-white/30 border-t-white animate-spin" />
+                ) : (
+                    <>
+                        {t('common.confirm_order')}
+                        <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                            <FiArrowRight size={18} className={isRtl ? "rotate-180" : ""} />
+                        </div>
+                    </>
+                )}
             </button>
         </div>
     );

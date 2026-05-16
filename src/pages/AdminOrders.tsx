@@ -165,7 +165,8 @@ export default function AdminOrdersPage() {
 
     if (!authOk && !loading) {
         return (
-            <div className="min-h-screen bg-cream flex items-center justify-center p-6">
+            <div className="min-h-screen bg_admin flex items-center justify-center p-6">
+
                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/80 backdrop-blur-md p-12 rounded-[3rem] border border-primary/5 shadow-premium text-center max-w-md">
                     <div className="text-7xl mb-8">🔒</div>
                     <h2 className="text-3xl font-black text-primary mb-4">{t('admin.login_title')}</h2>
@@ -179,7 +180,9 @@ export default function AdminOrdersPage() {
     }
 
     return (
-        <div className="min-h-screen bg-white/95 p-4 md:p-6">
+        <div className="min-h-screen bg_admin p-4 md:p-6 admin-page">
+
+
             <div className="max-w-7xl mx-auto space-y-12">
 
                 {/* Header & Main Toggle */}

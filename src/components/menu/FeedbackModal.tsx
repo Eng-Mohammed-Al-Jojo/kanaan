@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+
 import { FiX, FiStar, FiMessageSquare, FiSend } from "react-icons/fi";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../firebase";
@@ -74,10 +76,10 @@ export default function FeedbackModal({ show, onClose }: Props) {
         onClose();
     };
 
-    return (
+    return createPortal(
         <AnimatePresence>
             {show && (
-                <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-9999 flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -175,7 +177,7 @@ export default function FeedbackModal({ show, onClose }: Props) {
                                 initial={{ opacity: 0, y: 30, x: "-50%" }}
                                 animate={{ opacity: 1, y: 0, x: "-50%" }}
                                 exit={{ opacity: 0, y: 30, x: "-50%" }}
-                                className="fixed top-10 left-1/2 z-110 bg-primary text-white px-8 py-4 rounded-2xl font-black shadow-2xl border border-white/20 backdrop-blur-md"
+                                className="fixed top-10 left-1/2 z-210 bg-primary text-white px-8 py-4 rounded-2xl font-black shadow-2xl border border-white/20 backdrop-blur-md"
                             >
                                 {toast}
                             </motion.div>
@@ -183,7 +185,9 @@ export default function FeedbackModal({ show, onClose }: Props) {
                     </AnimatePresence>
                 </div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
+
 }
 

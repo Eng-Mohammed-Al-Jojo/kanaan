@@ -361,7 +361,7 @@ const CategorySection: React.FC<Props> = ({
   return (
     <div className="bg-white/80 backdrop-blur-xl p-8 sm:p-12 rounded-[3.5rem] mb-12 border border-white shadow-soft relative overflow-hidden">
       <div className="absolute top-0 left-0 w-64 h-64 bg-(--color-primary)/5 rounded-full -translate-y-1/2 -translate-x-1/2 blur-3xl" />
-      
+
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-10 mb-12 relative z-10">
         <div>
           <h2 className="text-3xl sm:text-4xl font-black text-(--color-primary) tracking-tight">{t('admin.categories')}</h2>
@@ -435,7 +435,7 @@ const CategorySection: React.FC<Props> = ({
                   items={categoriesArray.map((c) => c.id)}
                   strategy={verticalListSortingStrategy}
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                     {categoriesArray.map((cat) => (
                       <CategoryCard
                         key={cat.id}

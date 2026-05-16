@@ -295,7 +295,7 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="absolute inset-0 bg-gray-900/50 backdrop-blur-sm"
+                    className="absolute inset-0 bg-(--color-primary)/30 backdrop-blur-md"
                 />
 
                 {/* Modal */}
@@ -307,30 +307,30 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
                     className="
                         relative w-full max-w-xl
                         h-[95vh] sm:h-auto sm:max-h-[90vh]
-                        bg-white
-                        sm:rounded-4xl rounded-t-4xl
-                        shadow-[0_-8px_40px_rgba(53,81,82,0.15)]
+                        bg-cream/95 backdrop-blur-2xl
+                        sm:rounded-[3rem] rounded-t-[3rem]
+                        shadow-premium
                         overflow-hidden flex flex-col z-10
-                        border border-primary-100
+                        border border-white/50
                     "
                 >
                     {/* Top color accent */}
-                    <div className="h-1 bg-linear-to-r from-primary via-primary-400 to-secondary shrink-0" />
+                    <div className="h-1 bg-linear-to-r from-primary via-orange to-secondary shrink-0" />
 
                     {/* Header */}
-                    <div className="px-6 sm:px-8 pt-6 pb-5 flex items-center justify-between border-b border-gray-100 bg-white shrink-0">
+                    <div className="px-6 sm:px-8 pt-8 pb-6 flex items-center justify-between border-b border-primary/5 bg-white/40 shrink-0">
                         {/* Mobile drag handle */}
-                        <div className="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-gray-100 rounded-full sm:hidden" />
+                        <div className="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-primary/10 rounded-full sm:hidden" />
 
-                        <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-primary-600 text-white flex items-center justify-center text-2xl shadow-xl shadow-primary/20 shrink-0">
+                        <div className="flex items-center gap-5">
+                            <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-primary to-orange text-white flex items-center justify-center text-3xl shadow-2xl shadow-primary/20 shrink-0">
                                 {stepIcon}
                             </div>
                             <div>
-                                <h2 className="text-xl sm:text-2xl font-black text-gray-900 leading-tight tracking-tight">
+                                <h2 className="text-2xl sm:text-3xl font-black text-primary leading-tight tracking-tight">
                                     {stepTitle}
                                 </h2>
-                                <p className="text-primary text-[11px] font-black uppercase tracking-[0.2em] mt-1 opacity-60">
+                                <p className="text-orange text-[10px] font-black uppercase tracking-[0.2em] mt-1.5">
                                     {items.length} {t('common.items')} • {totalPrice}₪
                                 </p>
                             </div>
@@ -338,21 +338,21 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
 
                         <button
                             onClick={onClose}
-                            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gray-50 text-gray-400 hover:text-secondary hover:bg-secondary-50 hover:rotate-90 transition-all border border-gray-100"
+                            className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/50 text-primary/40 hover:text-primary hover:bg-white hover:rotate-90 transition-all border border-primary/10 shadow-sm"
                         >
-                            <FiX size={22} />
+                            <FiX size={24} />
                         </button>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="px-6 sm:px-8 py-3 flex items-center gap-2 bg-white shrink-0">
+                    <div className="px-6 sm:px-8 py-4 flex items-center gap-3 bg-white/20 shrink-0 border-b border-primary/5">
                         {STEPS.map((s, idx) => {
                             const isDone = idx < stepIdx;
                             const isActive = idx === stepIdx;
                             return (
                                 <div
                                     key={s}
-                                    className={`h-1.5 rounded-full flex-1 transition-all duration-500 ${isDone ? 'bg-primary' : isActive ? 'bg-primary-300' : 'bg-gray-100'
+                                    className={`h-2 rounded-full flex-1 transition-all duration-700 ${isDone ? 'bg-primary' : isActive ? 'bg-orange animate-pulse' : 'bg-primary/5'
                                         }`}
                                 />
                             );
@@ -362,7 +362,7 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
                     {/* Scroll Content */}
                     <div
                         ref={scrollRef}
-                        className="flex-1 overflow-y-auto custom-scrollbar px-5 sm:px-7 py-4 pb-32 bg-gray-50"
+                        className="flex-1 overflow-y-auto custom-scrollbar px-5 sm:px-8 py-6 pb-32"
                     >
                         <AnimatePresence mode="wait">
                             {step === "items" ? (
@@ -371,43 +371,45 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
                                     initial={{ opacity: 0, x: isRtl ? 16 : -16 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: isRtl ? -16 : 16 }}
-                                    className="space-y-2.5"
+                                    className="space-y-4"
                                 >
                                     {items.length === 0 ? (
-                                        <div className="py-20 text-center flex flex-col items-center gap-4">
-                                            <div className="w-24 h-24 rounded-3xl bg-primary-50 border border-primary-100 flex items-center justify-center text-5xl">
+                                        <div className="py-24 text-center flex flex-col items-center gap-6">
+                                            <div className="w-28 h-28 rounded-4xl bg-white shadow-soft border border-primary/5 flex items-center justify-center text-6xl">
                                                 🛒
                                             </div>
-                                            <h3 className="text-xl font-black text-gray-900">{t('common.empty_cart')}</h3>
-                                            <p className="text-gray-400 text-sm font-bold max-w-[240px]">{t('common.add_items_desc')}</p>
+                                            <div className="space-y-2">
+                                                <h3 className="text-2xl font-black text-primary">{t('common.empty_cart')}</h3>
+                                                <p className="text-primary/40 text-sm font-bold max-w-[240px] mx-auto">{t('common.add_items_desc')}</p>
+                                            </div>
                                             <button
                                                 onClick={onClose}
-                                                className="mt-2 px-8 py-3 rounded-2xl bg-primary text-white font-black shadow-lg shadow-primary/20 hover:scale-105 transition-all"
+                                                className="mt-4 px-10 py-4 rounded-2xl bg-primary text-white font-black shadow-premium hover:scale-105 transition-all"
                                             >
                                                 {t('common.back_to_menu')}
                                             </button>
                                         </div>
                                     ) : (
                                         <>
-                                            <div className="space-y-3">
+                                            <div className="space-y-4">
                                                 {items.map((item) => (
                                                     <CartItem key={item.priceKey} item={item} />
                                                 ))}
                                             </div>
                                             {/* Summary Card */}
-                                            <div className="mt-8 p-6 rounded-4xl bg-white border border-gray-100 shadow-soft relative overflow-hidden group">
-                                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110 duration-700" />
+                                            <div className="mt-10 p-8 rounded-[2.5rem] bg-white border border-primary/5 shadow-premium relative overflow-hidden group">
+                                                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full -mr-24 -mt-24 transition-transform group-hover:scale-125 duration-1000" />
                                                 <div className="relative z-10 flex justify-between items-end">
-                                                    <div className="space-y-1">
-                                                        <span className="text-gray-400 text-[10px] font-black uppercase tracking-[0.2em]">{t('common.total')}</span>
-                                                        <div className="flex items-baseline gap-1">
-                                                            <span className="text-4xl font-black text-primary">{totalPrice}</span>
-                                                            <span className="text-lg font-black text-primary/50">₪</span>
+                                                    <div className="space-y-2">
+                                                        <span className="text-primary/40 text-[10px] font-black uppercase tracking-[0.2em]">{t('common.total')}</span>
+                                                        <div className="flex items-baseline gap-2">
+                                                            <span className="text-5xl font-black text-primary tracking-tighter">{totalPrice}</span>
+                                                            <span className="text-xl font-black text-primary/40">₪</span>
                                                         </div>
                                                     </div>
-                                                    <div className="text-right">
-                                                        <span className="block text-xs font-bold text-gray-400">{t('common.items')}</span>
-                                                        <span className="text-lg font-black text-gray-900">{items.length}</span>
+                                                    <div className="text-right pb-1">
+                                                        <span className="block text-xs font-bold text-primary/40 mb-1">{t('common.items')}</span>
+                                                        <span className="text-2xl font-black text-primary">{items.length}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -423,9 +425,9 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
                                 >
                                     <button
                                         onClick={() => setStep("items")}
-                                        className="flex items-center gap-1.5 text-xs font-black text-primary hover:gap-2.5 transition-all mb-5 opacity-70 hover:opacity-100"
+                                        className="flex items-center gap-2 text-[11px] font-black text-primary uppercase tracking-widest hover:gap-4 transition-all mb-8 opacity-50 hover:opacity-100"
                                     >
-                                        <FiArrowRight className={isRtl ? "" : "rotate-180"} size={14} />
+                                        <FiArrowRight className={isRtl ? "" : "rotate-180"} size={16} />
                                         {t('common.back_to_cart')}
                                     </button>
                                     <OrderTabs
@@ -463,16 +465,16 @@ export default function CartModal({ isOpen, onClose }: { isOpen: boolean; onClos
 
                     {/* Footer CTA */}
                     {step === "items" && items.length > 0 && (
-                        <div className="absolute bottom-0 inset-x-0 px-6 sm:px-8 pb-8 pt-16 bg-linear-to-t from-gray-50 via-gray-50/95 to-transparent pointer-events-none z-30">
+                        <div className="absolute bottom-0 inset-x-0 px-6 sm:px-8 pb-10 pt-20 bg-linear-to-t from-cream via-cream/95 to-transparent pointer-events-none z-30">
                             <button
                                 onClick={() => setStep("order")}
-                                className="pointer-events-auto w-full py-5 bg-primary text-white rounded-4xl font-black text-lg flex items-center justify-between px-8 shadow-premium hover:bg-primary-600 hover:scale-[1.02] active:scale-[0.98] transition-all border border-primary-400/20 group"
+                                className="pointer-events-auto w-full py-6 bg-primary text-white rounded-3xl font-black text-xl flex items-center justify-between px-10 shadow-premium hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] transition-all border border-white/20 group"
                             >
                                 <span className="tracking-tight">{t('common.order_now')}</span>
-                                <div className="flex items-center gap-4">
-                                    <span className="text-2xl font-black">{totalPrice}₪</span>
-                                    <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                                        <FiArrowRight className={isRtl ? "rotate-180" : ""} size={20} />
+                                <div className="flex items-center gap-6">
+                                    <span className="text-3xl font-black">{totalPrice}₪</span>
+                                    <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center group-hover:translate-x-2 transition-transform">
+                                        <FiArrowRight className={isRtl ? "rotate-180" : ""} size={24} />
                                     </div>
                                 </div>
                             </button>

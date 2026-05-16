@@ -89,7 +89,7 @@ const FeaturedGallery: React.FC<Props> = ({
     };
 
     const modalContent = (
-        <div className="fixed inset-0 z-10001 flex items-center justify-center p-4 md:p-6">
+        <div className="fixed inset-0 z-10001 flex items-center justify-center p-1 md:p-3">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -104,7 +104,7 @@ const FeaturedGallery: React.FC<Props> = ({
                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
                 className="relative bg-white/95 backdrop-blur-2xl w-full max-w-5xl rounded-[3.5rem] border border-white shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10001 pointer-events-auto"
             >
-                <div className="p-10 md:p-12 border-b border-(--color-primary)/5 bg-white/50 backdrop-blur-md space-y-8 relative z-10">
+                <div className="p-4 md:p-6 border-b border-(--color-primary)/5 bg-white/50 backdrop-blur-md space-y-8 relative z-10">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-8">
                             <div className="w-16 h-16 md:w-20 md:h-20 rounded-3xl bg-(--color-primary) text-white flex items-center justify-center text-4xl shadow-2xl shadow-(--color-primary)/30">
@@ -133,7 +133,7 @@ const FeaturedGallery: React.FC<Props> = ({
                 </div>
 
                 {/* Grid */}
-                <div className="flex-1 overflow-y-auto p-10 md:p-12 custom-scrollbar bg-white/30 backdrop-blur-md">
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar bg-white/30 backdrop-blur-md">
                     <motion.div layout className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 md:gap-8">
                         <AnimatePresence mode="popLayout">
                             {isLoading ? (
@@ -170,7 +170,7 @@ const FeaturedGallery: React.FC<Props> = ({
                                                     animate={{ opacity: 1 }}
                                                     className="absolute inset-0 bg-(--color-primary)/10 backdrop-blur-[3px] flex items-center justify-center"
                                                 >
-                                                    <motion.div 
+                                                    <motion.div
                                                         initial={{ scale: 0.5, rotate: -45 }}
                                                         animate={{ scale: 1, rotate: 0 }}
                                                         className="w-14 h-14 rounded-full bg-white text-(--color-primary) flex items-center justify-center shadow-premium"
@@ -203,7 +203,7 @@ const FeaturedGallery: React.FC<Props> = ({
                     )}
                 </div>
 
-                <div className="p-10 md:p-12 border-t border-(--color-primary)/5 bg-white/50 backdrop-blur-md relative z-10">
+                <div className="p-4 md:p-6 border-t border-(--color-primary)/5 bg-white/50 backdrop-blur-md relative z-10">
                     <button
                         type="button"
                         onClick={onClose}

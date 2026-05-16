@@ -39,7 +39,8 @@ export default function TrackOrderPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-(--bg-main) flex items-center justify-center">
+            <div className="min-h-screen bg-cream/50 flex items-center justify-center">
+
                 <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
@@ -51,7 +52,8 @@ export default function TrackOrderPage() {
 
     if (!order) {
         return (
-            <div className="min-h-screen bg-(--bg-main) flex flex-col items-center justify-center p-6 text-center">
+            <div className="min-h-screen bg-cream/50 flex flex-col items-center justify-center p-6 text-center">
+
                 <div className="w-24 h-24 rounded-4xl bg-(--bg-card) flex items-center justify-center mb-6 text-5xl shadow-xl border border-(--border-color)">
                     🔍
                 </div>
@@ -96,7 +98,9 @@ export default function TrackOrderPage() {
     };
 
     return (
-        <div className="min-h-screen bg-(--bg-main) py-10 px-4 sm:px-6 md:px-10 flex justify-center">
+        <div className="min-h-screen bg-cream/50 py-10 px-4 sm:px-6 md:px-10 flex justify-center admin-page">
+
+
             <div className="w-full max-w-2xl space-y-8">
 
                 <AnimatePresence mode="wait">

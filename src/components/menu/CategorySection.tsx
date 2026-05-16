@@ -49,12 +49,12 @@ export default function CategorySection({ category, subcategories, items, orderS
       {/* Premium Heritage Category Header */}
       <div className="flex flex-col items-center gap-4 py-8 relative">
         {/* Decorative Arch Motif */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-32 border-t-4 border-x-4 border-primary/20 rounded-t-[100px] -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80  md:w-96 h-32 border-t-4 border-x-4 border-primary/20 rounded-t-[100px] -z-10" />
 
         <div className="flex flex-col items-center">
-          <h2 className="text-3xl md:text-5xl font-black text-primary tracking-tight text-center">
+          <h3 className="text-2xl md:text-4xl font-bold text-primary tracking-tight text-center">
             {catName}
-          </h2>
+          </h3>
           {/* Decorative Divider */}
           <div className="mt-4 flex items-center gap-4">
             <div className="w-12 h-1.5 bg-primary/20" />

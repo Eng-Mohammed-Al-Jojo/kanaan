@@ -44,12 +44,12 @@ export default function PaymentMethodsDisplay() {
         return (
             <div className="space-y-3">
                 {[...Array(2)].map((_, i) => (
-                    <div key={i} className="bg-(--bg-card) p-4 rounded-2xl border border-(--border-color) animate-pulse">
+                    <div key={i} className="bg-cream/50 p-4 rounded-2xl border border-primary/10 animate-pulse">
                         <div className="flex items-center gap-3">
-                            <div className="w-11 h-11 bg-(--bg-main) rounded-xl shrink-0" />
+                            <div className="w-11 h-11 bg-primary/5 rounded-xl shrink-0" />
                             <div className="flex-1 space-y-2">
-                                <div className="h-3 bg-(--bg-main) rounded-full w-1/3" />
-                                <div className="h-3 bg-(--bg-main) rounded-full w-2/3" />
+                                <div className="h-3 bg-primary/5 rounded-full w-1/3" />
+                                <div className="h-3 bg-primary/5 rounded-full w-2/3" />
                             </div>
                         </div>
                     </div>
@@ -61,10 +61,10 @@ export default function PaymentMethodsDisplay() {
     if (activeMethods.length === 0) {
         return (
             <div className="py-8 text-center">
-                <div className="w-12 h-12 rounded-2xl bg-(--bg-main) flex items-center justify-center mx-auto mb-3 text-(--text-muted)">
+                <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-3 text-primary/40">
                     <FiCreditCard size={20} />
                 </div>
-                <p className="text-xs font-bold text-(--text-muted)">{t('admin.no_payment_methods')}</p>
+                <p className="text-xs font-bold text-primary/40">{t('admin.no_payment_methods')}</p>
             </div>
         );
     }
@@ -74,11 +74,11 @@ export default function PaymentMethodsDisplay() {
             {activeMethods.map((method) => (
                 <div
                     key={method.id}
-                    className="bg-(--bg-card) rounded-2xl border border-(--border-color) overflow-hidden shadow-sm"
+                    className="bg-cream rounded-2xl border border-primary/10 overflow-hidden shadow-soft"
                 >
                     {/* Header */}
-                    <div className="flex items-center gap-3 px-4 py-3 border-b border-(--border-color) bg-(--bg-main)/40">
-                        <div className="w-9 h-9 rounded-xl bg-white border border-(--border-color) flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
+                    <div className="flex items-center gap-3 px-4 py-3 border-b border-primary/10 bg-primary/5">
+                        <div className="w-9 h-9 rounded-xl bg-white/50 border border-primary/10 flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
                             {method.image ? (
                                 <img
                                     src={method.image.startsWith('/') ? method.image : `/images/payment/${method.image}`}
@@ -89,10 +89,10 @@ export default function PaymentMethodsDisplay() {
                                     }}
                                 />
                             ) : (
-                                <FiImage size={14} className="text-(--text-muted)" />
+                                <FiImage size={14} className="text-primary/20" />
                             )}
                         </div>
-                        <span className="font-black text-(--text-main) text-sm">{method.name}</span>
+                        <span className="font-black text-primary text-sm">{method.name}</span>
                         <div className="mr-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/20">
                             <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                             <span className="text-[10px] font-black text-green-600 dark:text-green-400">متاح</span>
@@ -100,23 +100,23 @@ export default function PaymentMethodsDisplay() {
                     </div>
 
                     {/* Fields */}
-                    <div className="divide-y divide-(--border-color)">
+                    <div className="divide-y divide-primary/5">
                         {method.fields?.map((field) => {
                             const isCopied = copiedField === field.id;
                             return (
                                 <div
                                     key={field.id}
-                                    className="flex items-center justify-between px-4 py-3 gap-3 group hover:bg-(--bg-main)/30 transition-colors"
+                                    className="flex items-center justify-between px-4 py-3 gap-3 group hover:bg-primary/5 transition-colors"
                                 >
-                                    <span className="text-xs font-bold text-(--text-muted) shrink-0">{field.label}</span>
+                                    <span className="text-xs font-bold text-primary/60 shrink-0">{field.label}</span>
                                     <div className="flex items-center gap-2 min-w-0">
-                                        <span className="text-xs font-black text-(--text-main) font-mono truncate">{field.value}</span>
+                                        <span className="text-xs font-black text-primary font-mono truncate">{field.value}</span>
                                         <button
                                             type="button"
                                             onClick={() => handleCopy(field.value, field.id, field.label)}
                                             className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all ${isCopied
                                                 ? "bg-green-500 text-white"
-                                                : "bg-(--bg-main) text-(--text-muted) hover:bg-primary hover:text-white"
+                                                : "bg-primary/10 text-primary/60 hover:bg-primary hover:text-white"
                                                 }`}
                                         >
                                             {isCopied ? (
@@ -136,7 +136,7 @@ export default function PaymentMethodsDisplay() {
             ))}
 
             {toast && (
-                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-(--bg-card) border border-(--border-color) text-(--text-main) text-xs font-black px-5 py-3 rounded-full shadow-2xl z-50 animate-fade-in whitespace-nowrap">
+                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black px-6 py-3.5 rounded-full shadow-2xl z-50 animate-fade-in whitespace-nowrap">
                     {toast}
                 </div>
             )}

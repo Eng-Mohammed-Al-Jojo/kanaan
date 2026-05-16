@@ -468,7 +468,10 @@
         "company_name": "اسم الشركة",
         "whatsapp_contact": "تواصل واتساب",
         "social_links": "روابط التواصل الاجتماعي",
-        "item_form_desc": "صفحة الصنف"
+        "item_form_desc": "صفحة الصنف",
+        "logout_desc": "الخروج من لوحة التحكم",
+        "total": "الاجمالي",
+        "order": "الطلب"
     },
     "footer": {
         "developed_by": "تصميم وتطوير",

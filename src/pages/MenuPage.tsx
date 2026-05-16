@@ -44,7 +44,7 @@ export default function MenuPage() {
       <div className="fixed inset-0 pattern-heritage z-0 pointer-events-none" />
 
       {/* 🌟 Global Featured Button — Top Left */}
-      <div className="absolute top-6 left-6 z-[100]">
+      <div className="absolute top-6 left-6 z-30">
         {isDataReady && hasFeatured && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, x: -20 }}
@@ -95,7 +95,7 @@ export default function MenuPage() {
           <div className="absolute inset-0 pattern-gear pointer-events-none rounded-t-[200px]" />
 
           {/* 🏛️ Decorative Heritage Arch Frame */}
-          <div className="absolute top-0 left-0 w-full h-48 pointer-events-none z-20 overflow-hidden rounded-t-[200px]">
+          <div className="absolute top-0 left-0 w-full h-48 pointer-events-none z-8 overflow-hidden rounded-t-[200px]">
             {/* Layer 1: Soft Ambient Glow (Orange) */}
             <div className="absolute top-0 left-0 right-0 h-full border-t-3 border-orange blur-[6px]" />
 
