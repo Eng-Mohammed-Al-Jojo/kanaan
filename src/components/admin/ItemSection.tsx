@@ -59,7 +59,7 @@ const SortableItem: React.FC<{
       ref={setNodeRef}
       style={style}
       layout
-      className={`flex flex-col sm:flex-row gap-6 sm:gap-10 py-6 sm:py-8 transition-all bg-white mb-4 px-5 sm:px-8 rounded-[2.5rem] border ${isDragging ? "z-50 shadow-premium border-(--color-primary) scale-[1.02]" : "border-(--color-primary)/5 hover:border-(--color-primary)/20 shadow-soft hover:shadow-premium"} ${!item.visible ? "opacity-60 grayscale-[0.5]" : ""
+      className={`flex flex-col sm:flex-row gap-5 sm:gap-8 py-5 sm:py-6 transition-all bg-white mb-3 px-4 sm:px-6 rounded-[2rem] border ${isDragging ? "z-50 shadow-premium border-(--color-primary) scale-[1.02]" : "border-(--color-primary)/5 hover:border-(--color-primary)/20 shadow-soft hover:shadow-premium"} ${!item.visible ? "opacity-60 grayscale-[0.5]" : ""
         }`}
     >
       {/* ===== Top Row (image + info) ===== */}
@@ -68,15 +68,15 @@ const SortableItem: React.FC<{
         <div
           {...listeners}
           {...attributes}
-          className="cursor-grab active:cursor-grabbing p-3 text-(--color-primary)/20 hover:text-(--color-primary) transition-colors bg-(--color-primary)/5 rounded-xl"
+          className="cursor-grab active:cursor-grabbing p-2.5 text-(--color-primary)/20 hover:text-(--color-primary) transition-colors bg-(--color-primary)/5 rounded-lg"
         >
-          <FiMove size={22} />
+          <FiMove size={18} />
         </div>
 
         {/* Image */}
         <div className="relative group/img shrink-0">
           {item.image ? (
-            <div className="relative w-20 h-20 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border border-(--color-primary)/5 shadow-inner">
+            <div className="relative w-18 h-18 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-(--color-primary)/5 shadow-inner">
               <img
                 src={item.image.startsWith('/') ? item.image : `/images/${item.image}`}
                 alt={item.nameAr}
@@ -94,9 +94,9 @@ const SortableItem: React.FC<{
           ) : (
             <button
               onClick={() => openGallery(item.id)}
-              className="w-20 h-20 sm:w-28 sm:h-28 bg-(--color-cream)/30 border-2 border-dashed border-(--color-primary)/10 rounded-3xl flex items-center justify-center text-(--color-primary)/20 hover:text-(--color-primary) hover:border-(--color-primary)/40 transition-all"
+              className="w-18 h-18 sm:w-24 sm:h-24 bg-(--color-cream)/30 border-2 border-dashed border-(--color-primary)/10 rounded-2xl flex items-center justify-center text-(--color-primary)/20 hover:text-(--color-primary) hover:border-(--color-primary)/40 transition-all"
             >
-              <FiImage size={32} />
+              <FiImage size={28} />
             </button>
           )}
         </div>
@@ -104,15 +104,15 @@ const SortableItem: React.FC<{
         {/* Info */}
         <div className="flex-1 min-w-0 flex flex-col">
 
-          <div className="flex items-center gap-3">
-            <h4 className="font-black text-lg sm:text-2xl text-(--color-primary) truncate tracking-tight">
+          <div className="flex items-center gap-2.5">
+            <h4 className="font-black text-base sm:text-xl text-(--color-primary) truncate tracking-tight">
               {item.nameAr}
             </h4>
 
             {item.star && (
               <FiStar
                 className="text-amber-400 fill-amber-400 shrink-0 drop-shadow-sm"
-                size={20}
+                size={16}
               />
             )}
           </div>
@@ -134,21 +134,21 @@ const SortableItem: React.FC<{
             )}
           </div>
 
-          <div className="flex items-center gap-2 mt-3">
-            <span className="text-2xl font-black text-(--color-primary) tracking-tight">{item.price}</span>
-            <span className="text-xs font-black text-(--color-primary)/30 uppercase tracking-[0.2em]">₪</span>
+          <div className="flex items-center gap-1.5 mt-2.5">
+            <span className="text-xl font-black text-(--color-primary) tracking-tight">{item.price}</span>
+            <span className="text-[10px] font-black text-(--color-primary)/30 uppercase tracking-[0.2em]">₪</span>
           </div>
 
         </div>
       </div>
 
       {/* ===== Actions ===== */}
-      <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6 w-full sm:w-auto bg-(--color-primary)/5 p-3 rounded-[2rem] border border-(--color-primary)/5 shadow-inner">
+      <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto bg-(--color-primary)/5 p-2.5 rounded-[1.8rem] border border-(--color-primary)/5 shadow-inner">
 
         {/* Animated Toggle */}
         <button
           onClick={() => toggleItem(item.id, item.visible)}
-          className={`relative shrink-0 w-14 h-8 rounded-full flex items-center p-1.5 transition-all duration-500 ${item.visible
+          className={`relative shrink-0 w-12 h-7 rounded-full flex items-center p-1 transition-all duration-500 ${item.visible
             ? "bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.4)]"
             : "bg-(--color-primary)/10"
             }`}
@@ -164,51 +164,51 @@ const SortableItem: React.FC<{
           />
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
 
           <button
             onClick={async () => {
               const newStar = !item.star;
               await update(ref(db, `items/${item.id}`), { star: newStar });
             }}
-            className={`w-11 h-11 flex items-center justify-center rounded-2xl transition-all ${item.star
+            className={`w-9 h-9 flex items-center justify-center rounded-xl transition-all ${item.star
               ? "bg-amber-100 text-amber-600 shadow-inner"
               : "hover:bg-white text-(--color-primary)/20 hover:text-amber-500 hover:shadow-soft"
               }`}
           >
-            <FiStar size={22} fill={item.star ? "currentColor" : "none"} />
+            <FiStar size={18} fill={item.star ? "currentColor" : "none"} />
           </button>
 
           <button
             onClick={() => setPopup({ type: "editItem", id: item.id })}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/20 transition-all"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/20 transition-all"
           >
-            <FiEdit size={22} />
+            <FiEdit size={18} />
           </button>
 
           <button
             onClick={() => setPopup({ type: "deleteItem", id: item.id })}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-secondary) hover:shadow-soft text-(--color-primary)/20 transition-all"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-(--color-secondary) hover:shadow-soft text-(--color-primary)/20 transition-all"
           >
-            <FiTrash2 size={22} />
+            <FiTrash2 size={18} />
           </button>
 
         </div>
-        <div className="w-px h-10 bg-(--color-primary)/10 mx-1 hidden sm:block" />
-        <div className="flex items-center gap-2">
+        <div className="w-px h-8 bg-(--color-primary)/10 mx-0.5 hidden sm:block" />
+        <div className="flex items-center gap-1.5">
           <button
             onClick={() => moveItem(item.categoryId, item.id, 'up')}
             disabled={idx === 0}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/20 transition-all disabled:opacity-20 disabled:pointer-events-none"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/20 transition-all disabled:opacity-20 disabled:pointer-events-none"
           >
-            <FiArrowUp size={22} />
+            <FiArrowUp size={18} />
           </button>
           <button
             onClick={() => moveItem(item.categoryId, item.id, 'down')}
             disabled={idx === totalItems - 1}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/20 transition-all disabled:opacity-20 disabled:pointer-events-none"
+            className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white hover:text-(--color-primary) hover:shadow-soft text-(--color-primary)/20 transition-all disabled:opacity-20 disabled:pointer-events-none"
           >
-            <FiArrowDown size={22} />
+            <FiArrowDown size={18} />
           </button>
         </div>
       </div>
@@ -370,24 +370,24 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
 
 
       {/* Adding Form */}
-      <div className="bg-white/95 backdrop-blur-xl p-10 sm:p-12 border border-white shadow-premium relative overflow-hidden group rounded-[3.5rem]">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-(--color-primary)/10 transition-colors pointer-events-none duration-1000" />
+      <div className="bg-white/95 backdrop-blur-xl p-8 sm:p-10 border border-white shadow-premium relative overflow-hidden group rounded-[3rem]">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:bg-(--color-primary)/10 transition-colors pointer-events-none duration-1000" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-8 mb-12">
-          <div className="flex items-center gap-8">
-            <div className="w-20 h-20 rounded-[2rem] bg-(--color-primary)/5 text-(--color-primary) flex items-center justify-center text-4xl shadow-inner transition-transform group-hover:scale-110 duration-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mb-10">
+          <div className="flex items-center gap-6">
+            <div className="w-18 h-18 rounded-2xl bg-(--color-primary)/5 text-(--color-primary) flex items-center justify-center text-3xl shadow-inner transition-transform group-hover:scale-110 duration-500">
               <FiPlus />
             </div>
             <div>
-              <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.add_new_item')}</h2>
-              <p className="text-(--color-primary)/30 text-xs font-black uppercase tracking-[0.2em] mt-2">{t('admin.item_form_desc') || "إضافة منتج جديد للمنيو"}</p>
+              <h2 className="text-lg font-black text-(--color-primary) tracking-tight">{t('admin.add_new_item')}</h2>
+              <p className="text-(--color-primary)/30 text-[10px] font-black uppercase tracking-[0.2em] mt-1.5">{t('admin.item_form_desc') || "إضافة منتج جديد للمنيو"}</p>
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           <div className="flex flex-col gap-4">
-            <label className="text-md  md:text-xl font-bold  text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.categories')}</label>
+            <label className="text-sm  md:text-md font-bold  text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.categories')}</label>
             <CustomSelect
               options={Object.keys(categories).map(id => ({ id, name: categories[id].nameAr || "" }))}
               value={selectedCategory}
@@ -398,7 +398,7 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className={`flex flex-col gap-4 transition-all duration-700 ${currentCatSubcategories.length > 0 ? "opacity-100 translate-y-0" : "opacity-20 pointer-events-none translate-y-4"}`}>
-            <label className="text-md  md:text-xl font-bold  text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.subcategories')}</label>
+            <label className="text-sm  md:text-md font-bold  text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.subcategories')}</label>
             <CustomSelect
               options={currentCatSubcategories.map(([id, sub]) => ({ id, name: sub.nameAr || "" }))}
               value={selectedSubcategory}
@@ -409,11 +409,11 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-4">
-            <label className="text-md  md:text-xl font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
+            <label className="text-sm  md:text-md font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
               {t('common.name')}
             </label>
             <input
-              className={`w-full h-12 bg-(--color-primary)/5 border px-8 rounded-2xl text-md md:text-lg font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
+              className={`w-full h-12 bg-(--color-primary)/5 border px-8 rounded-2xl text-sm md:text-md  outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
                 ${itemNameError ? "border-(--color-secondary)" : "border-transparent"} text-right text-(--color-primary) placeholder:text-(--color-primary)/20`}
               placeholder={t('admin.item_name_ar_placeholder')}
               value={itemNameAr}
@@ -425,11 +425,11 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-4 md:col-span-2 lg:col-span-1">
-            <label className="text-md  md:text-xl font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
+            <label className="text-sm  md:text-md font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">
               {t('admin.ingredients_label')}
             </label>
             <input
-              className="w-full h-12 bg-(--color-primary)/5 border border-transparent px-8 rounded-2xl text-md md:text-lg font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/20"
+              className="w-full h-12 bg-(--color-primary)/5 border border-transparent px-8 rounded-2xl text-sm md:text-md  outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/20"
               placeholder={t('admin.ingredients_placeholder')}
               value={itemIngredientsAr}
               onChange={(e) => setItemIngredientsAr(e.target.value)}
@@ -437,9 +437,9 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           </div>
 
           <div className="flex flex-col gap-4">
-            <label className="text-md  md:text-xl font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.price')}</label>
+            <label className="text-sm  md:text-md font-bold text-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.price')}</label>
             <input
-              className={`w-full h-12 bg-(--color-primary)/5 border px-8 rounded-2xl text-md md:text-lg font-black outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
+              className={`w-full h-12 bg-(--color-primary)/5 border px-8 rounded-2xl text-sm md:text-md outline-none focus:bg-white focus:border-(--color-primary)/30 focus:ring-8 focus:ring-(--color-primary)/5 transition-all
                 ${itemPriceError ? "border-(--color-secondary)" : "border-transparent"} text-(--color-primary) placeholder:text-(--color-primary)/20`}
               placeholder={t('admin.item_price_placeholder')}
               value={itemPrice}
@@ -450,10 +450,10 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
           <div className="flex items-end">
             <button
               onClick={addItem}
-              className="w-full h-16 bg-(--color-primary) text-white font-black rounded-2xl shadow-xl shadow-(--color-primary)/30 hover:shadow-(--color-primary)/50 hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-4"
+              className="w-full h-14 bg-(--color-primary) text-white font-black rounded-xl shadow-xl shadow-(--color-primary)/30 hover:shadow-(--color-primary)/50 hover:-translate-y-1 active:translate-y-0 transition-all flex items-center justify-center gap-3.5"
             >
-              <FiPlus className="text-2xl" />
-              <span className="text-lg uppercase tracking-widest">{t('admin.add_item_btn')}</span>
+              <FiPlus className="text-xl" />
+              <span className="text-base uppercase tracking-widest">{t('admin.add_item_btn')}</span>
             </button>
           </div>
         </div>
@@ -478,10 +478,10 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
       </div>
 
       {/* Search Bar */}
-      <div className="relative group max-w-2xl mx-auto w-full">
-        <FiSearch className={`absolute ${i18n.language === 'ar' ? 'right-8' : 'left-8'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within:text-(--color-primary) transition-colors text-2xl`} />
+      <div className="relative group max-w-xl mx-auto w-full">
+        <FiSearch className={`absolute ${i18n.language === 'ar' ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within:text-(--color-primary) transition-colors text-xl`} />
         <input
-          className={`w-full bg-white border border-transparent rounded-[2rem] h-18 ${i18n.language === 'ar' ? 'pr-18 pl-8 text-right' : 'pl-18 pr-8'} text-lg font-black outline-none focus:border-(--color-primary)/30 focus:ring-10 focus:ring-(--color-primary)/5 transition-all shadow-premium text-(--color-primary) placeholder:text-(--color-primary)/20`}
+          className={`w-full bg-white border border-transparent rounded-2xl h-15 ${i18n.language === 'ar' ? 'pr-15 pl-6 text-right' : 'pl-15 pr-6'} text-base font-black outline-none focus:border-(--color-primary)/30 focus:ring-10 focus:ring-(--color-primary)/5 transition-all shadow-premium text-(--color-primary) placeholder:text-(--color-primary)/20`}
           placeholder={t('admin.search_placeholder')}
           value={quickSearch}
           onChange={(e) => setQuickSearch(e.target.value)}
@@ -513,19 +513,19 @@ const ItemSection: React.FC<Props> = ({ categories, subcategories, items, setPop
             const isExpanded = expandedSections[catId] ?? false;
 
             return (
-              <div key={catId} className="bg-white/80 backdrop-blur-xl border border-white rounded-[3rem] overflow-hidden shadow-soft hover:shadow-premium transition-all duration-500">
+              <div key={catId} className="bg-white/80 backdrop-blur-xl border border-white rounded-[2.5rem] overflow-hidden shadow-soft hover:shadow-premium transition-all duration-500">
                 <button
                   onClick={() => toggleSection(catId)}
-                  className="w-full p-6 flex items-center justify-between group bg-(--color-cream)/10 hover:bg-(--color-cream)/30 transition-colors"
+                  className="w-full p-5 flex items-center justify-between group bg-(--color-cream)/10 hover:bg-(--color-cream)/30 transition-colors"
                 >
 
-                  <div className="flex items-center gap-8">
-                    <div className="w-14 h-14 rounded-2xl bg-white text-(--color-primary) flex items-center justify-center shadow-soft transition-transform group-hover:scale-110 duration-500">
-                      <FiChevronDown size={24} className={`transition-transform duration-700 ${isExpanded ? "rotate-180" : ""}`} />
+                  <div className="flex items-center gap-6">
+                    <div className="w-12 h-12 rounded-xl bg-(--color-secondary) text-(--color-primary) flex items-center justify-center shadow-soft transition-transform group-hover:scale-110 duration-500">
+                      <FiChevronDown size={20} className={`transition-transform duration-700 text-(--color-cream) ${isExpanded ? "rotate-180" : ""}`} />
                     </div>
                     <div className="text-right">
-                      <h3 className="text-2xl font-black text-(--color-primary) tracking-tight">{cat.nameAr}</h3>
-                      <p className="text-(--color-primary)/30 text-[10px] font-black uppercase tracking-[0.2em] mt-2">{catItems.length} {t('admin.items_count', { count: catItems.length })}</p>
+                      <h3 className="text-xl font-black text-(--color-primary) tracking-tight">{cat.nameAr}</h3>
+                      <p className="text-(--color-primary)/30 text-[9px] font-black uppercase tracking-[0.2em] mt-1.5">{catItems.length} {t('admin.items_count', { count: catItems.length })}</p>
                     </div>
                   </div>
                 </button>

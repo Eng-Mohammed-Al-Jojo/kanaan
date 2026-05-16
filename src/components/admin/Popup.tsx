@@ -115,7 +115,7 @@ const Popup: React.FC<Props> = ({
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-lg bg-white/90 backdrop-blur-2xl rounded-[3.5rem] border border-white/50 overflow-hidden z-10 shadow-premium"
+          className="relative w-full max-w-lg bg-(--color-cream) backdrop-blur-2xl rounded-[3.5rem] border border-white/50 overflow-hidden z-10 shadow-premium"
         >
           {/* Design accents */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-(--color-primary)/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
@@ -128,7 +128,7 @@ const Popup: React.FC<Props> = ({
             <FiX size={28} />
           </button>
 
-          <div className="p-10">
+          <div className="p-8">
             {/* ===== Logout ===== */}
             {popup.type === "logout" && (
               <div className="text-center space-y-10 py-4">
@@ -334,25 +334,24 @@ const Popup: React.FC<Props> = ({
 
             {/* ===== Edit Item ===== */}
             {popup.type === "editItem" && editItemValues && setEditItemValues && categories && (
-              <div className="space-y-10 py-2">
-                <div className="flex items-center gap-10">
-                  <div className="w-24 h-24 rounded-[2rem] bg-(--color-secondary)/5 text-(--color-secondary) flex items-center justify-center text-5xl shadow-inner border border-(--color-secondary)/10 transition-transform hover:scale-110 duration-500">
-                    <FiEdit />
-                  </div>
-                  <div>
-                    <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.edit_product_title')}</h2>
-                    <p className="text-(--color-primary)/30 font-black text-[11px] uppercase tracking-[0.3em] mt-3">{t('admin.edit_product_desc')}</p>
-                  </div>
+              <div className="space-y-2 py-2 max-h-[85vh] overflow-y-auto px-1 custom-scroll">                <div className="flex items-center gap-10">
+                <div className="w-12 h-12 rounded-[2rem] bg-(--color-secondary)/5 text-(--color-secondary) flex items-center justify-center text-5xl shadow-inner border border-(--color-secondary)/10 transition-transform hover:scale-110 duration-500">
+                  <FiEdit className="text-md" />
                 </div>
+                <div>
+                  <h2 className="text-3xl font-black text-(--color-primary) tracking-tight">{t('admin.edit_product_title')}</h2>
+                  <p className="text-(--color-primary)/30 font-black text-[11px] uppercase tracking-[0.3em] mt-3">{t('admin.edit_product_desc')}</p>
+                </div>
+              </div>
 
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <div className="space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-[0.3em] text-(--color-primary)/30 px-2">{t('admin.categories')}</label>
                       <div className="relative group/field">
                         <FiLayers className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
                         <select
-                          className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) appearance-none shadow-premium uppercase tracking-widest"
+                          className="w-full h-12 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-1 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) appearance-none shadow-premium uppercase tracking-widest"
                           value={editItemValues.selectedCategory}
                           onChange={(e) => setEditItemValues({ ...editItemValues, selectedCategory: e.target.value, selectedSubcategory: "" })}
                         >
@@ -368,7 +367,7 @@ const Popup: React.FC<Props> = ({
                       <div className="relative group/field">
                         <FiLayers className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
                         <select
-                          className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) appearance-none shadow-premium uppercase tracking-widest"
+                          className="w-full h-12 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-1 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) appearance-none shadow-premium uppercase tracking-widest"
                           value={editItemValues.selectedSubcategory}
                           onChange={(e) => setEditItemValues({ ...editItemValues, selectedSubcategory: e.target.value })}
                         >
@@ -388,7 +387,7 @@ const Popup: React.FC<Props> = ({
                     <div className="relative group/field">
                       <FiType className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
                       <input
-                        className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
+                        className="w-full h-12 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-1 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
                         value={editItemValues.itemNameAr}
                         onChange={(e) => setEditItemValues({ ...editItemValues, itemNameAr: e.target.value })}
                       />
@@ -400,7 +399,7 @@ const Popup: React.FC<Props> = ({
                     <div className="relative group/field">
                       <FiInfo className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
                       <input
-                        className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
+                        className="w-full h-12 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-1 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
                         value={editItemValues.itemIngredientsAr || ""}
                         onChange={(e) => setEditItemValues({ ...editItemValues, itemIngredientsAr: e.target.value })}
                       />
@@ -412,7 +411,7 @@ const Popup: React.FC<Props> = ({
                     <div className="relative group/field">
                       <FiDollarSign className="right-6 absolute top-1/2 -translate-y-1/2 text-(--color-primary)/20 transition-all group-focus-within/field:text-(--color-primary) group-focus-within/field:scale-125 text-xl" />
                       <input
-                        className="w-full h-16 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-10 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
+                        className="w-full h-12 bg-white border border-transparent px-16 rounded-[1.2rem] text-sm font-black outline-none focus:ring-1 focus:ring-(--color-primary)/5 transition-all text-right text-(--color-primary) placeholder:text-(--color-primary)/10 shadow-premium uppercase tracking-widest"
                         value={editItemValues.itemPrice}
                         onChange={(e) => setEditItemValues({ ...editItemValues, itemPrice: e.target.value })}
                       />
@@ -423,13 +422,13 @@ const Popup: React.FC<Props> = ({
                 <div className="flex flex-col gap-4 pt-6">
                   <button
                     onClick={() => { updateItem && updateItem(); closePopup(); }}
-                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary) text-white font-black shadow-xl shadow-(--color-primary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-4"
+                    className="w-full h-12 rounded-[1.5rem] bg-(--color-primary) text-white font-black shadow-xl shadow-(--color-primary)/30 hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest text-sm flex items-center justify-center gap-4"
                   >
                     <FiCheck size={24} /> {t('admin.save_edits')}
                   </button>
                   <button
                     onClick={closePopup}
-                    className="w-full h-18 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
+                    className="w-full h-12 rounded-[1.5rem] bg-(--color-primary)/5 text-(--color-primary)/40 font-black hover:bg-(--color-primary)/10 transition-all uppercase tracking-widest text-sm"
                   >
                     {t('common.cancel')}
                   </button>

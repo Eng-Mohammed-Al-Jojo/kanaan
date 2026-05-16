@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { PaymentService } from "../../services/paymentService";
 import type { PaymentMethod } from "../../types/payment";
 import PaymentModal from "./PaymentModal";
-import { FiCreditCard } from "react-icons/fi";
+// import { FiCreditCard } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const LOCAL_STORAGE_KEY = "footerInfo";
@@ -163,7 +163,7 @@ export default function Footer() {
               ))}
             </div>
 
-            <button
+            {/* <button
               onClick={() => setIsPaymentModalOpen(true)}
               className="mt-2 flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group overflow-hidden relative"
             >
@@ -172,7 +172,7 @@ export default function Footer() {
               <span className="text-sm md:text-md font-black uppercase tracking-[0.2em] text-accent/80">
                 {t('footer.payment_methods') || "طرق الدفع"}
               </span>
-            </button>
+            </button> */}
           </div>
         </div>
 

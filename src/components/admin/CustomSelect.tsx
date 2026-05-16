@@ -36,13 +36,13 @@ const CustomSelect: React.FC<Props> = ({ options, value, onChange, error, placeh
                 onClick={() => !disabled && setOpen(!open)}
                 disabled={disabled}
                 className={`
-                    w-full h-16 flex items-center justify-between px-8 rounded-[1.2rem] border transition-all duration-700
+                    w-full h-12 flex items-center justify-between px-8 rounded-[1.2rem] border transition-all duration-700
                     bg-white outline-none shadow-soft
                     ${disabled ? "opacity-50 cursor-not-allowed border-transparent" : "hover:shadow-premium border-transparent"}
                     ${error ? "border-(--color-secondary) ring-8 ring-(--color-secondary)/5" : (!disabled ? "focus:ring-10 focus:ring-(--color-primary)/5" : "")} 
                 `}
             >
-                <span className={`text-sm md:text-md font-black uppercase tracking-[0.2em] ${selectedOption ? "text-(--color-primary)" : "text-(--color-primary)/20"}`}>
+                <span className={`text-sm md:text-md font-bold uppercase tracking-[0.2em] ${selectedOption ? "text-(--color-primary)" : "text-(--color-primary)/20"}`}>
                     {selectedOption ? selectedOption.name : placeholder || t('common.select')}
                 </span>
                 <FiChevronDown className={`transition-all duration-500 text-(--color-primary)/20 ${open ? "rotate-180 text-(--color-primary) scale-125" : ""}`} size={24} />
@@ -71,7 +71,7 @@ const CustomSelect: React.FC<Props> = ({ options, value, onChange, error, placeh
                                                 ${value === o.id ? "bg-(--color-primary) text-white shadow-xl shadow-(--color-primary)/20" : "hover:bg-(--color-primary)/5 text-(--color-primary)/40 hover:text-(--color-primary)"}
                                             `}
                                         >
-                                            <span className="text-[11px] font-black uppercase tracking-widest relative z-10">{o.name}</span>
+                                            <span className="text-sm md:text-md font-black uppercase tracking-widest relative z-10">{o.name}</span>
                                             {value === o.id && <FiCheck className="text-white relative z-10" size={20} strokeWidth={4} />}
                                             {value !== o.id && <div className="absolute inset-0 bg-white/40 opacity-0 group-hover/opt:opacity-100 transition-opacity" />}
                                         </button>

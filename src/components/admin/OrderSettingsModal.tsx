@@ -13,7 +13,7 @@ function Toast({ type, message }: { type: "success" | "error"; message: string }
             initial={{ opacity: 0, y: -20, x: "-50%" }}
             animate={{ opacity: 1, y: 20, x: "-50%" }}
             exit={{ opacity: 0, y: -20, x: "-50%" }}
-            className={`fixed top-0 left-1/2 z-200 px-8 py-4 rounded-3xl shadow-premium text-white font-black flex items-center gap-4 backdrop-blur-2xl border border-white/20 transition-all ${type === "success" ? "bg-emerald-600/95" : "bg-(--color-secondary)/95"}`}
+            className={`fixed top-0 left-1/2 z-200 px-6 py-3 rounded-2xl shadow-premium text-white font-black flex items-center gap-3.5 backdrop-blur-2xl border border-white/20 transition-all ${type === "success" ? "bg-emerald-600/95" : "bg-(--color-secondary)/95"}`}
         >
             <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-base">
                 {type === "success" ? <FiCheck /> : "×"}
@@ -24,7 +24,7 @@ function Toast({ type, message }: { type: "success" | "error"; message: string }
 }
 
 /* ================= Simple Components ================= */
-const inputClass = "w-full bg-(--color-primary)/5 border border-transparent rounded-2xl px-6 py-4 text-sm font-black text-(--color-primary) outline-none focus:bg-white focus:border-(--color-primary)/10 focus:ring-4 focus:ring-(--color-primary)/5 transition-all placeholder:text-(--color-primary)/10 uppercase tracking-widest shadow-inner";
+const inputClass = "w-full bg-(--color-primary)/5 border border-transparent rounded-xl px-5 py-3.5 text-xs font-black text-(--color-primary) outline-none focus:bg-white focus:border-(--color-primary)/10 focus:ring-4 focus:ring-(--color-primary)/5 transition-all placeholder:text-(--color-primary)/10 uppercase tracking-widest shadow-inner";
 
 function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, icon: Icon, required, isWaMode }: any) {
     const { t, i18n } = useTranslation();
@@ -35,21 +35,21 @@ function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, 
     return (
         <motion.div
             whileHover={!disabled ? { y: -2, boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.1)" } : {}}
-            className={`relative p-6 rounded-[2rem] border transition-all duration-700 group overflow-hidden ${enabled
+            className={`relative p-5 rounded-[1.8rem] border transition-all duration-700 group overflow-hidden ${enabled
                 ? "bg-white border-(--color-primary)/10 shadow-premium"
                 : "bg-(--color-primary)/5 border-transparent opacity-60 hover:opacity-100"
                 } ${disabled ? "opacity-30 grayscale pointer-events-none" : ""}`}
         >
-            <div className="flex items-center justify-between mb-4 relative z-10">
-                <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-all duration-700 shadow-soft ${enabled
+            <div className="flex items-center justify-between mb-3.5 relative z-10">
+                <div className="flex items-center gap-3.5">
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl transition-all duration-700 shadow-soft ${enabled
                         ? "bg-(--color-primary) text-white shadow-xl shadow-(--color-primary)/30"
                         : "bg-white text-(--color-primary)/20 border border-(--color-primary)/5"
                         }`}>
-                        <Icon size={24} />
+                        <Icon size={20} />
                     </div>
                     <div className="flex flex-col">
-                        <span className="font-black text-lg text-(--color-primary) tracking-tight">{title}</span>
+                        <span className="font-black text-base text-(--color-primary) tracking-tight">{title}</span>
                         {required && enabled && !value.trim() && (
                             <motion.span
                                 animate={{ opacity: [0.5, 1, 0.5] }}
@@ -89,15 +89,15 @@ function ServiceCheckbox({ title, enabled, onToggle, value, setValue, disabled, 
                         className="overflow-hidden relative z-10"
                     >
                         <div className="relative group/input">
-                            <div className={`absolute ${isRtl ? 'right-6' : 'left-6'} top-1/2 -translate-y-1/2 w-10 h-10 rounded-xl bg-white text-emerald-500 flex items-center justify-center border border-emerald-100 shadow-sm group-hover/input:scale-110 transition-transform duration-500`}>
-                                <FaWhatsapp size={20} />
+                            <div className={`absolute ${isRtl ? 'right-5' : 'left-5'} top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-white text-emerald-500 flex items-center justify-center border border-emerald-100 shadow-sm group-hover/input:scale-110 transition-transform duration-500`}>
+                                <FaWhatsapp size={18} />
                             </div>
                             <input
                                 type="tel"
                                 value={value}
                                 onChange={(e) => setValue(e.target.value.replace(/\D/g, ""))}
                                 placeholder={t('admin.whatsapp_placeholder')}
-                                className={`${inputClass} ${isRtl ? 'pr-20 pl-8' : 'pl-20 pr-8'} ${required && !value.trim() ? 'bg-(--color-secondary)/5' : ''}`}
+                                className={`${inputClass} ${isRtl ? 'pr-16 pl-6' : 'pl-16 pr-6'} ${required && !value.trim() ? 'bg-(--color-secondary)/5' : ''}`}
                             />
                         </div>
                     </motion.div>
@@ -189,17 +189,17 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                 initial={{ opacity: 0, scale: 0.98, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98, y: 20 }}
-                className="relative bg-white/95 backdrop-blur-2xl w-full max-w-xl rounded-[2.5rem] border border-white shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10"
+                className="relative bg-white/95 backdrop-blur-2xl w-full max-w-lg rounded-[2rem] border border-white shadow-premium flex flex-col max-h-[90vh] overflow-hidden z-10"
             >
                 {/* Header */}
-                <div className="px-6 py-4 border-b border-(--color-primary)/5 flex items-center justify-between bg-white/50 backdrop-blur-md relative z-10">
-                    <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-(--color-primary) text-white flex items-center justify-center text-xl shadow-xl shadow-(--color-primary)/30">
+                <div className="px-5 py-3.5 border-b border-(--color-primary)/5 flex items-center justify-between bg-white/50 backdrop-blur-md relative z-10">
+                    <div className="flex items-center gap-3.5">
+                        <div className="w-9 h-9 rounded-xl bg-(--color-primary) text-white flex items-center justify-center text-lg shadow-xl shadow-(--color-primary)/30">
                             <FiSettings />
                         </div>
                         <div>
-                            <h2 className="text-lg font-black text-(--color-primary) tracking-tight">{t('admin.system_settings')}</h2>
-                            <p className="text-(--color-primary)/30 text-[8px] font-black uppercase tracking-[0.15em] mt-0.5">{t('admin.system_config_desc')}</p>
+                            <h2 className="text-base font-black text-(--color-primary) tracking-tight">{t('admin.system_settings')}</h2>
+                            <p className="text-(--color-primary)/30 text-[7px] font-black uppercase tracking-[0.15em] mt-0.5">{t('admin.system_config_desc')}</p>
                         </div>
                     </div>
                     <button
@@ -211,17 +211,17 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+                <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
                     {/* Order Module Toggle */}
-                    <div className="p-5 rounded-[1.5rem] bg-(--color-primary)/5 border border-transparent flex items-center justify-between shadow-inner relative group overflow-hidden">
+                    <div className="p-4.5 rounded-[1.2rem] bg-(--color-primary)/5 border border-transparent flex items-center justify-between shadow-inner relative group overflow-hidden">
                         <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2 blur-xl" />
-                        <div className="flex items-center gap-4 relative z-10">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-inner transition-all duration-700 ${orderSystem ? "bg-(--color-primary) text-white" : "bg-white text-(--color-primary)/20 border border-(--color-primary)/5"}`}>
+                        <div className="flex items-center gap-3.5 relative z-10">
+                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg shadow-inner transition-all duration-700 ${orderSystem ? "bg-(--color-primary) text-white" : "bg-white text-(--color-primary)/20 border border-(--color-primary)/5"}`}>
                                 <FiSmartphone />
                             </div>
                             <div className="flex flex-col">
-                                <span className="font-black text-base text-(--color-primary) leading-none tracking-tight">{t('admin.enable_web_ordering')}</span>
-                                <span className="text-[8px] text-(--color-primary)/30 font-black uppercase tracking-[0.15em] mt-1.5">{orderSystem ? "النظام مفعل حالياً" : "النظام معطل"}</span>
+                                <span className="font-black text-sm text-(--color-primary) leading-none tracking-tight">{t('admin.enable_web_ordering')}</span>
+                                <span className="text-[7px] text-(--color-primary)/30 font-black uppercase tracking-[0.15em] mt-1.5">{orderSystem ? "النظام مفعل حالياً" : "النظام معطل"}</span>
                             </div>
                         </div>
                         <button
@@ -296,86 +296,86 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                     </AnimatePresence>
 
                     {/* Complaints */}
-                    <div className="p-5 rounded-[1.5rem] bg-(--color-secondary)/5 border border-transparent space-y-4 relative group overflow-hidden shadow-inner">
+                    <div className="p-5 rounded-[1.5rem] bg-(--color-secondary)/5 border border-transparent space-y-3.5 relative group overflow-hidden shadow-inner">
                         <div className="absolute bottom-0 right-0 w-20 h-20 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2 blur-xl" />
-                        <div className="flex items-center gap-4 relative z-10">
-                            <div className="w-10 h-10 rounded-xl bg-(--color-secondary) text-white flex items-center justify-center shadow-xl shadow-(--color-secondary)/30 group-hover:scale-110 transition-transform duration-700">
-                                <FiInfo size={20} />
+                        <div className="flex items-center gap-3.5 relative z-10">
+                            <div className="w-9 h-9 rounded-xl bg-(--color-secondary) text-white flex items-center justify-center shadow-xl shadow-(--color-secondary)/30 group-hover:scale-110 transition-transform duration-700">
+                                <FiInfo size={18} />
                             </div>
                             <div>
-                                <h3 className="font-black text-base text-(--color-primary) tracking-tight">{t('admin.complaints_whatsapp')}</h3>
-                                <p className="text-[8px] text-(--color-primary)/30 font-black mt-1 uppercase tracking-[0.15em]">{t('admin.feedback_channel') || "قناة التواصل للشكاوى والملاحظات"}</p>
+                                <h3 className="font-black text-sm text-(--color-primary) tracking-tight">{t('admin.complaints_whatsapp')}</h3>
+                                <p className="text-[7px] text-(--color-primary)/30 font-black mt-1 uppercase tracking-[0.15em]">{t('admin.feedback_channel') || "قناة التواصل للشكاوى والملاحظات"}</p>
                             </div>
                         </div>
                         <div className="space-y-2 relative z-10">
-                            <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.whatsapp_number') || "رقم الواتساب"}</label>
+                            <label className="text-[8px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.whatsapp_number') || "رقم الواتساب"}</label>
                             <div className="relative group/input">
                                 <div className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg bg-white text-(--color-secondary) flex items-center justify-center border border-(--color-secondary)/10 shadow-sm group-hover/input:scale-110 transition-transform duration-500`}>
-                                    <FaWhatsapp size={16} />
+                                    <FaWhatsapp size={14} />
                                 </div>
                                 <input
                                     value={complaintsWhatsapp}
                                     onChange={(e) => setComplaintsWhatsapp(e.target.value.replace(/\D/g, ""))}
                                     placeholder={t('admin.whatsapp_placeholder')}
-                                    className={`${inputClass} ${isRtl ? 'pr-14 pl-5' : 'pl-14 pr-5'} bg-white! shadow-soft h-12 py-0`}
+                                    className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-11 py-0`}
                                 />
                             </div>
                         </div>
                     </div>
 
                     {/* Footer Info */}
-                    <div className="p-6 rounded-[2rem] bg-(--color-primary)/5 border border-transparent space-y-6 shadow-inner relative overflow-hidden group">
+                    <div className="p-5 rounded-[1.8rem] bg-(--color-primary)/5 border border-transparent space-y-5 shadow-inner relative overflow-hidden group">
                         <div className="absolute top-0 left-0 w-20 h-20 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-xl" />
-                        <div className="flex items-center gap-4 relative z-10">
-                            <div className="w-10 h-10 rounded-xl bg-white text-(--color-primary) flex items-center justify-center border border-(--color-primary)/5 shadow-soft group-hover:scale-110 transition-transform duration-700">
-                                <FiLayout size={20} />
+                        <div className="flex items-center gap-3.5 relative z-10">
+                            <div className="w-9 h-9 rounded-xl bg-white text-(--color-primary) flex items-center justify-center border border-(--color-primary)/5 shadow-soft group-hover:scale-110 transition-transform duration-700">
+                                <FiLayout size={18} />
                             </div>
-                            <h3 className="font-black text-base text-(--color-primary) tracking-tight">{t('admin.footer_info')}</h3>
+                            <h3 className="font-black text-sm text-(--color-primary) tracking-tight">{t('admin.footer_info')}</h3>
                         </div>
 
-                        <div className="space-y-4 relative z-10">
+                        <div className="space-y-3.5 relative z-10">
                             {/* Address */}
                             <div className="space-y-2">
-                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.address') || "العنوان"}</label>
+                                <label className="text-[8px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.address') || "العنوان"}</label>
                                 <div className="relative group/input">
-                                    <FiLayout className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-(--color-primary) group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
-                                    <input placeholder={t('admin.address_detail')} value={footer.address} onChange={(e) => setFooter({ ...footer, address: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                    <FiLayout className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-(--color-primary) group-focus-within/input:scale-110 transition-all duration-500`} size={14} />
+                                    <input placeholder={t('admin.address_detail')} value={footer.address} onChange={(e) => setFooter({ ...footer, address: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-10 pl-5' : 'pl-10 pr-5'} bg-white! shadow-soft h-11 py-0`} />
                                 </div>
                             </div>
 
                             {/* Phone */}
                             <div className="space-y-2">
-                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.phone') || "رقم الهاتف"}</label>
+                                <label className="text-[8px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.phone') || "رقم الهاتف"}</label>
                                 <div className="relative group/input">
-                                    <FiSmartphone className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-(--color-primary) group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
-                                    <input placeholder={t('admin.primary_phone')} value={footer.phone} onChange={(e) => setFooter({ ...footer, phone: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                    <FiSmartphone className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-(--color-primary) group-focus-within/input:scale-110 transition-all duration-500`} size={14} />
+                                    <input placeholder={t('admin.primary_phone')} value={footer.phone} onChange={(e) => setFooter({ ...footer, phone: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-10 pl-5' : 'pl-10 pr-5'} bg-white! shadow-soft h-11 py-0`} />
                                 </div>
                             </div>
 
                             {/* Whatsapp */}
                             <div className="space-y-2">
-                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.whatsapp_contact') || "واتساب التواصل"}</label>
+                                <label className="text-[8px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.whatsapp_contact') || "واتساب التواصل"}</label>
                                 <div className="relative group/input">
-                                    <FaWhatsapp className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-emerald-500 group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
-                                    <input placeholder={t('admin.contact_whatsapp')} value={footer.whatsapp} onChange={(e) => setFooter({ ...footer, whatsapp: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                    <FaWhatsapp className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-emerald-500 group-focus-within/input:scale-110 transition-all duration-500`} size={14} />
+                                    <input placeholder={t('admin.contact_whatsapp')} value={footer.whatsapp} onChange={(e) => setFooter({ ...footer, whatsapp: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-10 pl-5' : 'pl-10 pr-5'} bg-white! shadow-soft h-11 py-0`} />
                                 </div>
                             </div>
 
                             {/* Social Media Stack */}
-                            <div className="space-y-3 pt-1">
-                                <label className="text-[9px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.social_links') || "روابط التواصل الاجتماعي"}</label>
-                                <div className="space-y-3">
+                            <div className="space-y-2.5 pt-0.5">
+                                <label className="text-[8px] font-black uppercase tracking-[0.2em] text-(--color-primary)/30 px-2">{t('admin.social_links') || "روابط التواصل الاجتماعي"}</label>
+                                <div className="space-y-2.5">
                                     <div className="relative group/input">
-                                        <FaFacebook className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-blue-600 group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
-                                        <input placeholder="Facebook Username" value={footer.facebook} onChange={(e) => setFooter({ ...footer, facebook: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                        <FaFacebook className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-blue-600 group-focus-within/input:scale-110 transition-all duration-500`} size={14} />
+                                        <input placeholder="Facebook Username" value={footer.facebook} onChange={(e) => setFooter({ ...footer, facebook: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-10 pl-5' : 'pl-10 pr-5'} bg-white! shadow-soft h-11 py-0`} />
                                     </div>
                                     <div className="relative group/input">
-                                        <FaInstagram className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-pink-500 group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
-                                        <input placeholder="Instagram Username" value={footer.instagram} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                        <FaInstagram className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-pink-500 group-focus-within/input:scale-110 transition-all duration-500`} size={14} />
+                                        <input placeholder="Instagram Username" value={footer.instagram} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-10 pl-5' : 'pl-10 pr-5'} bg-white! shadow-soft h-11 py-0`} />
                                     </div>
                                     <div className="relative group/input">
-                                        <FaTiktok className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-black group-focus-within/input:scale-110 transition-all duration-500`} size={16} />
-                                        <input placeholder="Tiktok Username" value={footer.tiktok} onChange={(e) => setFooter({ ...footer, tiktok: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-12 pl-5' : 'pl-12 pr-5'} bg-white! shadow-soft h-12 py-0`} />
+                                        <FaTiktok className={`absolute ${isRtl ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-(--color-primary)/20 group-focus-within/input:text-black group-focus-within/input:scale-110 transition-all duration-500`} size={14} />
+                                        <input placeholder="Tiktok Username" value={footer.tiktok} onChange={(e) => setFooter({ ...footer, tiktok: e.target.value })} className={`${inputClass} ${isRtl ? 'pr-10 pl-5' : 'pl-10 pr-5'} bg-white! shadow-soft h-11 py-0`} />
                                     </div>
                                 </div>
                             </div>
@@ -384,13 +384,13 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                 </div>
 
                 {/* Footer Save */}
-                <div className="px-6 py-4 border-t border-(--color-primary)/5 bg-white/50 backdrop-blur-md relative z-10">
+                <div className="px-5 py-3.5 border-t border-(--color-primary)/5 bg-white/50 backdrop-blur-md relative z-10">
                     <motion.button
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={handleSave}
                         disabled={saving}
-                        className={`w-full h-14 rounded-xl font-black text-white shadow-2xl flex items-center justify-center gap-3 transition-all relative overflow-hidden group uppercase tracking-[0.15em] ${saving
+                        className={`w-full h-12 rounded-xl font-black text-white shadow-2xl flex items-center justify-center gap-2.5 transition-all relative overflow-hidden group uppercase tracking-[0.15em] ${saving
                             ? "bg-emerald-500/50 cursor-not-allowed"
                             : "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-600/40"
                             }`}
@@ -399,12 +399,12 @@ export default function OrderSettingsModal({ onClose, settings: initialSettings,
                             <motion.div
                                 animate={{ rotate: 360 }}
                                 transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-                                className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                                className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
                             />
                         ) : (
-                            <FiCheck size={20} />
+                            <FiCheck size={18} />
                         )}
-                        <span className="text-sm">{t('admin.save_changes')}</span>
+                        <span className="text-xs">{t('admin.save_changes')}</span>
                     </motion.button>
                 </div>
 

@@ -167,11 +167,11 @@ export default function AdminOrdersPage() {
         return (
             <div className="min-h-screen bg_admin flex items-center justify-center p-6">
 
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/80 backdrop-blur-md p-12 rounded-[3rem] border border-primary/5 shadow-premium text-center max-w-md">
-                    <div className="text-7xl mb-8">🔒</div>
-                    <h2 className="text-3xl font-black text-primary mb-4">{t('admin.login_title')}</h2>
-                    <p className="text-primary/40 font-medium mb-8">{t('admin.login_required')}</p>
-                    <button onClick={() => navigate("/admin")} className="w-full py-5 bg-primary text-white rounded-2xl font-black shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95">
+                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/80 backdrop-blur-md p-10 rounded-[2.5rem] border border-primary/5 shadow-premium text-center max-w-sm">
+                    <div className="text-6xl mb-6">🔒</div>
+                    <h2 className="text-2xl font-black text-primary mb-3">{t('admin.login_title')}</h2>
+                    <p className="text-primary/40 font-medium mb-6 text-sm">{t('admin.login_required')}</p>
+                    <button onClick={() => navigate("/admin")} className="w-full py-4 bg-primary text-white rounded-xl font-black shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95 text-base">
                         {t('admin.login_btn')}
                     </button>
                 </motion.div>
@@ -186,35 +186,35 @@ export default function AdminOrdersPage() {
             <div className="max-w-7xl mx-auto space-y-12">
 
                 {/* Header & Main Toggle */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8">
-                    <div className="flex items-center gap-6">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                    <div className="flex items-center gap-5">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => navigate(-1)}
-                            className="w-14 h-14 flex items-center justify-center bg-white text-primary rounded-2xl border border-primary/5 shadow-soft hover:shadow-premium transition-all"
+                            className="w-12 h-12 flex items-center justify-center bg-white text-primary rounded-xl border border-primary/5 shadow-soft hover:shadow-premium transition-all"
                         >
-                            {isRtl ? <FiArrowRight size={24} /> : <FiArrowRight className="rotate-180" size={24} />}
+                            {isRtl ? <FiArrowRight size={20} /> : <FiArrowRight className="rotate-180" size={20} />}
                         </motion.button>
                         <div className="text-right">
-                            <h1 className="text-4xl font-black text-primary tracking-tight">{t('admin.orders_board')}</h1>
-                            <p className="text-primary/40 text-xs font-bold uppercase tracking-[0.2em] mt-2 flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                            <h1 className="text-3xl font-black text-primary tracking-tight">{t('admin.orders_board')}</h1>
+                            <p className="text-primary/40 text-[10px] font-bold uppercase tracking-[0.2em] mt-1.5 flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                                 {viewMode === "history" ? t('admin.archived_orders') : viewMode === "whatsapp" ? t('admin.source_whatsapp') : t('admin.active_orders')}
                             </p>
                         </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4">
-                        <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="flex items-center gap-2.5">
                             <button
                                 onClick={() => setIsApprovalsModalOpen(true)}
-                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-white border border-primary/5 shadow-soft transition-all relative ${payments.some(p => p.status === 'pending') ? 'text-amber-500' : 'text-primary/30'}`}
+                                className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-white border border-primary/5 shadow-soft transition-all relative ${payments.some(p => p.status === 'pending') ? 'text-amber-500' : 'text-primary/30'}`}
                                 title={t('admin.payment_requests')}
                             >
-                                <FiBell />
+                                <FiBell size={18} />
                                 {payments.filter(p => p.status === 'pending').length > 0 && (
-                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-white animate-bounce">
+                                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 text-white text-[8px] font-black rounded-full flex items-center justify-center border-2 border-white animate-bounce">
                                         {payments.filter(p => p.status === 'pending').length}
                                     </span>
                                 )}
@@ -222,33 +222,33 @@ export default function AdminOrdersPage() {
 
                             <button
                                 onClick={() => setIsPaymentModalOpen(true)}
-                                className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl bg-white text-primary/30 border border-primary/5 hover:text-primary hover:border-primary/30 shadow-soft transition-all"
+                                className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-white text-primary/30 border border-primary/5 hover:text-primary hover:border-primary/30 shadow-soft transition-all"
                                 title={t('admin.payment_methods')}
                             >
-                                <FiDollarSign />
+                                <FiDollarSign size={18} />
                             </button>
 
                             <button
                                 onClick={() => setShowAnalytics(!showAnalytics)}
-                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-xl transition-all border ${showAnalytics ? 'bg-primary text-white border-primary shadow-lg' : 'bg-white text-primary/30 border-primary/5 hover:text-primary hover:border-primary/30 shadow-soft'}`}
+                                className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg transition-all border ${showAnalytics ? 'bg-primary text-white border-primary shadow-lg' : 'bg-white text-primary/30 border-primary/5 hover:text-primary hover:border-primary/30 shadow-soft'}`}
                                 title="الاحصائيات"
                             >
-                                <FiBarChart2 />
+                                <FiBarChart2 size={18} />
                             </button>
 
 
-                            <div className="flex bg-white/50 p-1.5 gap-1.5 rounded-2xl border border-primary/5 shadow-inner">
+                            <div className="flex bg-white/50 p-1 gap-1 rounded-xl border border-primary/5 shadow-inner">
                                 <button
                                     onClick={() => updateSettings('system', !settings.system)}
-                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${settings.system ? 'text-primary bg-primary/10' : 'text-primary/30 hover:bg-white/50'}`}
+                                    className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${settings.system ? 'text-primary bg-primary/10' : 'text-primary/30 hover:bg-white/50'}`}
                                 >
-                                    {settings.system ? <FiBell /> : <FiBellOff />}
+                                    {settings.system ? <FiBell size={16} /> : <FiBellOff size={16} />}
                                 </button>
                                 <button
                                     onClick={() => updateSettings('sound', !settings.sound)}
-                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${settings.sound ? 'text-blue-500 bg-blue-500/10' : 'text-primary/30 hover:bg-white/50'}`}
+                                    className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${settings.sound ? 'text-blue-500 bg-blue-500/10' : 'text-primary/30 hover:bg-white/50'}`}
                                 >
-                                    {settings.sound ? <FiVolume2 /> : <FiVolumeX />}
+                                    {settings.sound ? <FiVolume2 size={16} /> : <FiVolumeX size={16} />}
                                 </button>
                             </div>
                         </div>
@@ -256,9 +256,9 @@ export default function AdminOrdersPage() {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setIsCloseDayModalOpen(true)}
-                                className="px-6 py-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border border-red-200 transition-all font-black text-xs uppercase tracking-widest shadow-soft flex items-center gap-2"
+                                className="px-5 py-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border border-red-200 transition-all font-black text-[10px] uppercase tracking-widest shadow-soft flex items-center gap-2"
                             >
-                                <FiTrash2 /> إغلاق يومي وتنزيل Excel
+                                <FiTrash2 size={14} /> إغلاق يومي وتنزيل Excel
                             </button>
 
                             <div className="flex bg-white p-1.5 rounded-2xl border border-gray-100 shadow-inner">
@@ -270,7 +270,7 @@ export default function AdminOrdersPage() {
                                     <button
                                         key={mode.id}
                                         onClick={() => setViewMode(mode.id as any)}
-                                        className={`px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all ${viewMode === mode.id
+                                        className={`px-4 py-2 rounded-xl text-[10px] font-bold flex items-center gap-2 transition-all ${viewMode === mode.id
                                             ? 'bg-primary text-white shadow-xl shadow-primary/20'
                                             : 'text-gray-400 hover:text-primary hover:bg-gray-50'
                                             }`}
@@ -285,7 +285,7 @@ export default function AdminOrdersPage() {
                 </div>
 
                 {/* Dashboard Stats KPI Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <StatCard icon={<FiDollarSign />} label={t('admin.total_revenue')} value={`${stats.overall.totalRevenue}₪`} type="primary" />
                     <StatCard icon={<FiShoppingBag />} label={t('admin.total_orders')} value={stats.overall.totalOrders} type="blue" />
                     <StatCard icon={<FiCheckCircle />} label={t('admin.paid_orders')} value={stats.overall.paidCount} type="emerald" />
@@ -296,7 +296,7 @@ export default function AdminOrdersPage() {
                 <AnimatePresence>
                     {showAnalytics && (
                         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                            <div className="bg-white/80 backdrop-blur-md p-8 rounded-[2.5rem] border border-primary/5 shadow-soft">
+                            <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2rem] border border-primary/5 shadow-soft">
                                 <AnalyticsSection orders={orders} />
                             </div>
                         </motion.div>
@@ -304,12 +304,12 @@ export default function AdminOrdersPage() {
                 </AnimatePresence>
 
                 {/* Advanced Filter Management */}
-                <div className="bg-white/80 backdrop-blur-md p-8 rounded-[3rem] border border-primary/5 shadow-soft space-y-8">
-                    <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-primary/5 text-primary flex items-center justify-center">
-                            <FiFilter size={20} />
+                <div className="bg-white/80 backdrop-blur-md p-6 rounded-[2.5rem] border border-primary/5 shadow-soft space-y-6">
+                    <div className="flex items-center gap-3.5">
+                        <div className="w-9 h-9 rounded-xl bg-primary/5 text-primary flex items-center justify-center">
+                            <FiFilter size={18} />
                         </div>
-                        <h3 className="text-lg font-black text-primary uppercase tracking-widest">{t('admin.advanced_filters')}</h3>
+                        <h3 className="text-base font-black text-primary uppercase tracking-widest">{t('admin.advanced_filters')}</h3>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
@@ -355,19 +355,19 @@ export default function AdminOrdersPage() {
 
                 {/* Professional Orders Table */}
                 <>
-                    <div className="bg-white/80 backdrop-blur-md rounded-[3rem] border border-primary/5 shadow-premium overflow-hidden flex flex-col">
+                    <div className="bg-white/80 backdrop-blur-md rounded-[2.5rem] border border-primary/5 shadow-premium overflow-hidden flex flex-col">
                         <div className="overflow-x-auto custom-scrollbar">
                             <table className="w-full text-right border-collapse min-w-[1000px]">
                                 <thead>
                                     <tr className="bg-primary/5 border-b border-primary/5">
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.order_id')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.customer')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.order_time')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.type')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.status_lifecycle')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.payment')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em] text-center">{t('common.total')}</th>
-                                        <th className="px-8 py-6 text-[11px] font-bold uppercase text-primary/40 tracking-[0.2em] text-left">{t('admin.actions')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.order_id')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.customer')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.order_time')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.type')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.status_lifecycle')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em]">{t('admin.payment')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em] text-center">{t('common.total')}</th>
+                                        <th className="px-6 py-5 text-[10px] font-bold uppercase text-primary/40 tracking-[0.2em] text-left">{t('admin.actions')}</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-primary/5">
@@ -396,14 +396,14 @@ export default function AdminOrdersPage() {
                                                 >
 
                                                     {/* ORDER ID */}
-                                                    <td className="px-8 py-6">
-                                                        <div className="flex flex-col gap-2 items-start">
-                                                            <span className="text-xs font-black text-primary bg-primary/5 px-2 py-1.5 rounded-xl border border-primary/10 tracking-widest shadow-sm">
+                                                    <td className="px-6 py-5">
+                                                        <div className="flex flex-col gap-1.5 items-start">
+                                                            <span className="text-[10px] font-black text-primary bg-primary/5 px-2 py-1 rounded-xl border border-primary/10 tracking-widest shadow-sm">
                                                                 {order.orderId}
                                                             </span>
 
                                                             {order.source === "whatsapp" && (
-                                                                <span className="text-[10px] font-bold bg-emerald-500 text-white px-2.5 py-1 rounded-lg uppercase tracking-wider">
+                                                                <span className="text-[8px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded-lg uppercase tracking-wider">
                                                                     {t('admin.source_whatsapp')}
                                                                 </span>
                                                             )}
@@ -411,12 +411,12 @@ export default function AdminOrdersPage() {
                                                     </td>
 
                                                     {/* CUSTOMER */}
-                                                    <td className="px-8 py-6">
+                                                    <td className="px-6 py-5">
                                                         <div className="flex flex-col">
-                                                            <p className="text-base font-bold text-gray-900 leading-tight">
+                                                            <p className="text-sm font-bold text-gray-900 leading-tight">
                                                                 {order.customer?.name}
                                                             </p>
-                                                            <p className="text-xs text-gray-400 font-medium mt-1">
+                                                            <p className="text-[10px] text-gray-400 font-medium mt-1">
                                                                 {order.customer?.table
                                                                     ? `${t('admin.table_number')} ${order.customer.table}`
                                                                     : (order.customer?.phone || "")}
@@ -424,9 +424,9 @@ export default function AdminOrdersPage() {
                                                         </div>
                                                     </td>
                                                     {/* TIME ORDER */}
-                                                    <td className="px-8 py-6">
+                                                    <td className="px-6 py-5">
                                                         <div className="flex flex-col">
-                                                            <span className="text-sm font-bold text-gray-900">
+                                                            <span className="text-[13px] font-bold text-gray-900">
                                                                 {order.createdAt
                                                                     ? new Date(order.createdAt).toLocaleTimeString('ar-EG', {
                                                                         hour: '2-digit',
@@ -435,7 +435,7 @@ export default function AdminOrdersPage() {
                                                                     : "--"}
                                                             </span>
 
-                                                            <span className="text-[11px] text-gray-400 font-medium mt-1">
+                                                            <span className="text-[10px] text-gray-400 font-medium mt-0.5">
                                                                 {order.createdAt
                                                                     ? new Date(order.createdAt).toLocaleDateString('ar-EG')
                                                                     : ""}
@@ -443,29 +443,29 @@ export default function AdminOrdersPage() {
                                                         </div>
                                                     </td>
                                                     {/* TYPE */}
-                                                    <td className="px-8 py-6">
+                                                    <td className="px-6 py-5">
                                                         <div className="flex items-center justify-center">
                                                             {order.orderType === "in" ? (
                                                                 <div
                                                                     title={t('common.dine_in')}
-                                                                    className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-sm border border-blue-100 hover:scale-110 transition-transform"
+                                                                    className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shadow-sm border border-blue-100 hover:scale-110 transition-transform"
                                                                 >
-                                                                    <FaChair size={18} />
+                                                                    <FaChair size={15} />
                                                                 </div>
                                                             ) : (
                                                                 <div
                                                                     title={t('common.takeaway')}
-                                                                    className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-sm border border-emerald-100 hover:scale-110 transition-transform"
+                                                                    className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-sm border border-emerald-100 hover:scale-110 transition-transform"
                                                                 >
-                                                                    <FaMotorcycle size={18} />
+                                                                    <FaMotorcycle size={15} />
                                                                 </div>
                                                             )}
                                                         </div>
                                                     </td>
 
                                                     {/* STATUS */}
-                                                    <td className="px-8 py-6">
-                                                        <div className="min-w-[360px]">
+                                                    <td className="px-6 py-5">
+                                                        <div className="min-w-[320px]">
                                                             <InlineStatusPills
                                                                 order={order}
                                                                 t={t}
@@ -475,7 +475,7 @@ export default function AdminOrdersPage() {
                                                     </td>
 
                                                     {/* PAYMENT */}
-                                                    <td className="px-8 py-6">
+                                                    <td className="px-6 py-5">
                                                         <button
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
@@ -497,23 +497,23 @@ export default function AdminOrdersPage() {
                                                     </td>
 
                                                     {/* TOTAL */}
-                                                    <td className="px-8 py-6 text-center">
-                                                        <span className="text-xl font-black text-primary tracking-tight">
-                                                            {order.totalPrice}<span className="text-xs ml-0.5 opacity-60">₪</span>
+                                                    <td className="px-6 py-5 text-center">
+                                                        <span className="text-lg font-black text-primary tracking-tight">
+                                                            {order.totalPrice}<span className="text-[10px] ml-0.5 opacity-60">₪</span>
                                                         </span>
                                                     </td>
 
                                                     {/* ACTIONS */}
-                                                    <td className="px-8 py-6">
-                                                        <div className="flex items-center gap-3 justify-start">
+                                                    <td className="px-6 py-5">
+                                                        <div className="flex items-center gap-2.5 justify-start">
                                                             <button
                                                                 onClick={(e) => {
                                                                     e.stopPropagation();
                                                                     setSelectedOrder(order);
                                                                 }}
-                                                                className="w-10 h-10 rounded-xl bg-gray-50 text-gray-400 hover:bg-primary/10 hover:text-primary transition-all flex items-center justify-center shadow-sm"
+                                                                className="w-9 h-9 rounded-xl bg-gray-50 text-gray-400 hover:bg-primary/10 hover:text-primary transition-all flex items-center justify-center shadow-sm"
                                                             >
-                                                                <FiInfo size={18} />
+                                                                <FiInfo size={16} />
                                                             </button>
 
 
@@ -523,9 +523,9 @@ export default function AdminOrdersPage() {
                                                                     e.stopPropagation();
                                                                     setDeleteId(order.id);
                                                                 }}
-                                                                className="w-10 h-10 rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all flex items-center justify-center shadow-sm"
+                                                                className="w-9 h-9 rounded-xl bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all flex items-center justify-center shadow-sm"
                                                             >
-                                                                <FiTrash2 size={18} />
+                                                                <FiTrash2 size={16} />
                                                             </button>
                                                         </div>
                                                     </td>
@@ -645,15 +645,15 @@ function StatCard({ icon, label, value, type }: StatCardProps) {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`${s.bg} border ${s.border} p-8 rounded-[2.5rem] shadow-soft hover:shadow-premium transition-all duration-500 group`}
+            className={`${s.bg} border ${s.border} p-6 rounded-[2rem] shadow-soft hover:shadow-premium transition-all duration-500 group`}
         >
-            <div className="flex items-center gap-6">
-                <div className={`w-16 h-16 rounded-3xl ${s.iconBg} ${s.iconText} flex items-center justify-center shadow-inner transition-transform group-hover:scale-110`}>
-                    <span className="text-2xl">{icon}</span>
+            <div className="flex items-center gap-5">
+                <div className={`w-14 h-14 rounded-2xl ${s.iconBg} ${s.iconText} flex items-center justify-center shadow-inner transition-transform group-hover:scale-110`}>
+                    <span className="text-xl">{icon}</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-1">{label}</span>
-                    <div className={`text-3xl font-black ${s.text} tracking-tight`}>{value}</div>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-0.5">{label}</span>
+                    <div className={`text-2xl font-black ${s.text} tracking-tight`}>{value}</div>
                 </div>
             </div>
         </motion.div>
@@ -705,7 +705,7 @@ function StatusBadge({ status, t }: { status: OrderStatus; t: any }) {
     };
     const c = config[status] || config.pending;
     return (
-        <span className={`px-5 py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-widest ${c.bg} ${c.text} ${c.border} shadow-sm flex items-center gap-1.5`}>
+        <span className={`px-4 py-2 rounded-lg border text-[9px] font-black uppercase tracking-widest ${c.bg} ${c.text} ${c.border} shadow-sm flex items-center gap-1.5`}>
             {t(`admin.${status}`) || status}
         </span>
     );
