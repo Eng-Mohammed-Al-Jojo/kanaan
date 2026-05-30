@@ -122,7 +122,7 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
 
     const loadData = async () => {
       try {
-        const { data } = await MenuService.getMenuWithFallback();
+        const { data, source } = await MenuService.getMenuWithFallback();
         if (!isMounted.current) return;
 
         setCategories(data.categories);
@@ -134,24 +134,27 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
           cat.available && data.items.some((i: any) => i.categoryId === cat.id)
         );
 
-        if (availableWithItems.length > 0 && (!activeCategoryId || activeCategoryId === "all")) {
-          // Default is "all", which we handle in the UI, but if we need a specific first category:
-          // setActiveCategoryId("all"); // Or the first one if "all" is disabled
-        }
-
         const wasLoaded = sessionStorage.getItem("menu_orca_initial_load");
+        
+        // Performance Fix: If data source is cache or local JSON, or page was already loaded, bypass MIN_LOADING_TIME completely (0 lag)
+        const isInstantSource = source === 'cache' || source === 'json';
         const elapsed = Date.now() - startTime.current;
-        const remainingFetchTime = wasLoaded ? 0 : Math.max(0, MIN_LOADING_TIME - elapsed);
+        const remainingFetchTime = (wasLoaded || isInstantSource) ? 0 : Math.max(0, MIN_LOADING_TIME - elapsed);
 
         setTimeout(() => {
           if (!isMounted.current) return;
           onLoadingChange?.(false);
-          setPhase("skeleton");
           sessionStorage.setItem("menu_orca_initial_load", "true");
 
-          setTimeout(() => {
-            if (isMounted.current) setPhase("ready");
-          }, SKELETON_DURATION);
+          // Transition to ready phase quickly or immediately
+          if (isInstantSource || wasLoaded) {
+            setPhase("ready");
+          } else {
+            setPhase("skeleton");
+            setTimeout(() => {
+              if (isMounted.current) setPhase("ready");
+            }, SKELETON_DURATION);
+          }
         }, remainingFetchTime);
 
         unsubscribe = MenuService.subscribeToMenuUpdates((freshData) => {

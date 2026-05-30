@@ -78,11 +78,13 @@ export default function MenuPage() {
             transition={{ duration: 0.8 }}
             className="relative flex flex-col items-center"
           >
-            <div className="w-full h-auto bg-transparent">
+            <div className="w-90 h-90 bg-transparent flex items-center justify-center">
               <img
                 src="/logo.png"
                 alt="Kanaan Logo"
-                className="w-full h-full  drop-shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
+                width="192"
+                height="192"
+                className="w-full h-full object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
               />
             </div>
           </motion.div>
