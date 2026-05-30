@@ -130,10 +130,6 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
         setItems(data.items);
         setOrderSystem(data.orderSystem);
 
-        const availableWithItems = data.categories.filter((cat: any) =>
-          cat.available && data.items.some((i: any) => i.categoryId === cat.id)
-        );
-
         const wasLoaded = sessionStorage.getItem("menu_orca_initial_load");
         
         // Performance Fix: If data source is cache or local JSON, or page was already loaded, bypass MIN_LOADING_TIME completely (0 lag)
