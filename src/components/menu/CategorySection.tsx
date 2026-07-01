@@ -23,7 +23,10 @@ export default function CategorySection({ category, subcategories, items, orderS
     const groups: Record<string, Item[]> = {};
     const noSubItems: Item[] = [];
 
-    items.forEach(item => {
+    // Defensive: only process items that are visible (visible !== false)
+    const visibleOnly = items.filter(item => item.visible !== false);
+
+    visibleOnly.forEach(item => {
       const sub = subcategories.find(s => s.id === item.subcategoryId);
       if (item.subcategoryId && sub && sub.visible !== false) {
         if (!groups[item.subcategoryId]) groups[item.subcategoryId] = [];

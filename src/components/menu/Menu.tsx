@@ -177,41 +177,43 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
   }, [onLoadingChange]);
 
   /* ================= Derived Data (Optimized) ================= */
-  const featuredItems = useMemo(() =>
-    items
-      .filter(i => (i.star === true || (i as any).isFeatured === true))
-      .sort((a, b) => {
-        if (a.visible === false && b.visible !== false) return 1;
-        if (a.visible !== false && b.visible === false) return -1;
-        return (a.order ?? 0) - (b.order ?? 0);
-      }),
+
+  // Single source of truth: only items that should be visible to the customer
+  const visibleItems = useMemo(() =>
+    items.filter(i => i.visible !== false),
     [items]
+  );
+
+  const featuredItems = useMemo(() =>
+    visibleItems
+      .filter(i => (i.star === true || (i as any).isFeatured === true))
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0)),
+    [visibleItems]
   );
 
   const availableCategories = useMemo(() => {
     return categories
       .filter(cat => {
-        // Show category if it has at least one item, even if unavailable
-        return items.some(i => i.categoryId === cat.id);
+        // Hide category if marked not visible/available
+        if (cat.visible === false || cat.available === false) return false;
+        // Hide category if it has no visible items
+        return visibleItems.some(i => i.categoryId === cat.id);
       })
       .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-  }, [categories, items]);
+  }, [categories, visibleItems]);
 
   const filteredItems = useMemo(() => {
     const search = searchTerm?.toLowerCase() ?? "";
     if (!search) return [];
-    return items
+    // Search only within visible items
+    return visibleItems
       .filter((item) => {
         const name = (item.nameAr || item.name || "").toLowerCase();
         const ingredients = (item.ingredientsAr || item.ingredients || "").toLowerCase();
         return name.includes(search) || ingredients.includes(search);
       })
-      .sort((a, b) => {
-        if (a.visible === false && b.visible !== false) return 1;
-        if (a.visible !== false && b.visible === false) return -1;
-        return (a.order ?? 0) - (b.order ?? 0);
-      });
-  }, [items, searchTerm]);
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  }, [visibleItems, searchTerm]);
 
   useEffect(() => {
     onFeaturedCheck?.(featuredItems.length > 0);
@@ -347,12 +349,9 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
                         category={cat}
                         subcategories={subcategories}
                         items={
-                          [...items.filter(i => i.categoryId === cat.id)]
-                            .sort((a, b) => {
-                              if (a.visible === false && b.visible !== false) return 1;
-                              if (a.visible !== false && b.visible === false) return -1;
-                              return (a.order ?? 0) - (b.order ?? 0);
-                            })
+                          visibleItems
+                            .filter(i => i.categoryId === cat.id)
+                            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
                         }
                         orderSystem={orderSystem}
                         onItemClick={handleItemClick}
@@ -365,12 +364,9 @@ export default function Menu({ onLoadingChange, onFeaturedCheck, onFeaturedItems
                         category={activeCategory}
                         subcategories={subcategories}
                         items={
-                          [...items.filter(i => i.categoryId === activeCategoryId)]
-                            .sort((a, b) => {
-                              if (a.visible === false && b.visible !== false) return 1;
-                              if (a.visible !== false && b.visible === false) return -1;
-                              return (a.order ?? 0) - (b.order ?? 0);
-                            })
+                          visibleItems
+                            .filter(i => i.categoryId === activeCategoryId)
+                            .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
                         }
                         orderSystem={orderSystem}
                         onItemClick={handleItemClick}

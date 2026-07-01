@@ -16,10 +16,8 @@ export default function LoadingScreen({ visible, onExited }: Props) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (!visible) {
-      setProgress(100);
-      return;
-    }
+    if (!visible) return;
+    setProgress(0);
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 95) return prev;
