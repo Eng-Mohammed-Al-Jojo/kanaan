@@ -478,7 +478,10 @@
         "rights_reserved": "جميع الحقوق محفوظة",
         "contact_us": "تواصل معنا",
         "follow_us": "تابعنا",
-        "payment_methods": "طرق الدفع"
+        "payment_methods": "طرق الدفع",
+        "location": "الموقع",
+        "contact": "للتواصل",
+        "social": "تابعونا على شبكات التواصل"
     },
     "whatsapp": {
         "time": "الوقت",
