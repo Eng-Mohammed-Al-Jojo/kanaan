@@ -80,7 +80,7 @@ export default function LoadingScreen({ visible, onExited }: Props) {
               <motion.div
                 animate={{ scale: [0.98, 1.02, 0.98] }}
                 transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                className="relative flex h-36 w-36 items-center justify-center rounded-full bg-[#FDFBD4]/10 shadow-[0_20px_70px_rgba(0,0,0,0.28)]"
+                className="relative flex h-36 w-36 items-center justify-center rounded-full bg-[#FDFBD4]/80 shadow-[0_20px_70px_rgba(0,0,0,0.28)]"
               >
                 <img
                   src="/logo.png"
@@ -96,8 +96,8 @@ export default function LoadingScreen({ visible, onExited }: Props) {
               <p className="text-[11px] font-black uppercase tracking-[0.38em] text-cream/60">
                 Kanaan Cafe & Restaurant
               </p>
-              <h1 className="text-3xl font-black tracking-tight text-cream">
-                {isRtl ? "جارٍ تجهيز القائمة" : "Preparing the menu"}
+              <h1 className="text-2xl font-black tracking-tight text-cream">
+                {isRtl ? "كنعان أصل الحضارة .." : "Preparing the menu"}
               </h1>
 
             </div>

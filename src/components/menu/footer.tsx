@@ -8,7 +8,7 @@ import {
   FaPhoneAlt,
   FaTelegramPlane,
   FaTiktok,
-  FaCreditCard,
+  // FaCreditCard,
 } from "react-icons/fa";
 import { ref, onValue } from "firebase/database";
 import { motion } from "framer-motion";
@@ -119,15 +119,15 @@ export default function Footer() {
         >
           <div className="flex flex-col items-center gap-8 text-center">
             <div className="flex flex-col items-center gap-3">
-
-              <img
-                src="/logo.png"
-                alt="Kanaan Logo"
-                className="h-24 w-auto drop-shadow-[0_16px_40px_rgba(0,0,0,0.35)] sm:h-28"
-                loading="lazy"
-                decoding="async"
-              />
-
+              <div className="rounded-3xl bg-[#FDFBD4]/80 backdrop-blur-md p-5 shadow-2xl ring-1 ring-white/20">
+                <img
+                  src="/logo.png"
+                  alt="Kanaan Logo"
+                  className="h-36 w-auto"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
 
             <div className="grid w-full gap-4 md:grid-cols-3">
@@ -158,7 +158,7 @@ export default function Footer() {
                 </a>
               </div>
 
-              <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+              {/* <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
                 <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
                   <FaCreditCard size={18} />
                 </div>
@@ -176,7 +176,7 @@ export default function Footer() {
                       ? (isRtl ? "عرض طرق الدفع" : "View payment methods")
                       : (isRtl ? "طرق الدفع غير متاحة" : "No payment methods")}
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex flex-col items-center gap-4">
