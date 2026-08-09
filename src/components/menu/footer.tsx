@@ -8,7 +8,9 @@ import {
   FaPhoneAlt,
   FaTelegramPlane,
   FaTiktok,
-  // FaCreditCard,
+  FaCreditCard,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
 import { ref, onValue } from "firebase/database";
 import { motion } from "framer-motion";
@@ -75,6 +77,11 @@ export default function Footer() {
     return () => unsubFooter();
   }, []);
 
+  const enabledPaymentMethods = useMemo(
+    () => paymentMethods.filter((method) => method.isEnabled !== false),
+    [paymentMethods]
+  );
+
   const socialIcons = useMemo(
     () =>
       [
@@ -93,12 +100,13 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#4b3426_0%,#3c291e_52%,#2b1d15_100%)] text-cream"
+      className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#4B3426_0%,#3C291E_52%,#2B1D15_100%)] text-cream"
       dir={isRtl ? "rtl" : "ltr"}
     >
+      {/* Subtle Heritage Background Pattern & Illumination */}
       <div className="absolute inset-0 pointer-events-none opacity-60">
         <div
-          className="absolute inset-0 opacity-[0.1]"
+          className="absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage: `url('/palestinian_pattern_ornament_1778819421475.png')`,
             backgroundSize: "360px",
@@ -115,14 +123,15 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="rounded-[2rem] border border-white/10 bg-white/5 px-4 py-8 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-xl sm:px-8 lg:px-10"
+          className="rounded-[2rem] border border-white/10 bg-white/5 px-4 py-8 shadow-[0_30px_80px_rgba(0,0,0,0.18)] backdrop-blur-md sm:px-8 lg:px-10"
         >
           <div className="flex flex-col items-center gap-8 text-center">
+            {/* Restaurant Logo Header */}
             <div className="flex flex-col items-center gap-3">
               <div className="rounded-3xl bg-[#FDFBD4]/80 backdrop-blur-md p-5 shadow-2xl ring-1 ring-white/20">
                 <img
                   src="/logo.png"
-                  alt="Kanaan Logo"
+                  alt={isRtl ? "شعار مطعم كنعان" : "Kanaan Logo"}
                   className="h-36 w-auto"
                   loading="lazy"
                   decoding="async"
@@ -130,58 +139,77 @@ export default function Footer() {
               </div>
             </div>
 
+            {/* Information Grid: Address, Contact & Payment Methods Cards */}
             <div className="grid w-full gap-4 md:grid-cols-3">
-              <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
-                  <FaMapMarkerAlt size={18} />
+              {/* Location Card */}
+              <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] flex flex-col items-center justify-between">
+                <div className="w-full">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
+                    <FaMapMarkerAlt size={18} />
+                  </div>
+                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cream/45">
+                    {t("footer.location") || (isRtl ? "الموقع" : "Location")}
+                  </p>
+                  <p className="mt-2 text-sm font-medium leading-7 text-cream/90">
+                    {footer.address || (isRtl ? "العنوان غير متوفر" : "Address not available")}
+                  </p>
                 </div>
-                <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cream/45">
-                  {t("footer.location") || "Location"}
-                </p>
-                <p className="mt-2 text-sm font-medium leading-7 text-cream/90">
-                  {footer.address || (isRtl ? "العنوان غير متوفر" : "Address not available")}
-                </p>
               </div>
 
-              <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
-                  <FaPhoneAlt size={18} />
+              {/* Contact Card */}
+              <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] flex flex-col items-center justify-between">
+                <div className="w-full">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
+                    <FaPhoneAlt size={18} />
+                  </div>
+                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cream/45">
+                    {t("footer.contact") || (isRtl ? "للتواصل" : "Contact")}
+                  </p>
+                  <a
+                    href={footer.phone ? `tel:${footer.phone}` : undefined}
+                    className="mt-2 block text-sm font-semibold leading-7 text-cream/90 transition-colors hover:text-[#FDFBD4]"
+                  >
+                    {footer.phone || (isRtl ? "الهاتف غير متوفر" : "Phone not available")}
+                  </a>
                 </div>
-                <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cream/45">
-                  {t("footer.contact") || "Contact"}
-                </p>
-                <a
-                  href={footer.phone ? `tel:${footer.phone}` : undefined}
-                  className="mt-2 block text-sm font-semibold leading-7 text-cream/90 transition-colors hover:text-[#FDFBD4]"
-                >
-                  {footer.phone || (isRtl ? "الهاتف غير متوفر" : "Phone not available")}
-                </a>
               </div>
 
-              {/* <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
-                  <FaCreditCard size={18} />
+              {/* Payment Methods Modal Trigger Card */}
+              <div className="rounded-[1.5rem] border border-white/10 bg-black/10 p-5 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] flex flex-col items-center justify-between">
+                <div className="w-full">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D8D1C2]/10 text-[#FDFBD4]">
+                    <FaCreditCard size={18} />
+                  </div>
+                  <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cream/45">
+                    {t("footer.payment_methods") || (isRtl ? "طرق الدفع" : "Payment Methods")}
+                  </p>
                 </div>
-                <p className="text-[11px] font-black uppercase tracking-[0.28em] text-cream/45">
-                  {t("footer.payment_methods") || "Payment"}
-                </p>
+
                 <button
                   type="button"
                   onClick={() => setIsPaymentModalOpen(true)}
-                  className="mt-3 inline-flex items-center justify-center rounded-full border border-white/10 bg-cream/10 px-5 py-2.5 text-sm font-bold text-cream transition-all hover:bg-cream/[0.15] hover:text-white"
+                  disabled={isPaymentLoading}
+                  className="mt-4 inline-flex items-center justify-center gap-2 rounded-full border border-[#FDFBD4]/20 bg-[#FDFBD4]/10 px-5 py-2.5 text-xs font-bold text-[#FDFBD4] transition-all hover:bg-[#FDFBD4]/20 hover:scale-105 active:scale-95 disabled:opacity-50"
+                  aria-label={isRtl ? "عرض طرق الدفع المتاحة" : "View Payment Methods"}
                 >
-                  {isPaymentLoading
-                    ? (isRtl ? "جارٍ التحميل" : "Loading")
-                    : paymentMethods.length > 0
-                      ? (isRtl ? "عرض طرق الدفع" : "View payment methods")
-                      : (isRtl ? "طرق الدفع غير متاحة" : "No payment methods")}
+                  {isPaymentLoading ? (
+                    <span>{isRtl ? "جارٍ التحميل..." : "Loading..."}</span>
+                  ) : enabledPaymentMethods.length > 0 ? (
+                    <>
+                      <span>{isRtl ? "عرض طرق الدفع المتاحة" : "View Payment Methods"}</span>
+                      {isRtl ? <FaChevronLeft size={11} /> : <FaChevronRight size={11} />}
+                    </>
+                  ) : (
+                    <span>{isRtl ? "طرق الدفع غير متاحة" : "No payment methods"}</span>
+                  )}
                 </button>
-              </div> */}
+              </div>
             </div>
 
+            {/* Social Links */}
             <div className="flex flex-col items-center gap-4">
               <p className="text-[11px] font-black uppercase tracking-[0.3em] text-cream/45">
-                {t("footer.social") || "Follow us"}
+                {t("footer.social") || (isRtl ? "تابعونا على شبكات التواصل" : "Follow us")}
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 {socialIcons.map(({ Icon, url, label }, index) => (
@@ -201,13 +229,14 @@ export default function Footer() {
               </div>
             </div>
 
+            {/* Bottom Bar: Copyright & Developer Link */}
             <div className="flex w-full flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
               <div className="flex flex-col items-center gap-1 text-center sm:items-start sm:text-right">
                 <span className="text-[10px] font-black uppercase tracking-[0.28em] text-cream/40">
                   © {new Date().getFullYear()}
                 </span>
                 <span className="text-sm font-medium text-cream/80">
-                  {t("footer.rights_reserved")}
+                  {t("footer.rights_reserved") || (isRtl ? "جميع الحقوق محفوظة - مطعم كنعان" : "All rights reserved - Kanaan Restaurant")}
                 </span>
               </div>
 
@@ -243,3 +272,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -10,21 +9,6 @@ interface Props {
 export default function LoadingScreen({ visible, onExited }: Props) {
   const { i18n } = useTranslation();
   const isRtl = i18n.language === "ar";
-  const [progress, setProgress] = useState(12);
-
-  useEffect(() => {
-    if (!visible) {
-      setProgress(100);
-      return;
-    }
-
-    setProgress(12);
-    const interval = window.setInterval(() => {
-      setProgress((current) => Math.min(96, current + Math.max(1, (96 - current) * 0.08)));
-    }, 120);
-
-    return () => window.clearInterval(interval);
-  }, [visible]);
 
   return (
     <AnimatePresence onExitComplete={onExited}>
@@ -33,77 +17,118 @@ export default function LoadingScreen({ visible, onExited }: Props) {
           key="loading-screen"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.01 }}
+          exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_45%),linear-gradient(180deg,#3f2a1f_0%,#2f2017_45%,#221710_100%)] text-cream"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_top,_rgba(88,117,90,0.45)_0%,_#2A4D35_45%,_#1C3323_100%)] text-[#FDFBD4]"
           dir={isRtl ? "rtl" : "ltr"}
-          aria-busy="true"
+          aria-busy={visible}
           aria-live="polite"
         >
-          <div className="absolute inset-0 pointer-events-none opacity-60">
-            <div className="absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_top,_rgba(253,251,212,0.18),_transparent_65%)]" />
-            <div className="absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C68B59]/10 blur-[140px]" />
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.03)_0%,transparent_25%,transparent_75%,rgba(255,255,255,0.03)_100%)]" />
+          {/* Ambient Background & Palestinian Heritage Pattern */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div
+              className="absolute inset-0 opacity-[0.06] bg-repeat bg-[length:320px_320px]"
+              style={{ backgroundImage: `url('/palestinian_pattern_ornament_1778819421475.png')` }}
+            />
+            {/* Top Heritage Glow */}
+            <div className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(ellipse_at_top,_rgba(253,251,212,0.2),_transparent_70%)]" />
+            {/* Center Copper Glow */}
+            <div className="absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C68B59]/20 blur-[130px] motion-safe:animate-pulse" />
           </div>
 
-          <div className="relative z-10 flex w-full max-w-md flex-col items-center px-6 text-center">
-            <div className="relative flex h-60 w-60 items-center justify-center">
-              <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 220 220">
-                <circle
-                  cx="110"
-                  cy="110"
-                  r="88"
-                  stroke="rgba(253,251,212,0.12)"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <motion.circle
-                  cx="110"
-                  cy="110"
-                  r="88"
-                  stroke="rgba(253,251,212,0.95)"
-                  strokeWidth="3"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeDasharray={2 * Math.PI * 88}
-                  initial={false}
-                  animate={{
-                    strokeDashoffset: (2 * Math.PI * 88) - (progress / 100) * (2 * Math.PI * 88),
-                  }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                />
-              </svg>
+          <div className="relative z-10 flex w-full max-w-sm flex-col items-center px-6 text-center">
+            {/* Heritage Arch Container */}
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex w-full flex-col items-center rounded-t-[140px] rounded-b-[40px] border border-[#C68B59]/30 bg-[#2A4D35]/60 p-8 shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-md ring-1 ring-white/10"
+            >
+              {/* Outer Arch Border Accent */}
+              <div className="absolute inset-2 rounded-t-[130px] rounded-b-[32px] border border-[#FDFBD4]/15 pointer-events-none" />
 
-              <div className="absolute inset-4 rounded-full bg-white/5 blur-2xl" />
-              <div className="absolute inset-7 rounded-full border border-white/10 bg-white/[0.08] backdrop-blur-xl" />
+              {/* Logo with Dual Rotating Heritage Arc */}
+              <div className="relative flex h-52 w-52 items-center justify-center mb-6">
+                {/* Outer Clockwise Copper Arc */}
+                <svg className="absolute inset-0 h-full w-full motion-safe:animate-spin" style={{ animationDuration: '4s' }} viewBox="0 0 200 200">
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="88"
+                    stroke="rgba(253, 251, 212, 0.12)"
+                    strokeWidth="2"
+                    fill="none"
+                  />
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="88"
+                    stroke="#C68B59"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeDasharray="120 380"
+                  />
+                </svg>
 
-              <motion.div
-                animate={{ scale: [0.98, 1.02, 0.98] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                className="relative flex h-36 w-36 items-center justify-center rounded-full bg-[#FDFBD4]/80 shadow-[0_20px_70px_rgba(0,0,0,0.28)]"
-              >
-                <img
-                  src="/logo.png"
-                  alt="Kanaan Logo"
-                  className="h-28 w-28 object-contain drop-shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
-                  loading="eager"
-                  decoding="async"
-                />
-              </motion.div>
-            </div>
+                {/* Inner Counter-Clockwise Cream Arc */}
+                <svg className="absolute inset-3 h-[calc(100%-24px)] w-[calc(100%-24px)] motion-safe:animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }} viewBox="0 0 200 200">
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="80"
+                    stroke="#FDFBD4"
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeDasharray="80 340"
+                    opacity="0.85"
+                  />
+                </svg>
 
-            <div className="mt-8 space-y-3">
-              <p className="text-[11px] font-black uppercase tracking-[0.38em] text-cream/60">
-                Kanaan Cafe & Restaurant
-              </p>
-              <h1 className="text-2xl font-black tracking-tight text-cream">
-                {isRtl ? "كنعان أصل الحضارة .." : "Preparing the menu"}
-              </h1>
+                {/* Logo Capsule */}
+                <motion.div
+                  animate={{ scale: [0.97, 1.03, 0.97] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative flex h-36 w-36 items-center justify-center rounded-full bg-[#FDFBD4] p-3 shadow-[0_15px_45px_rgba(0,0,0,0.35)] ring-4 ring-[#C68B59]/30"
+                >
+                  <img
+                    src="/logo.png"
+                    alt={isRtl ? "شعار مطعم كنعان" : "Kanaan Restaurant Logo"}
+                    className="h-28 w-28 object-contain drop-shadow-[0_8px_16px_rgba(90,62,43,0.3)]"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </motion.div>
+              </div>
 
-            </div>
+              {/* Title & Brand Slogan */}
+              <div className="space-y-3">
+                <span className="inline-block rounded-full bg-[#C68B59]/25 px-4 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-[#FDFBD4] border border-[#C68B59]/40">
+                  {isRtl ? "مطعم وكافيه كنعان" : "Kanaan Cafe & Restaurant"}
+                </span>
+
+                <h1 className="text-2xl font-black tracking-tight text-[#FDFBD4] leading-tight">
+                  {isRtl ? "كنعان أصل الحضارة .." : "Kanaan Heritage Menu"}
+                </h1>
+
+                <p className="text-xs font-semibold text-[#FDFBD4]/75">
+                  {isRtl ? "جاري تحضير قائمة الطعام الشهية..." : "Preparing delicious menu..."}
+                </p>
+
+                {/* Animated Shimmer Dots */}
+                <div className="flex items-center justify-center gap-1.5 pt-2">
+                  <div className="h-2 w-2 rounded-full bg-[#C68B59] motion-safe:animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="h-2 w-2 rounded-full bg-[#FDFBD4] motion-safe:animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="h-2 w-2 rounded-full bg-[#58755A] motion-safe:animate-bounce" style={{ animationDelay: '300ms' }} />
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 }
+
+
