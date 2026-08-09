@@ -105,7 +105,7 @@ export default function MenuPage() {
             className="flex flex-col flex-1 relative z-10"
             dir={isRtl ? "rtl" : "ltr"}
           >
-            <div className="absolute top-6 left-6 z-30">
+            <div className="absolute top-4 left-4 z-30">
               {hasFeatured && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8, x: -20 }}

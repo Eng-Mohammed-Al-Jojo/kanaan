@@ -104,23 +104,21 @@ export default function LoadingScreen({ visible, onExited }: Props) {
 
               {/* Title & Brand Slogan */}
               <div className="space-y-3">
-                <span className="inline-block rounded-full bg-[#C68B59]/25 px-4 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-[#FDFBD4] border border-[#C68B59]/40">
-                  {isRtl ? "مطعم وكافيه كنعان" : "Kanaan Cafe & Restaurant"}
-                </span>
 
-                <h1 className="text-2xl font-black tracking-tight text-[#FDFBD4] leading-tight">
-                  {isRtl ? "كنعان أصل الحضارة .." : "Kanaan Heritage Menu"}
+                <h1 className="text-xl font-black tracking-tight text-[#FDFBD4] leading-tight">
+                  {isRtl ? " كنعان — حيث للذوق حكاية" : "A Taste of Authenticity"}
                 </h1>
 
-                <p className="text-xs font-semibold text-[#FDFBD4]/75">
-                  {isRtl ? "جاري تحضير قائمة الطعام الشهية..." : "Preparing delicious menu..."}
-                </p>
-
                 {/* Animated Shimmer Dots */}
-                <div className="flex items-center justify-center gap-1.5 pt-2">
-                  <div className="h-2 w-2 rounded-full bg-[#C68B59] motion-safe:animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="h-2 w-2 rounded-full bg-[#FDFBD4] motion-safe:animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="h-2 w-2 rounded-full bg-[#58755A] motion-safe:animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div className="flex gap-2 mt-10  justify-center ">
+                  {[0, 1, 2].map((i) => (
+                    <motion.span
+                      key={i}
+                      className="w-3 h-3 rounded-full bg-[#FDFBD4]"
+                      animate={{ y: [0, -8, 0], opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.18 }}
+                    />
+                  ))}
                 </div>
               </div>
             </motion.div>

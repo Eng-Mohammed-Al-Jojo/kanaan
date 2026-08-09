@@ -66,7 +66,7 @@ export default function PaymentModal({
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-10">
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-10">
                     {isLoading ? (
                         <div className="space-y-6">
                             {[1, 2, 3].map(i => (
